@@ -53,7 +53,7 @@ public class SowPerformer implements ActionPerformer {
             if (counter * 10.0f > action.getTimeLeft()) {
                 Skill farming = performer.getSkills().getSkillOrLearn(SkillList.FARMING);
                 farming.skillCheck(crop.difficulty, 0.0, false, 1.0f);
-                PlanterItem.updateData(target, crop, 0, true);
+                PlanterItem.updateData(target, crop, 0, true, 0, 0);
                 target.setData2((int) (100.0 - farming.getKnowledge() + source.getQualityLevel() + source.getRarity() * 20 + action.getRarity() * 50));
                 performer.getCommunicator().sendNormalServerMessage("You sow the " + crop.displayName + ".");
                 source.setWeight(source.getWeightGrams() - source.getTemplate().getWeightGrams(), true);

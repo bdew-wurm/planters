@@ -18,6 +18,7 @@ public class PlanterBehaviour implements BehaviourProvider {
             List<ActionEntry> list = new ArrayList<>();
             if (SowPerformer.canUse(performer, source, target)) list.add(Actions.actionEntrys[Actions.SOW]);
             if (CultivatePerformer.canUse(performer, source, target)) list.add(Actions.actionEntrys[Actions.CULTIVATE]);
+            if (TendPerformer.canUse(performer, source, target)) list.add(Actions.actionEntrys[Actions.FARM]);
             return list;
         } else return null;
     }

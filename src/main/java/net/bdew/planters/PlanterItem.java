@@ -85,32 +85,33 @@ public class PlanterItem {
         }));
     }
 
-    public static void updateData(Item item, Plantable crop, int growthStage, boolean tended) {
-        if (crop != null) {
-            StringBuilder name = new StringBuilder(template.getName());
-            name.append(" - ").append(crop.displayName);
-            if (growthStage >= 0 && growthStage <= 6) {
-                name.append(" (").append(AGES[growthStage]);
-                if (growthStage < 5 && !tended) {
-                    name.append(", ").append("untended");
-                }
-                name.append(")");
+    public static void updateData(Item item, Plantable crop, int growthStage, boolean tended, int tendCount, int tendPower) {
+        StringBuilder name = new StringBuilder(template.getName());
+        name.append(" - ").append(crop.displayName);
+        if (growthStage >= 0 && growthStage <= 6) {
+            name.append(" (").append(AGES[growthStage]);
+            if (growthStage < 5 && !tended) {
+                name.append(", ").append("untended");
             }
-            VolaTile vt = Zones.getOrCreateTile(item.getTilePos(), item.isOnSurface());
-            vt.makeInvisible(item);
-            item.setAuxData((byte) crop.number);
-            item.setName(name.toString());
-            item.setData1(growthStage & 0xFF | (tended ? 0x100 : 0));
-            vt.makeVisible(item);
-        } else {
-            VolaTile vt = Zones.getOrCreateTile(item.getTilePos(), item.isOnSurface());
-            vt.makeInvisible(item);
-            item.setAuxData((byte) 0);
-            item.setData(0, 0);
-            item.setName(template.getName());
-            vt.makeVisible(item);
+            name.append(")");
         }
+        VolaTile vt = Zones.getOrCreateTile(item.getTilePos(), item.isOnSurface());
+        vt.makeInvisible(item);
+        item.setAuxData((byte) crop.number);
+        item.setName(name.toString());
+        item.setData((growthStage & 0xFF) | (tended ? 0x100 : 0), (tendCount & 0xFF) | (tendPower << 8));
+        vt.makeVisible(item);
     }
+
+    public static void clearData(Item item) {
+        VolaTile vt = Zones.getOrCreateTile(item.getTilePos(), item.isOnSurface());
+        vt.makeInvisible(item);
+        item.setAuxData((byte) 0);
+        item.setData(0, 0);
+        item.setName(template.getName());
+        vt.makeVisible(item);
+    }
+
 
     public static Plantable getPlantable(Item item) {
         if (item.getAuxData() <= 0) return null;
@@ -124,4 +125,13 @@ public class PlanterItem {
     public static boolean isTended(Item item) {
         return (item.getData1() & 0x100) != 0;
     }
+
+    public static int getTendCount(Item item) {
+        return item.getData2() & 0xFF;
+    }
+
+    public static int getTendPower(Item item) {
+        return item.getData2() >> 8;
+    }
+
 }

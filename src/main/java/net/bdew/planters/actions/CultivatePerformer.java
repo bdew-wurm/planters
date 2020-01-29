@@ -47,7 +47,7 @@ public class CultivatePerformer implements ActionPerformer {
         } else {
             if (counter * 10.0f > action.getTimeLeft()) {
                 performer.getCommunicator().sendNormalServerMessage("The planter is cultivated and ready to sow now.");
-                PlanterItem.updateData(target, null, 0, false);
+                PlanterItem.clearData(target);
                 return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
             }
         }

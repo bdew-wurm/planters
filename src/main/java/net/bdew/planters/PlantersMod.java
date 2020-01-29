@@ -3,6 +3,7 @@ package net.bdew.planters;
 import net.bdew.planters.actions.CultivatePerformer;
 import net.bdew.planters.actions.PlanterBehaviour;
 import net.bdew.planters.actions.SowPerformer;
+import net.bdew.planters.actions.TendPerformer;
 import org.gotti.wurmunlimited.modloader.interfaces.*;
 import org.gotti.wurmunlimited.modsupport.actions.ModActions;
 
@@ -46,6 +47,7 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
     public void onServerStarted() {
         ModActions.registerActionPerformer(new SowPerformer());
         ModActions.registerActionPerformer(new CultivatePerformer());
+        ModActions.registerActionPerformer(new TendPerformer());
         ModActions.registerBehaviourProvider(new PlanterBehaviour());
     }
 
