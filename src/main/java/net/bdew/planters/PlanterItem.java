@@ -41,6 +41,7 @@ public class PlanterItem {
                         ItemTypes.ITEM_TYPE_ONE_PER_TILE,
                         ItemTypes.ITEM_TYPE_TILE_ALIGNED,
                         ItemTypes.ITEM_TYPE_HASDATA,
+                        ItemTypes.ITEM_TYPE_NORENAME
                 })
                 .decayTime(9072000L)
                 .dimensions(200, 200, 30)
@@ -87,18 +88,22 @@ public class PlanterItem {
 
     public static void updateData(Item item, Plantable crop, int growthStage, boolean tended, int tendCount, int tendPower) {
         StringBuilder name = new StringBuilder(template.getName());
+        StringBuilder description = new StringBuilder();
+
         name.append(" - ").append(crop.displayName);
+
         if (growthStage >= 0 && growthStage <= 6) {
-            name.append(" (").append(AGES[growthStage]);
+            description.append(AGES[growthStage]);
             if (growthStage < 5 && !tended) {
-                name.append(", ").append("untended");
+                description.append(", ").append("untended");
             }
-            name.append(")");
         }
+
         VolaTile vt = Zones.getOrCreateTile(item.getTilePos(), item.isOnSurface());
         vt.makeInvisible(item);
         item.setAuxData((byte) crop.number);
         item.setName(name.toString());
+        item.setDescription(description.toString());
         item.setData((growthStage & 0xFF) | (tended ? 0x100 : 0), (tendCount & 0xFF) | (tendPower << 8));
         vt.makeVisible(item);
     }
@@ -109,9 +114,9 @@ public class PlanterItem {
         item.setAuxData((byte) 0);
         item.setData(0, 0);
         item.setName(template.getName());
+        item.setDescription("");
         vt.makeVisible(item);
     }
-
 
     public static Plantable getPlantable(Item item) {
         if (item.getAuxData() <= 0) return null;
