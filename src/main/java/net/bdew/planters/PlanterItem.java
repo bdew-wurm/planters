@@ -134,4 +134,8 @@ public class PlanterItem {
         return item.getData2() >> 8;
     }
 
+    public static boolean needsPolling(Item item) {
+        return item.getTemplateId() == id && item.getParentId() == -10L && item.getAuxData() > 0 && getGrowthStage(item) < (PlantersMod.canWilt ? 6 : 5);
+    }
+
 }

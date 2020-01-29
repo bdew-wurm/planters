@@ -1,9 +1,11 @@
 package net.bdew.planters;
 
+import javassist.ClassPool;
 import net.bdew.planters.actions.CultivatePerformer;
 import net.bdew.planters.actions.PlanterBehaviour;
 import net.bdew.planters.actions.SowPerformer;
 import net.bdew.planters.actions.TendPerformer;
+import org.gotti.wurmunlimited.modloader.classhooks.HookManager;
 import org.gotti.wurmunlimited.modloader.interfaces.*;
 import org.gotti.wurmunlimited.modsupport.actions.ModActions;
 
@@ -30,6 +32,8 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
             logger.log(Level.INFO, msg);
     }
 
+    public static boolean canWilt = true;
+
     @Override
     public void configure(Properties properties) {
     }
@@ -40,7 +44,19 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
 
     @Override
     public void preInit() {
-        ModActions.init();
+        try {
+            ModActions.init();
+
+            ClassPool classPool = HookManager.getInstance().getClassPool();
+
+            classPool.getCtClass("com.wurmonline.server.zones.Zone").getMethod("addItem", "(Lcom/wurmonline/server/items/Item;ZZZ)V")
+                    .insertAfter("if ($4) net.bdew.planters.Hooks.addItemLoading($1);");
+
+            classPool.getCtClass("com.wurmonline.server.Server")
+                    .getMethod("run", "()V").insertAfter("net.bdew.planters.Hooks.pollPlanters();");
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -49,6 +65,8 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
         ModActions.registerActionPerformer(new CultivatePerformer());
         ModActions.registerActionPerformer(new TendPerformer());
         ModActions.registerBehaviourProvider(new PlanterBehaviour());
+
+        logInfo(String.format("Loaded %d planters that need polling", PlanterTracker.trackedCount()));
     }
 
     @Override

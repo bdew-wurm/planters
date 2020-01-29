@@ -12,6 +12,7 @@ import com.wurmonline.server.villages.VillageRole;
 import com.wurmonline.server.villages.Villages;
 import net.bdew.planters.Plantable;
 import net.bdew.planters.PlanterItem;
+import net.bdew.planters.PlanterTracker;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPerformer;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPropagation;
 
@@ -58,6 +59,7 @@ public class SowPerformer implements ActionPerformer {
                 performer.getCommunicator().sendNormalServerMessage("You sow the " + crop.displayName + ".");
                 source.setWeight(source.getWeightGrams() - source.getTemplate().getWeightGrams(), true);
                 Server.getInstance().broadCastAction(performer.getName() + " sows some seeds.", performer, 5);
+                PlanterTracker.addPlanter(target);
                 return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
             }
         }

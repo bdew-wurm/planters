@@ -11,6 +11,7 @@ import com.wurmonline.server.villages.Village;
 import com.wurmonline.server.villages.VillageRole;
 import com.wurmonline.server.villages.Villages;
 import net.bdew.planters.PlanterItem;
+import net.bdew.planters.PlanterTracker;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPerformer;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPropagation;
 
@@ -48,6 +49,7 @@ public class CultivatePerformer implements ActionPerformer {
             if (counter * 10.0f > action.getTimeLeft()) {
                 performer.getCommunicator().sendNormalServerMessage("The planter is cultivated and ready to sow now.");
                 PlanterItem.clearData(target);
+                PlanterTracker.removePlanter(target);
                 return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
             }
         }
