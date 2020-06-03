@@ -1,10 +1,7 @@
 package net.bdew.planters;
 
 import javassist.ClassPool;
-import net.bdew.planters.actions.CultivatePerformer;
-import net.bdew.planters.actions.PlanterBehaviour;
-import net.bdew.planters.actions.SowPerformer;
-import net.bdew.planters.actions.TendPerformer;
+import net.bdew.planters.actions.*;
 import org.gotti.wurmunlimited.modloader.classhooks.HookManager;
 import org.gotti.wurmunlimited.modloader.interfaces.*;
 import org.gotti.wurmunlimited.modsupport.actions.ModActions;
@@ -64,6 +61,7 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
         ModActions.registerActionPerformer(new SowPerformer());
         ModActions.registerActionPerformer(new CultivatePerformer());
         ModActions.registerActionPerformer(new TendPerformer());
+        ModActions.registerActionPerformer(new HarvestPerformer());
         ModActions.registerBehaviourProvider(new PlanterBehaviour());
 
         logInfo(String.format("Loaded %d planters that need polling", PlanterTracker.trackedCount()));
