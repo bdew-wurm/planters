@@ -44,16 +44,17 @@ public class SowPerformer implements ActionPerformer {
         if (crop == null)
             return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
 
-        if (counter == 1.0f) {
+        if (counter == 1f) {
             performer.getCommunicator().sendNormalServerMessage("You start sowing the seeds.");
             Server.getInstance().broadCastAction(performer.getName() + " starts sowing some seeds.", performer, 5);
             int time = Actions.getQuickActionTime(performer, performer.getSkills().getSkillOrLearn(SkillList.FARMING), null, 0.0);
             performer.sendActionControl("sowing", true, time);
             action.setTimeLeft(time);
         } else {
-            if (counter * 10.0f > action.getTimeLeft()) {
+            if (counter * 10f > action.getTimeLeft()) {
+                performer.getStatus().modifyStamina(-2000f);
                 Skill farming = performer.getSkills().getSkillOrLearn(SkillList.FARMING);
-                farming.skillCheck(crop.difficulty, 0.0, false, 1.0f);
+                farming.skillCheck(crop.difficulty, 0.0, false, 1f);
                 PlanterItem.updateData(target, crop, 0, true, 0, 0);
                 target.setData2((int) (100.0 - farming.getKnowledge() + source.getQualityLevel() + source.getRarity() * 20 + action.getRarity() * 50));
                 performer.getCommunicator().sendNormalServerMessage("You sow the " + crop.displayName + ".");

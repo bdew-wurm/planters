@@ -56,7 +56,7 @@ public class PlanterItem {
 
         id = template.getTemplateId();
 
-        CreationEntryCreator.createAdvancedEntry(SkillList.CARPENTRY, ItemList.woodBeam, ItemList.woodBeam, id, false, false, 0.0F, true, true, CreationCategories.DECORATION)
+        CreationEntryCreator.createAdvancedEntry(SkillList.CARPENTRY, ItemList.woodBeam, ItemList.woodBeam, id, false, false, 0f, true, true, CreationCategories.DECORATION)
                 .addRequirement(new CreationRequirement(1, ItemList.woodBeam, 9, true))
                 .addRequirement(new CreationRequirement(2, ItemList.nailsIronLarge, 4, true))
                 .addRequirement(new CreationRequirement(3, ItemList.dirtPile, 1, true));

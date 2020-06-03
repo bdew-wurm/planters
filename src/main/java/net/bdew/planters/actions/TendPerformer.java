@@ -3,6 +3,7 @@ package net.bdew.planters.actions;
 import com.wurmonline.server.Server;
 import com.wurmonline.server.behaviours.Action;
 import com.wurmonline.server.behaviours.Actions;
+import com.wurmonline.server.behaviours.Methods;
 import com.wurmonline.server.creatures.Creature;
 import com.wurmonline.server.items.Item;
 import com.wurmonline.server.items.ItemList;
@@ -47,14 +48,23 @@ public class TendPerformer implements ActionPerformer {
         if (crop == null)
             return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
 
-        if (counter == 1.0f) {
-            Server.getInstance().broadCastAction(performer.getName() + " starts tending the field.", performer, 5);
+        if (counter == 1f) {
+            Server.getInstance().broadCastAction(performer.getName() + " starts tending the planter.", performer, 5);
             performer.getCommunicator().sendNormalServerMessage("You start removing weeds and otherwise put the planter in good order.");
             int time = Actions.getQuickActionTime(performer, performer.getSkills().getSkillOrLearn(SkillList.FARMING), null, 0.0);
             performer.sendActionControl("farming", true, time);
+            source.setDamage(source.getDamage() + 0.0005f * source.getDamageModifier());
+            performer.getStatus().modifyStamina(-1500f);
             action.setTimeLeft(time);
         } else {
-            if (counter * 10.0f > action.getTimeLeft()) {
+            if (action.justTickedSecond()) {
+                source.setDamage(source.getDamage() + 0.0003f * source.getDamageModifier());
+                performer.getStatus().modifyStamina(-2000f);
+                if (action.mayPlaySound())
+                    Methods.sendSound(performer, "sound.work.farming.rake");
+            }
+
+            if (counter * 10f > action.getTimeLeft()) {
                 if (action.getRarity() != 0) performer.playPersonalSound("sound.fx.drumroll");
                 double power = 0.0;
                 double bonus = 0.0;
@@ -83,8 +93,8 @@ public class TendPerformer implements ActionPerformer {
                 tendPower += (int) (power * 2.0 + action.getRarity() * 110 + source.getRarity() * 10);
 
                 if (source.getSpellEffects() != null) {
-                    final float extraChance = source.getSpellEffects().getRuneEffect(RuneUtilities.ModifierEffect.ENCH_FARMYIELD) - 1.0f;
-                    if (extraChance > 0.0f && Server.rand.nextFloat() < extraChance) {
+                    final float extraChance = source.getSpellEffects().getRuneEffect(RuneUtilities.ModifierEffect.ENCH_FARMYIELD) - 1f;
+                    if (extraChance > 0f && Server.rand.nextFloat() < extraChance) {
                         performer.getCommunicator().sendNormalServerMessage("The " + source.getName() + " seems to have an extra effect on the planter.");
                         tendPower += 100;
                         if (tendCount < 5) tendCount++;

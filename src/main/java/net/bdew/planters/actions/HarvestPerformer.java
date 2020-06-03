@@ -54,19 +54,19 @@ public class HarvestPerformer implements ActionPerformer {
         if (crop == null)
             return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
 
-        if (counter == 1.0f) {
+        if (counter == 1f) {
             Server.getInstance().broadCastAction(performer.getName() + " starts harvesting the planter.", performer, 5);
             performer.getCommunicator().sendNormalServerMessage("You start harvesting the planter.");
             int time = Actions.getStandardActionTime(performer, performer.getSkills().getSkillOrLearn(SkillList.FARMING), null, 0.0);
-            performer.sendActionControl("farming", true, time);
-            performer.getStatus().modifyStamina(-1000.0f);
+            performer.sendActionControl("harvesting", true, time);
+            performer.getStatus().modifyStamina(-1000f);
             action.setTimeLeft(time);
         } else {
             if (action.justTickedSecond()) {
                 if (crop.needsScythe && source != null) {
                     source.setDamage(source.getDamage() + 0.0003f * source.getDamageModifier());
                 }
-                performer.getStatus().modifyStamina(-2000.0f);
+                performer.getStatus().modifyStamina(-2000f);
                 if (action.mayPlaySound()) {
                     if (crop.needsScythe)
                         Methods.sendSound(performer, "sound.work.farming.scythe");
@@ -74,7 +74,7 @@ public class HarvestPerformer implements ActionPerformer {
                         Methods.sendSound(performer, "sound.work.farming.harvest");
                 }
             }
-            if (counter * 10.0f > action.getTimeLeft()) {
+            if (counter * 10f > action.getTimeLeft()) {
                 byte rarity = action.getRarity();
                 if (rarity != 0) performer.playPersonalSound("sound.fx.drumroll");
                 Skill farming = performer.getSkills().getSkillOrLearn(SkillList.FARMING);
@@ -94,15 +94,15 @@ public class HarvestPerformer implements ActionPerformer {
                 float planterRarityMod = 1f + target.getRarity() * 0.2f;
 
                 float knowledge = (float) farming.getKnowledge(0.0);
-                float ql = (knowledge + (100.0f - knowledge) * ((float) power / 500.0f)) * planterRarityMod;
+                float ql = (knowledge + (100f - knowledge) * ((float) power / 500f)) * planterRarityMod;
 
                 int farmedCount = PlanterItem.getTendCount(target);
                 int farmedChance = PlanterItem.getTendPower(target);
                 short resource = (short) (farmedChance + rarity * 110 + itemRarity * 50 + Math.min(5, farmedCount) * 50);
 
-                float div = 100.0f - knowledge / 15.0f;
+                float div = 100f - knowledge / 15f;
                 short bonusYield = (short) (resource / div / 1.5f);
-                float baseYield = knowledge / 15.0f;
+                float baseYield = knowledge / 15f;
                 int quantity = (int) ((baseYield + bonusYield + PlantersMod.extraHarvest) * planterRarityMod);
 
                 PlanterItem.clearData(target);
@@ -137,7 +137,7 @@ public class HarvestPerformer implements ActionPerformer {
 
                 try {
                     for (int x = 0; x < quantity; ++x) {
-                        final Item result = ItemFactory.createItem(crop.cropItem, Math.max(Math.min(ql, 100.0f), 1.0f), null);
+                        final Item result = ItemFactory.createItem(crop.cropItem, Math.max(Math.min(ql, 100f), 1f), null);
                         if (!performer.getInventory().insertItem(result, true)) {
                             performer.getCommunicator().sendNormalServerMessage("You can't carry the harvest. It falls to the ground and is ruined!");
                         }

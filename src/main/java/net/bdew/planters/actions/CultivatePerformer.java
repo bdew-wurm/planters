@@ -3,6 +3,7 @@ package net.bdew.planters.actions;
 import com.wurmonline.server.Server;
 import com.wurmonline.server.behaviours.Action;
 import com.wurmonline.server.behaviours.Actions;
+import com.wurmonline.server.behaviours.Methods;
 import com.wurmonline.server.creatures.Creature;
 import com.wurmonline.server.items.Item;
 import com.wurmonline.server.items.ItemList;
@@ -39,14 +40,22 @@ public class CultivatePerformer implements ActionPerformer {
             else
                 return propagate(action, ActionPropagation.SERVER_PROPAGATION, ActionPropagation.ACTION_PERFORMER_PROPAGATION);
 
-        if (counter == 1.0f) {
+        if (counter == 1f) {
             performer.getCommunicator().sendNormalServerMessage("You start to cultivate the planter.");
             Server.getInstance().broadCastAction(performer.getName() + " starts to cultivate the planter.", performer, 5);
             int time = Actions.getQuickActionTime(performer, performer.getSkills().getSkillOrLearn(SkillList.FARMING), null, 0.0);
             performer.sendActionControl("cultivating", true, time);
             action.setTimeLeft(time);
+            performer.getStatus().modifyStamina(-1000f);
+
         } else {
-            if (counter * 10.0f > action.getTimeLeft()) {
+            if (action.justTickedSecond()) {
+                source.setDamage(source.getDamage() + 0.0003f * source.getDamageModifier());
+                performer.getStatus().modifyStamina(-2000f);
+                if (action.mayPlaySound())
+                    Methods.sendSound(performer, String.format("sound.work.digging%d", Server.rand.nextInt(3) + 1));
+            }
+            if (counter * 10f > action.getTimeLeft()) {
                 performer.getCommunicator().sendNormalServerMessage("The planter is cultivated and ready to sow now.");
                 PlanterItem.clearData(target);
                 PlanterTracker.removePlanter(target);

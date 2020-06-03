@@ -44,9 +44,9 @@ public class Hooks {
             if (!PlanterItem.needsPolling(planter)) PlanterTracker.removePlanter(planter);
 
             if (WurmCalendar.isNight())
-                SoundPlayer.playSound("sound.ambient.night.crickets", planter.getTileX(), planter.getTileY(), planter.isOnSurface(), 0.0f);
+                SoundPlayer.playSound("sound.ambient.night.crickets", planter.getTileX(), planter.getTileY(), planter.isOnSurface(), 0f);
             else
-                SoundPlayer.playSound("sound.birdsong.bird2", planter.getTileX(), planter.getTileY(), planter.isOnSurface(), 0.0f);
+                SoundPlayer.playSound("sound.birdsong.bird2", planter.getTileX(), planter.getTileY(), planter.isOnSurface(), 0f);
         }
 
         PlantersMod.logInfo(String.format("Polled %d planters, took %dms, remaining %d", planters.size(), System.currentTimeMillis() - start, PlanterTracker.trackedCount()));
