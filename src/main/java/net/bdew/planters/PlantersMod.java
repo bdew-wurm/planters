@@ -30,9 +30,12 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
     }
 
     public static boolean canWilt = true;
+    public static int extraHarvest = 0;
 
     @Override
     public void configure(Properties properties) {
+        extraHarvest = Integer.parseInt(properties.getProperty("extraHarvest", "3"));
+        canWilt = !Boolean.parseBoolean(properties.getProperty("disableWeeds", "true"));
     }
 
     @Override
