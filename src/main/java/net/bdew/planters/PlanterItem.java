@@ -1,7 +1,9 @@
 package net.bdew.planters;
 
+import com.wurmonline.server.WurmCalendar;
 import com.wurmonline.server.items.*;
 import com.wurmonline.server.skills.SkillList;
+import com.wurmonline.server.structures.Structure;
 import com.wurmonline.server.zones.VolaTile;
 import com.wurmonline.server.zones.Zones;
 import com.wurmonline.shared.constants.IconConstants;
@@ -82,15 +84,21 @@ public class PlanterItem {
             if (item.getDamage() >= 50f)
                 sb.append("decayed.");
 
+            if (WurmCalendar.isWinter() && item.isOnSurface()) {
+                VolaTile vt = Zones.getTileOrNull(item.getTilePos(), true);
+                if (vt != null) {
+                    Structure st = vt.getStructure();
+                    if (st == null || st.isTypeBridge())
+                        sb.append("winter.");
+                }
+            }
+
             return sb.toString();
         }));
     }
 
     public static void updateData(Item item, Plantable crop, int growthStage, boolean tended, int tendCount, int tendPower) {
-        StringBuilder name = new StringBuilder(template.getName());
         StringBuilder description = new StringBuilder();
-
-        name.append(" - ").append(crop.displayName);
 
         if (growthStage >= 0 && growthStage <= 6) {
             description.append(AGES[growthStage]);
@@ -102,7 +110,7 @@ public class PlanterItem {
         VolaTile vt = Zones.getOrCreateTile(item.getTilePos(), item.isOnSurface());
         vt.makeInvisible(item);
         item.setAuxData((byte) crop.number);
-        item.setName(name.toString());
+        item.setName(template.getName() + " - " + crop.displayName);
         item.setDescription(description.toString());
         item.setData((growthStage & 0xFF) | (tended ? 0x100 : 0), (tendCount & 0xFF) | (tendPower << 8));
         vt.makeVisible(item);
@@ -142,5 +150,4 @@ public class PlanterItem {
     public static boolean needsPolling(Item item) {
         return item.getTemplateId() == id && item.getParentId() == -10L && item.getAuxData() > 0 && getGrowthStage(item) < (PlantersMod.canWilt ? 6 : 5);
     }
-
 }
