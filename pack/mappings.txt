@@ -1,1 +1,3 @@
-model.structure.farmbox					= planterbed.dae
+model.structure.farmbox		= planterbed.dae
+model.structure.farmbox.wheat 	= planterwheat4.dae
+model.structure.farmbox.corn 	= planterwheat4.dae?sprite_wheat_wheat_png.texture=corn.dds&sprite_wheat.texture=corn.dds
