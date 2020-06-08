@@ -1,5 +1,6 @@
 package net.bdew.planters;
 
+import com.wurmonline.server.creatures.Communicator;
 import javassist.ClassPool;
 import net.bdew.planters.actions.*;
 import org.gotti.wurmunlimited.modloader.classhooks.HookManager;
@@ -11,7 +12,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PlantersMod implements WurmServerMod, Initable, PreInitable, Configurable, ServerStartedListener, ItemTemplatesCreatedListener {
+public class PlantersMod implements WurmServerMod, Initable, PreInitable, Configurable, ServerStartedListener, ItemTemplatesCreatedListener, PlayerMessageListener {
     private static final Logger logger = Logger.getLogger("PlantersMod");
 
     public static void logException(String msg, Throwable e) {
@@ -77,5 +78,17 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public boolean onPlayerMessage(Communicator communicator, String s) {
+        return false;
+    }
+
+    @Override
+    public MessagePolicy onPlayerMessage(Communicator communicator, String message, String title) {
+        if (message.startsWith("#") && communicator.getPlayer().getPower() == 5)
+            return GmCommands.handle(communicator, message, title);
+        return MessagePolicy.PASS;
     }
 }
