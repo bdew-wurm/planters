@@ -20,7 +20,7 @@ jar {
 task pack(type: Zip) {
     from fileTree(dir: 'pack', include: '**')
     destinationDirectory = file("build/pack")
-    archiveName "planters-pack.zip"
+    archiveName "planters-pack.jar"
 }
 
 task dist(type: Zip) {

@@ -13,7 +13,7 @@
     <subject/>
     <title/>
     <unit meter="0.025400" name="centimeter"/>
-    <up_axis>Y_UP</up_axis>
+    <up_axis>Z_UP</up_axis>
   </asset>
   <library_images>
     <image id="MapFBXASC032FBXASC03566-image" name="MapFBXASC032FBXASC03566">

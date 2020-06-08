@@ -2,43 +2,366 @@
 
 model.structure.farmbox                     = planterbed.dae
 model.structure.farmbox.dirt.decayed        = planterbed.dae?oakplank.texture=woodbridge_decay.png
-model.structure.farmbox.dirt.winter         = planterbed.dae?dirtwurm.texture=farm_winter.jpg
-model.structure.farmbox.dirt.decayed.winter = planterbed.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.dirt.winter         = planterbed.dae?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.dirt.decayed.winter = planterbed.dae?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
 
 ########## cabbage #########
 
 model.structure.farmbox.cabbage.young                         = cabbage-tended.dae
 model.structure.farmbox.cabbage.young.decayed                 = cabbage-tended.dae?oakplank.texture=woodbridge_decay.png
-model.structure.farmbox.cabbage.young.winter                  = cabbage-tended.dae?dirtwurm.texture=farm_winter.jpg
-model.structure.farmbox.cabbage.young.decayed.winter          = cabbage-tended.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.young.winter                  = cabbage-tended.dae?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.young.decayed.winter          = cabbage-tended.dae?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
 model.structure.farmbox.cabbage.young.untended                = cabbage-young.dae
 model.structure.farmbox.cabbage.young.untended.decayed        = cabbage-young.dae?oakplank.texture=woodbridge_decay.png
-model.structure.farmbox.cabbage.young.untended.winter         = cabbage-young.dae?dirtwurm.texture=farm_winter.jpg
-model.structure.farmbox.cabbage.young.untended.decayed.winter = cabbage-young.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.young.untended.winter         = cabbage-young.dae?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.young.untended.decayed.winter = cabbage-young.dae?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
 model.structure.farmbox.cabbage.ripe                          = cabbage-ripe.dae
 model.structure.farmbox.cabbage.ripe.decayed                  = cabbage-ripe.dae?oakplank.texture=woodbridge_decay.png
-model.structure.farmbox.cabbage.ripe.winter                   = cabbage-ripe.dae?dirtwurm.texture=farm_winter.jpg
-model.structure.farmbox.cabbage.ripe.decayed.winter           = cabbage-ripe.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.ripe.winter                   = cabbage-ripe.dae?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.ripe.decayed.winter           = cabbage-ripe.dae?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
 model.structure.farmbox.cabbage.ripe.wilted                   = cabbage-wilted.dae
 model.structure.farmbox.cabbage.ripe.wilted.decayed           = cabbage-wilted.dae?oakplank.texture=woodbridge_decay.png
-model.structure.farmbox.cabbage.ripe.wilted.winter            = cabbage-wilted.dae?dirtwurm.texture=farm_winter.jpg
-model.structure.farmbox.cabbage.ripe.wilted.decayed.winter    = cabbage-wilted.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.ripe.wilted.winter            = cabbage-wilted.dae?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.ripe.wilted.decayed.winter    = cabbage-wilted.dae?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
 
 ########## pumpkin #########
 
 model.structure.farmbox.pumpkin.young                         = pumpkin-tended.dae
 model.structure.farmbox.pumpkin.young.decayed                 = pumpkin-tended.dae?oakplank.texture=woodbridge_decay.png
-model.structure.farmbox.pumpkin.young.winter                  = pumpkin-tended.dae?dirtwurm.texture=farm_winter.jpg
-model.structure.farmbox.pumpkin.young.decayed.winter          = pumpkin-tended.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.young.winter                  = pumpkin-tended.dae?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.young.decayed.winter          = pumpkin-tended.dae?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
 model.structure.farmbox.pumpkin.young.untended                = pumpkin-young.dae
 model.structure.farmbox.pumpkin.young.untended.decayed        = pumpkin-young.dae?oakplank.texture=woodbridge_decay.png
-model.structure.farmbox.pumpkin.young.untended.winter         = pumpkin-young.dae?dirtwurm.texture=farm_winter.jpg
-model.structure.farmbox.pumpkin.young.untended.decayed.winter = pumpkin-young.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.young.untended.winter         = pumpkin-young.dae?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.young.untended.decayed.winter = pumpkin-young.dae?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
 model.structure.farmbox.pumpkin.ripe                          = pumpkin-ripe.dae
 model.structure.farmbox.pumpkin.ripe.decayed                  = pumpkin-ripe.dae?oakplank.texture=woodbridge_decay.png
-model.structure.farmbox.pumpkin.ripe.winter                   = pumpkin-ripe.dae?dirtwurm.texture=farm_winter.jpg
-model.structure.farmbox.pumpkin.ripe.decayed.winter           = pumpkin-ripe.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.ripe.winter                   = pumpkin-ripe.dae?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.ripe.decayed.winter           = pumpkin-ripe.dae?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
 model.structure.farmbox.pumpkin.ripe.wilted                   = pumpkin-wilted.dae
 model.structure.farmbox.pumpkin.ripe.wilted.decayed           = pumpkin-wilted.dae?oakplank.texture=woodbridge_decay.png
-model.structure.farmbox.pumpkin.ripe.wilted.winter            = pumpkin-wilted.dae?dirtwurm.texture=farm_winter.jpg
-model.structure.farmbox.pumpkin.ripe.wilted.decayed.winter    = pumpkin-wilted.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.ripe.wilted.winter            = pumpkin-wilted.dae?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.ripe.wilted.decayed.winter    = pumpkin-wilted.dae?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## barley #########
+
+model.structure.farmbox.barley.young                         = sprite-tended.dae?sprite_wheat.texture=barley.dds
+model.structure.farmbox.barley.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=barley.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.barley.young.winter                  = sprite-tended.dae?sprite_wheat.texture=barley.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.barley.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=barley.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.barley.young.untended                = sprite-young.dae?sprite_wheat.texture=barley.dds
+model.structure.farmbox.barley.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=barley.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.barley.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=barley.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.barley.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=barley.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.barley.ripe                          = sprite-ripe.dae?sprite_wheat.texture=barley.dds
+model.structure.farmbox.barley.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=barley.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.barley.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=barley.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.barley.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=barley.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.barley.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=barley.dds
+model.structure.farmbox.barley.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=barley.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.barley.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=barley.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.barley.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=barley.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## corn #########
+
+model.structure.farmbox.corn.young                         = sprite-tended.dae?sprite_wheat.texture=corn.dds
+model.structure.farmbox.corn.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=corn.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.corn.young.winter                  = sprite-tended.dae?sprite_wheat.texture=corn.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.corn.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=corn.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.corn.young.untended                = sprite-young.dae?sprite_wheat.texture=corn.dds
+model.structure.farmbox.corn.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=corn.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.corn.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=corn.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.corn.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=corn.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.corn.ripe                          = sprite-ripe.dae?sprite_wheat.texture=corn.dds
+model.structure.farmbox.corn.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=corn.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.corn.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=corn.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.corn.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=corn.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.corn.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=corn.dds
+model.structure.farmbox.corn.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=corn.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.corn.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=corn.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.corn.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=corn.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## cotton #########
+
+model.structure.farmbox.cotton.young                         = sprite-tended.dae?sprite_wheat.texture=cotton.dds
+model.structure.farmbox.cotton.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=cotton.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cotton.young.winter                  = sprite-tended.dae?sprite_wheat.texture=cotton.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cotton.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=cotton.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cotton.young.untended                = sprite-young.dae?sprite_wheat.texture=cotton.dds
+model.structure.farmbox.cotton.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=cotton.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cotton.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=cotton.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cotton.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=cotton.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cotton.ripe                          = sprite-ripe.dae?sprite_wheat.texture=cotton.dds
+model.structure.farmbox.cotton.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=cotton.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cotton.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=cotton.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cotton.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=cotton.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cotton.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=cotton.dds
+model.structure.farmbox.cotton.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=cotton.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cotton.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=cotton.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cotton.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=cotton.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## garlic #########
+
+model.structure.farmbox.garlic.young                         = sprite-tended.dae?sprite_wheat.texture=garlic.dds
+model.structure.farmbox.garlic.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=garlic.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.garlic.young.winter                  = sprite-tended.dae?sprite_wheat.texture=garlic.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.garlic.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=garlic.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.garlic.young.untended                = sprite-young.dae?sprite_wheat.texture=garlic.dds
+model.structure.farmbox.garlic.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=garlic.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.garlic.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=garlic.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.garlic.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=garlic.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.garlic.ripe                          = sprite-ripe.dae?sprite_wheat.texture=garlic.dds
+model.structure.farmbox.garlic.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=garlic.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.garlic.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=garlic.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.garlic.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=garlic.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.garlic.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=garlic.dds
+model.structure.farmbox.garlic.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=garlic.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.garlic.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=garlic.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.garlic.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=garlic.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## oat #########
+
+model.structure.farmbox.oat.young                         = sprite-tended.dae?sprite_wheat.texture=oat.dds
+model.structure.farmbox.oat.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=oat.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.oat.young.winter                  = sprite-tended.dae?sprite_wheat.texture=oat.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.oat.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=oat.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.oat.young.untended                = sprite-young.dae?sprite_wheat.texture=oat.dds
+model.structure.farmbox.oat.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=oat.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.oat.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=oat.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.oat.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=oat.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.oat.ripe                          = sprite-ripe.dae?sprite_wheat.texture=oat.dds
+model.structure.farmbox.oat.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=oat.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.oat.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=oat.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.oat.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=oat.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.oat.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=oat.dds
+model.structure.farmbox.oat.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=oat.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.oat.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=oat.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.oat.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=oat.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## onion #########
+
+model.structure.farmbox.onion.young                         = sprite-tended.dae?sprite_wheat.texture=onion.dds
+model.structure.farmbox.onion.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=onion.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.onion.young.winter                  = sprite-tended.dae?sprite_wheat.texture=onion.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.onion.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=onion.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.onion.young.untended                = sprite-young.dae?sprite_wheat.texture=onion.dds
+model.structure.farmbox.onion.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=onion.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.onion.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=onion.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.onion.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=onion.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.onion.ripe                          = sprite-ripe.dae?sprite_wheat.texture=onion.dds
+model.structure.farmbox.onion.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=onion.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.onion.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=onion.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.onion.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=onion.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.onion.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=onion.dds
+model.structure.farmbox.onion.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=onion.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.onion.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=onion.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.onion.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=onion.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## potato #########
+
+model.structure.farmbox.potato.young                         = sprite-tended.dae?sprite_wheat.texture=potato.dds
+model.structure.farmbox.potato.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=potato.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.potato.young.winter                  = sprite-tended.dae?sprite_wheat.texture=potato.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.potato.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=potato.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.potato.young.untended                = sprite-young.dae?sprite_wheat.texture=potato.dds
+model.structure.farmbox.potato.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=potato.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.potato.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=potato.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.potato.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=potato.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.potato.ripe                          = sprite-ripe.dae?sprite_wheat.texture=potato.dds
+model.structure.farmbox.potato.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=potato.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.potato.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=potato.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.potato.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=potato.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.potato.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=potato.dds
+model.structure.farmbox.potato.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=potato.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.potato.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=potato.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.potato.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=potato.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## rye #########
+
+model.structure.farmbox.rye.young                         = sprite-tended.dae?sprite_wheat.texture=rye.dds
+model.structure.farmbox.rye.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=rye.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.rye.young.winter                  = sprite-tended.dae?sprite_wheat.texture=rye.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.rye.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=rye.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.rye.young.untended                = sprite-young.dae?sprite_wheat.texture=rye.dds
+model.structure.farmbox.rye.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=rye.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.rye.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=rye.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.rye.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=rye.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.rye.ripe                          = sprite-ripe.dae?sprite_wheat.texture=rye.dds
+model.structure.farmbox.rye.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=rye.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.rye.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=rye.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.rye.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=rye.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.rye.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=rye.dds
+model.structure.farmbox.rye.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=rye.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.rye.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=rye.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.rye.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=rye.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## strawberries #########
+
+model.structure.farmbox.strawberries.young                         = sprite-tended.dae?sprite_wheat.texture=strawberry.dds
+model.structure.farmbox.strawberries.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=strawberry.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.strawberries.young.winter                  = sprite-tended.dae?sprite_wheat.texture=strawberry.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.strawberries.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=strawberry.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.strawberries.young.untended                = sprite-young.dae?sprite_wheat.texture=strawberry.dds
+model.structure.farmbox.strawberries.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=strawberry.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.strawberries.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=strawberry.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.strawberries.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=strawberry.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.strawberries.ripe                          = sprite-ripe.dae?sprite_wheat.texture=strawberry.dds
+model.structure.farmbox.strawberries.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=strawberry.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.strawberries.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=strawberry.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.strawberries.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=strawberry.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.strawberries.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=strawberry.dds
+model.structure.farmbox.strawberries.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=strawberry.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.strawberries.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=strawberry.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.strawberries.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=strawberry.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## wemp #########
+
+model.structure.farmbox.wemp.young                         = sprite-tended.dae?sprite_wheat.texture=wemp.dds
+model.structure.farmbox.wemp.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=wemp.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.wemp.young.winter                  = sprite-tended.dae?sprite_wheat.texture=wemp.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wemp.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=wemp.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wemp.young.untended                = sprite-young.dae?sprite_wheat.texture=wemp.dds
+model.structure.farmbox.wemp.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=wemp.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.wemp.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=wemp.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wemp.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=wemp.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wemp.ripe                          = sprite-ripe.dae?sprite_wheat.texture=wemp.dds
+model.structure.farmbox.wemp.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=wemp.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.wemp.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=wemp.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wemp.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=wemp.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wemp.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=wemp.dds
+model.structure.farmbox.wemp.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=wemp.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.wemp.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=wemp.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wemp.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=wemp.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## wheat #########
+
+model.structure.farmbox.wheat.young                         = sprite-tended.dae?sprite_wheat.texture=wheat.dds
+model.structure.farmbox.wheat.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=wheat.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.wheat.young.winter                  = sprite-tended.dae?sprite_wheat.texture=wheat.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wheat.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=wheat.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wheat.young.untended                = sprite-young.dae?sprite_wheat.texture=wheat.dds
+model.structure.farmbox.wheat.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=wheat.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.wheat.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=wheat.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wheat.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=wheat.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wheat.ripe                          = sprite-ripe.dae?sprite_wheat.texture=wheat.dds
+model.structure.farmbox.wheat.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=wheat.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.wheat.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=wheat.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wheat.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=wheat.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wheat.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=wheat.dds
+model.structure.farmbox.wheat.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=wheat.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.wheat.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=wheat.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.wheat.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=wheat.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## tomatoes #########
+
+model.structure.farmbox.tomatoes.young                         = sprite-tended.dae?sprite_wheat.texture=tomato.dds
+model.structure.farmbox.tomatoes.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=tomato.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.tomatoes.young.winter                  = sprite-tended.dae?sprite_wheat.texture=tomato.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.tomatoes.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=tomato.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.tomatoes.young.untended                = sprite-young.dae?sprite_wheat.texture=tomato.dds
+model.structure.farmbox.tomatoes.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=tomato.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.tomatoes.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=tomato.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.tomatoes.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=tomato.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.tomatoes.ripe                          = sprite-ripe.dae?sprite_wheat.texture=tomato.dds
+model.structure.farmbox.tomatoes.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=tomato.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.tomatoes.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=tomato.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.tomatoes.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=tomato.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.tomatoes.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=tomato.dds
+model.structure.farmbox.tomatoes.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=tomato.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.tomatoes.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=tomato.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.tomatoes.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=tomato.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## sugar beet #########
+
+model.structure.farmbox.sugarbeet.young                         = sprite-tended.dae?sprite_wheat.texture=sugarbeet.dds
+model.structure.farmbox.sugarbeet.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=sugarbeet.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.sugarbeet.young.winter                  = sprite-tended.dae?sprite_wheat.texture=sugarbeet.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.sugarbeet.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=sugarbeet.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.sugarbeet.young.untended                = sprite-young.dae?sprite_wheat.texture=sugarbeet.dds
+model.structure.farmbox.sugarbeet.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=sugarbeet.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.sugarbeet.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=sugarbeet.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.sugarbeet.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=sugarbeet.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.sugarbeet.ripe                          = sprite-ripe.dae?sprite_wheat.texture=sugarbeet.dds
+model.structure.farmbox.sugarbeet.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=sugarbeet.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.sugarbeet.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=sugarbeet.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.sugarbeet.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=sugarbeet.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.sugarbeet.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=sugarbeet.dds
+model.structure.farmbox.sugarbeet.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=sugarbeet.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.sugarbeet.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=sugarbeet.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.sugarbeet.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=sugarbeet.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## lettuce #########
+
+model.structure.farmbox.lettuce.young                         = sprite-tended.dae?sprite_wheat.texture=lettuce.dds
+model.structure.farmbox.lettuce.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=lettuce.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.lettuce.young.winter                  = sprite-tended.dae?sprite_wheat.texture=lettuce.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.lettuce.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=lettuce.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.lettuce.young.untended                = sprite-young.dae?sprite_wheat.texture=lettuce.dds
+model.structure.farmbox.lettuce.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=lettuce.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.lettuce.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=lettuce.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.lettuce.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=lettuce.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.lettuce.ripe                          = sprite-ripe.dae?sprite_wheat.texture=lettuce.dds
+model.structure.farmbox.lettuce.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=lettuce.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.lettuce.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=lettuce.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.lettuce.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=lettuce.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.lettuce.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=lettuce.dds
+model.structure.farmbox.lettuce.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=lettuce.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.lettuce.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=lettuce.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.lettuce.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=lettuce.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## peas #########
+
+model.structure.farmbox.peapods.young                         = sprite-tended.dae?sprite_wheat.texture=peas.dds
+model.structure.farmbox.peapods.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=peas.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.peapods.young.winter                  = sprite-tended.dae?sprite_wheat.texture=peas.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.peapods.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=peas.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.peapods.young.untended                = sprite-young.dae?sprite_wheat.texture=peas.dds
+model.structure.farmbox.peapods.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=peas.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.peapods.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=peas.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.peapods.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=peas.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.peapods.ripe                          = sprite-ripe.dae?sprite_wheat.texture=peas.dds
+model.structure.farmbox.peapods.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=peas.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.peapods.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=peas.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.peapods.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=peas.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.peapods.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=peas.dds
+model.structure.farmbox.peapods.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=peas.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.peapods.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=peas.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.peapods.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=peas.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## carrots #########
+
+model.structure.farmbox.carrots.young                         = sprite-tended.dae?sprite_wheat.texture=carrot.dds
+model.structure.farmbox.carrots.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=carrot.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.carrots.young.winter                  = sprite-tended.dae?sprite_wheat.texture=carrot.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.carrots.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=carrot.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.carrots.young.untended                = sprite-young.dae?sprite_wheat.texture=carrot.dds
+model.structure.farmbox.carrots.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=carrot.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.carrots.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=carrot.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.carrots.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=carrot.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.carrots.ripe                          = sprite-ripe.dae?sprite_wheat.texture=carrot.dds
+model.structure.farmbox.carrots.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=carrot.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.carrots.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=carrot.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.carrots.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=carrot.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.carrots.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=carrot.dds
+model.structure.farmbox.carrots.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=carrot.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.carrots.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=carrot.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.carrots.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=carrot.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## cucumber #########
+
+model.structure.farmbox.cucumber.young                         = sprite-tended.dae?sprite_wheat.texture=cucumber.dds
+model.structure.farmbox.cucumber.young.decayed                 = sprite-tended.dae?sprite_wheat.texture=cucumber.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cucumber.young.winter                  = sprite-tended.dae?sprite_wheat.texture=cucumber.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cucumber.young.decayed.winter          = sprite-tended.dae?sprite_wheat.texture=cucumber.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cucumber.young.untended                = sprite-young.dae?sprite_wheat.texture=cucumber.dds
+model.structure.farmbox.cucumber.young.untended.decayed        = sprite-young.dae?sprite_wheat.texture=cucumber.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cucumber.young.untended.winter         = sprite-young.dae?sprite_wheat.texture=cucumber.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cucumber.young.untended.decayed.winter = sprite-young.dae?sprite_wheat.texture=cucumber.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cucumber.ripe                          = sprite-ripe.dae?sprite_wheat.texture=cucumber.dds
+model.structure.farmbox.cucumber.ripe.decayed                  = sprite-ripe.dae?sprite_wheat.texture=cucumber.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cucumber.ripe.winter                   = sprite-ripe.dae?sprite_wheat.texture=cucumber.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cucumber.ripe.decayed.winter           = sprite-ripe.dae?sprite_wheat.texture=cucumber.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cucumber.ripe.wilted                   = sprite-wilted.dae?sprite_wheat.texture=cucumber.dds
+model.structure.farmbox.cucumber.ripe.wilted.decayed           = sprite-wilted.dae?sprite_wheat.texture=cucumber.dds&oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cucumber.ripe.wilted.winter            = sprite-wilted.dae?sprite_wheat.texture=cucumber.dds&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.cucumber.ripe.wilted.decayed.winter    = sprite-wilted.dae?sprite_wheat.texture=cucumber.dds&oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
