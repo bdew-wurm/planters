@@ -1,6 +1,7 @@
 ########## Base #########
 
 model.structure.farmbox                     = planterbed.dae
+model.structure.farmbox.unfinished          = planterunfinished.dae
 model.structure.farmbox.dirt.decayed        = planterbed.dae?oakplank.texture=woodbridge_decay.png
 model.structure.farmbox.dirt.winter         = planterbed.dae?farmwurm.texture=farm_winter.jpg
 model.structure.farmbox.dirt.decayed.winter = planterbed.dae?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg

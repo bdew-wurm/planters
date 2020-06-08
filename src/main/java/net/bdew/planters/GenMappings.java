@@ -62,6 +62,7 @@ public class GenMappings {
 
     public static void main(String[] args) {
         addMapping(PlanterItem.BASEMODEL, "planterbed.dae");
+        addMapping(PlanterItem.BASEMODEL + "unfinished", "planterunfinished.dae");
         generateVariants("dirt", "planterbed", "oakplank", "farmwurm");
         emitSection("Base");
         for (Plantable plant : Plantable.values()) {
