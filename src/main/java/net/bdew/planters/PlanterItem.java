@@ -16,7 +16,7 @@ public class PlanterItem {
     public static ItemTemplate template;
     public static int id;
 
-    private static final String BASEMODEL = "model.structure.farmbox.";
+    public static final String BASEMODEL = "model.structure.farmbox.";
 
     private static final String[] AGES = new String[]{
             "freshly sown",
