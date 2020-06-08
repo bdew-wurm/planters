@@ -6,9 +6,9 @@
       <authoring_tool>FBX COLLADA exporter</authoring_tool>
       <comments/>
     </contributor>
-    <created>2020-06-03T12:07:40Z</created>
+    <created>2020-06-05T14:07:16Z</created>
     <keywords/>
-    <modified>2020-06-03T12:07:40Z</modified>
+    <modified>2020-06-05T14:07:16Z</modified>
     <revision/>
     <subject/>
     <title/>
@@ -16,23 +16,29 @@
     <up_axis>Y_UP</up_axis>
   </asset>
   <library_images>
-    <image id="MapFBXASC032FBXASC0353-image" name="MapFBXASC032FBXASC0353">
+    <image id="MapFBXASC032FBXASC0356-image" name="MapFBXASC032FBXASC0356">
       <init_from>dirt.dds</init_from>
     </image>
-    <image id="MapFBXASC032FBXASC0352-image" name="MapFBXASC032FBXASC0352">
+    <image id="MapFBXASC032FBXASC0357-image" name="MapFBXASC032FBXASC0357">
+      <init_from>farm.jpg</init_from>
+    </image>
+    <image id="MapFBXASC032FBXASC0358-image" name="MapFBXASC032FBXASC0358">
       <init_from>Plank_oak.dds</init_from>
     </image>
   </library_images>
   <library_materials>
-    <material id="MaterialFBXASC032FBXASC03525" name="MaterialFBXASC032FBXASC03525">
-      <instance_effect url="#MaterialFBXASC032FBXASC03525-fx"/>
+    <material id="dirtwurm" name="dirtwurm">
+      <instance_effect url="#dirtwurm-fx"/>
+    </material>
+    <material id="MatFBXASC195FBXASC131_riau" name="MatFBXASC195FBXASC131_riau">
+      <instance_effect url="#MatFBXASC195FBXASC131_riau-fx"/>
     </material>
     <material id="oakplank" name="oakplank">
       <instance_effect url="#oakplank-fx"/>
     </material>
   </library_materials>
   <library_effects>
-    <effect id="MaterialFBXASC032FBXASC03525-fx" name="MaterialFBXASC032FBXASC03525">
+    <effect id="dirtwurm-fx" name="dirtwurm">
       <profile_COMMON>
         <technique sid="standard">
           <phong>
@@ -40,10 +46,10 @@
               <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
             </emission>
             <ambient>
-              <color sid="ambient">0.000000  0.000000 0.000000 1.000000</color>
+              <color sid="ambient">0.640000  0.640000 0.640000 1.000000</color>
             </ambient>
             <diffuse>
-              <texture texture="MapFBXASC032FBXASC0353-image" texcoord="CHANNEL0">
+              <texture texture="MapFBXASC032FBXASC0356-image" texcoord="CHANNEL0">
                 <extra>
                   <technique profile="MAYA">
                     <wrapU sid="wrapU0">TRUE</wrapU>
@@ -54,10 +60,44 @@
               </texture>
             </diffuse>
             <specular>
-              <color sid="specular">0.000000  0.000000 0.000000 1.000000</color>
+              <color sid="specular">1.729412  1.729412 1.729412 1.000000</color>
             </specular>
             <shininess>
-              <float sid="shininess">1024.000000</float>
+              <float sid="shininess">780.277466</float>
+            </shininess>
+            <transparency>
+              <float sid="transparency">0.000000</float>
+            </transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="MatFBXASC195FBXASC131_riau-fx" name="MatFBXASC195FBXASC131_riau">
+      <profile_COMMON>
+        <technique sid="standard">
+          <phong>
+            <emission>
+              <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0.640000  0.640000 0.640000 1.000000</color>
+            </ambient>
+            <diffuse>
+              <texture texture="MapFBXASC032FBXASC0357-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>ADD</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color sid="specular">1.729412  1.729412 1.729412 1.000000</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">780.277466</float>
             </shininess>
             <transparency>
               <float sid="transparency">0.000000</float>
@@ -77,7 +117,7 @@
               <color sid="ambient">0.640000  0.640000 0.640000 1.000000</color>
             </ambient>
             <diffuse>
-              <texture texture="MapFBXASC032FBXASC0352-image" texcoord="CHANNEL0">
+              <texture texture="MapFBXASC032FBXASC0358-image" texcoord="CHANNEL0">
                 <extra>
                   <technique profile="MAYA">
                     <wrapU sid="wrapU0">TRUE</wrapU>
@@ -171,7 +211,7 @@
           </technique_common>
         </source>
         <source id="dirt-UV0">
-          <float_array id="dirt-UV0-array" count="40">
+          <float_array id="dirt-UV0-array" count="44">
 -0.618960 -0.618960
 1.618960 -0.618960
 1.618960 1.618960
@@ -190,11 +230,13 @@
 -0.618960 1.618960
 1.618960 -0.618960
 1.618960 1.618960
--0.618960 -0.618960
--0.618960 1.618960
+0.905397 0.938014
+0.040805 0.938014
+0.040805 0.073421
+0.905397 0.073421
 </float_array>
           <technique_common>
-            <accessor source="#dirt-UV0-array" count="20" stride="2">
+            <accessor source="#dirt-UV0-array" count="22" stride="2">
               <param name="S" type="float"/>
               <param name="T" type="float"/>
             </accessor>
@@ -203,11 +245,17 @@
         <vertices id="dirt-VERTEX">
           <input semantic="POSITION" source="#dirt-POSITION"/>
         </vertices>
-        <triangles count="12" material="MaterialFBXASC032FBXASC03525">
+        <triangles count="10" material="dirtwurm">
           <input semantic="VERTEX" offset="0" source="#dirt-VERTEX"/>
           <input semantic="NORMAL" offset="1" source="#dirt-Normal0"/>
           <input semantic="TEXCOORD" offset="2" set="0" source="#dirt-UV0"/>
-          <p> 1 0 1 3 1 2 2 2 3 2 3 3 0 4 0 1 5 1 3 6 5 7 7 6 6 8 7 6 9 7 2 10 4 3 11 5 7 12 9 5 13 10 4 14 11 4 15 11 6 16 8 7 17 9 5 18 13 1 19 14 0 20 15 0 21 15 4 22 12 5 23 13 6 24 16 4 25 17 0 26 15 0 27 15 2 28 4 6 29 16 3 30 5 1 31 14 5 32 19 5 33 19 7 34 18 3 35 5</p>
+          <p> 1 0 1 3 1 2 2 2 3 2 3 3 0 4 0 1 5 1 3 6 5 7 7 6 6 8 7 6 9 7 2 10 4 3 11 5 7 12 9 5 13 10 4 14 11 4 15 11 6 16 8 7 17 9 5 18 13 1 19 14 0 20 15 0 21 15 4 22 12 5 23 13 6 24 16 4 25 17 0 26 15 0 27 15 2 28 4 6 29 16</p>
+        </triangles>
+        <triangles count="2" material="MatFBXASC195FBXASC131_riau">
+          <input semantic="VERTEX" offset="0" source="#dirt-VERTEX"/>
+          <input semantic="NORMAL" offset="1" source="#dirt-Normal0"/>
+          <input semantic="TEXCOORD" offset="2" set="0" source="#dirt-UV0"/>
+          <p> 3 30 19 1 31 20 5 32 21 5 33 21 7 34 18 3 35 19</p>
         </triangles>
       </mesh>
     </geometry>
@@ -1794,13 +1842,14 @@
     </geometry>
   </library_geometries>
   <library_visual_scenes>
-    <visual_scene id="planterbed" name="planterbed">
+    <visual_scene id="0a planter bed cultivated" name="0a planter bed cultivated">
       <node name="dirt" id="dirt" sid="dirt">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#dirt-lib">
           <bind_material>
             <technique_common>
-              <instance_material symbol="MaterialFBXASC032FBXASC03525" target="#MaterialFBXASC032FBXASC03525"/>
+              <instance_material symbol="dirtwurm" target="#dirtwurm"/>
+              <instance_material symbol="MatFBXASC195FBXASC131_riau" target="#MatFBXASC195FBXASC131_riau"/>
             </technique_common>
           </bind_material>
         </instance_geometry>
@@ -1811,7 +1860,7 @@
         </extra>
       </node>
       <node name="top_4_Cube_023" id="top_4_Cube_023" sid="top_4_Cube_023">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#top_4_Cube_023-lib">
           <bind_material>
             <technique_common>
@@ -1826,7 +1875,7 @@
         </extra>
       </node>
       <node name="top_2_Cube_022" id="top_2_Cube_022" sid="top_2_Cube_022">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#top_2_Cube_022-lib">
           <bind_material>
             <technique_common>
@@ -1841,7 +1890,7 @@
         </extra>
       </node>
       <node name="top_3_Cube_021" id="top_3_Cube_021" sid="top_3_Cube_021">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#top_3_Cube_021-lib">
           <bind_material>
             <technique_common>
@@ -1856,7 +1905,7 @@
         </extra>
       </node>
       <node name="top_1_Cube_016" id="top_1_Cube_016" sid="top_1_Cube_016">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#top_1_Cube_016-lib">
           <bind_material>
             <technique_common>
@@ -1871,7 +1920,7 @@
         </extra>
       </node>
       <node name="plank_07_Cube_010" id="plank_07_Cube_010" sid="plank_07_Cube_010">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#plank_07_Cube_010-lib">
           <bind_material>
             <technique_common>
@@ -1886,7 +1935,7 @@
         </extra>
       </node>
       <node name="plank_06_Cube_009" id="plank_06_Cube_009" sid="plank_06_Cube_009">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#plank_06_Cube_009-lib">
           <bind_material>
             <technique_common>
@@ -1901,7 +1950,7 @@
         </extra>
       </node>
       <node name="plank_09_Cube_013" id="plank_09_Cube_013" sid="plank_09_Cube_013">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#plank_09_Cube_013-lib">
           <bind_material>
             <technique_common>
@@ -1916,7 +1965,7 @@
         </extra>
       </node>
       <node name="plank_08_Cube_011" id="plank_08_Cube_011" sid="plank_08_Cube_011">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#plank_08_Cube_011-lib">
           <bind_material>
             <technique_common>
@@ -1931,7 +1980,7 @@
         </extra>
       </node>
       <node name="plank_10_Cube_014" id="plank_10_Cube_014" sid="plank_10_Cube_014">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#plank_10_Cube_014-lib">
           <bind_material>
             <technique_common>
@@ -1946,7 +1995,7 @@
         </extra>
       </node>
       <node name="plank_04_Cube_006" id="plank_04_Cube_006" sid="plank_04_Cube_006">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#plank_04_Cube_006-lib">
           <bind_material>
             <technique_common>
@@ -1961,7 +2010,7 @@
         </extra>
       </node>
       <node name="plank_05_Cube_007" id="plank_05_Cube_007" sid="plank_05_Cube_007">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#plank_05_Cube_007-lib">
           <bind_material>
             <technique_common>
@@ -1976,7 +2025,7 @@
         </extra>
       </node>
       <node name="plank_03_Cube_004" id="plank_03_Cube_004" sid="plank_03_Cube_004">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#plank_03_Cube_004-lib">
           <bind_material>
             <technique_common>
@@ -1991,7 +2040,7 @@
         </extra>
       </node>
       <node name="plank_02_Cube_03" id="plank_02_Cube_03" sid="plank_02_Cube_03">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#plank_02_Cube_03-lib">
           <bind_material>
             <technique_common>
@@ -2006,7 +2055,7 @@
         </extra>
       </node>
       <node name="plank_01_Cube_02" id="plank_01_Cube_02" sid="plank_01_Cube_02">
-        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 -1.000000 0.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
+        <matrix sid="matrix">1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000</matrix>
         <instance_geometry url="#plank_01_Cube_02-lib">
           <bind_material>
             <technique_common>
@@ -2032,6 +2081,6 @@
     </visual_scene>
   </library_visual_scenes>
   <scene>
-    <instance_visual_scene url="#planterbed"/>
+    <instance_visual_scene url="#0a planter bed cultivated"/>
   </scene>
 </COLLADA>

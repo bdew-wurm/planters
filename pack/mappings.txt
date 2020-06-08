@@ -1,3 +1,44 @@
-model.structure.farmbox		= planterbed.dae
-model.structure.farmbox.wheat 	= planterwheat4.dae
-model.structure.farmbox.corn 	= planterwheat4.dae?sprite_wheat_wheat_png.texture=corn.dds&sprite_wheat.texture=corn.dds
+########## Base #########
+
+model.structure.farmbox                     = planterbed.dae
+model.structure.farmbox.dirt.decayed        = planterbed.dae?oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.dirt.winter         = planterbed.dae?dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.dirt.decayed.winter = planterbed.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+
+########## cabbage #########
+
+model.structure.farmbox.cabbage.young                         = cabbage-tended.dae
+model.structure.farmbox.cabbage.young.decayed                 = cabbage-tended.dae?oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cabbage.young.winter                  = cabbage-tended.dae?dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.young.decayed.winter          = cabbage-tended.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.young.untended                = cabbage-young.dae
+model.structure.farmbox.cabbage.young.untended.decayed        = cabbage-young.dae?oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cabbage.young.untended.winter         = cabbage-young.dae?dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.young.untended.decayed.winter = cabbage-young.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.ripe                          = cabbage-ripe.dae
+model.structure.farmbox.cabbage.ripe.decayed                  = cabbage-ripe.dae?oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cabbage.ripe.winter                   = cabbage-ripe.dae?dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.ripe.decayed.winter           = cabbage-ripe.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.ripe.wilted                   = cabbage-wilted.dae
+model.structure.farmbox.cabbage.ripe.wilted.decayed           = cabbage-wilted.dae?oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.cabbage.ripe.wilted.winter            = cabbage-wilted.dae?dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.cabbage.ripe.wilted.decayed.winter    = cabbage-wilted.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+
+########## pumpkin #########
+
+model.structure.farmbox.pumpkin.young                         = pumpkin-tended.dae
+model.structure.farmbox.pumpkin.young.decayed                 = pumpkin-tended.dae?oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.pumpkin.young.winter                  = pumpkin-tended.dae?dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.young.decayed.winter          = pumpkin-tended.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.young.untended                = pumpkin-young.dae
+model.structure.farmbox.pumpkin.young.untended.decayed        = pumpkin-young.dae?oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.pumpkin.young.untended.winter         = pumpkin-young.dae?dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.young.untended.decayed.winter = pumpkin-young.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.ripe                          = pumpkin-ripe.dae
+model.structure.farmbox.pumpkin.ripe.decayed                  = pumpkin-ripe.dae?oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.pumpkin.ripe.winter                   = pumpkin-ripe.dae?dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.ripe.decayed.winter           = pumpkin-ripe.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.ripe.wilted                   = pumpkin-wilted.dae
+model.structure.farmbox.pumpkin.ripe.wilted.decayed           = pumpkin-wilted.dae?oakplank.texture=woodbridge_decay.png
+model.structure.farmbox.pumpkin.ripe.wilted.winter            = pumpkin-wilted.dae?dirtwurm.texture=farm_winter.jpg
+model.structure.farmbox.pumpkin.ripe.wilted.decayed.winter    = pumpkin-wilted.dae?oakplank.texture=woodbridge_decay.png&dirtwurm.texture=farm_winter.jpg
