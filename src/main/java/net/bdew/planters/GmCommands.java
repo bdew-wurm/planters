@@ -2,13 +2,18 @@ package net.bdew.planters;
 
 import com.wurmonline.server.FailedException;
 import com.wurmonline.server.Items;
+import com.wurmonline.server.Server;
 import com.wurmonline.server.creatures.Communicator;
 import com.wurmonline.server.items.*;
 import org.gotti.wurmunlimited.modloader.interfaces.MessagePolicy;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public class GmCommands {
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+    public static Optional<Boolean> forceWinter = Optional.empty();
+
     private static void spawnTestPlanter(int tileX, int tileY, Plantable plant, int age, boolean tended, float damage) {
         try {
             Item itm = ItemFactory.createItem(PlanterItem.id, 99f, tileX * 4f + 2f, tileY * 4f + 2f, 0, true, Materials.MATERIAL_WOOD_BIRCH, (byte) 0, -10L, null);
@@ -55,6 +60,31 @@ public class GmCommands {
                     .filter(i -> i.getTemplateId() == PlanterItem.id)
                     .forEach(i -> Items.destroyItem(i.getWurmId()));
             communicator.sendNormalServerMessage("Deleted all planters.");
+            return MessagePolicy.DISCARD;
+        } else if (message.startsWith("#planterwinter")) {
+            String[] args = message.split(" ");
+            boolean needsReload = true;
+            if (args.length < 2 || (!args[1].equalsIgnoreCase("on") && !args[1].equalsIgnoreCase("off") && !args[1].equalsIgnoreCase("disable"))) {
+                communicator.sendNormalServerMessage("Usage: #planterwinter <on|off|disable>");
+                needsReload = false;
+            } else if (args[1].equalsIgnoreCase("on")) {
+                forceWinter = Optional.of(true);
+                communicator.sendNormalServerMessage("Winter forced to ON");
+            } else if (args[1].equalsIgnoreCase("off")) {
+                forceWinter = Optional.of(false);
+                communicator.sendNormalServerMessage("Winter forced to OFF");
+            } else {
+                forceWinter = Optional.empty();
+                communicator.sendNormalServerMessage("Winter returned to normal");
+            }
+            if (needsReload) {
+                try {
+                    communicator.player.createVisionArea();
+                    Server.getInstance().addCreatureToPort(communicator.player);
+                } catch (Exception e) {
+                    PlantersMod.logException("error in createVisionArea", e);
+                }
+            }
             return MessagePolicy.DISCARD;
         }
         return MessagePolicy.PASS;

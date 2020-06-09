@@ -28,6 +28,10 @@ public class PlanterItem {
             "wilted"
     };
 
+    private static boolean isWinter() {
+        return GmCommands.forceWinter.orElse(WurmCalendar.isWinter());
+    }
+
     public static void register() throws IOException {
         template = new ItemTemplateBuilder("bdew.water.planter")
                 .name("large planter", "large planters", "A large planter suitable for growing crops.")
@@ -84,7 +88,7 @@ public class PlanterItem {
             if (item.getDamage() >= 50f)
                 sb.append("decayed.");
 
-            if (WurmCalendar.isWinter() && item.isOnSurface()) {
+            if (isWinter() && item.isOnSurface()) {
                 VolaTile vt = Zones.getTileOrNull(item.getTilePos(), true);
                 if (vt != null) {
                     Structure st = vt.getStructure();
