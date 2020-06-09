@@ -41,18 +41,18 @@ public class GenMappings {
         mappings.clear();
     }
 
-    private static void generateVariants(String key, String model, String woodName, String dirtname) {
-        addMapping(PlanterItem.BASEMODEL + key, String.format("%s.dae", model));
-        addMapping(PlanterItem.BASEMODEL + key + ".decayed", String.format("%s.dae?%s.texture=woodbridge_decay.png", model, woodName));
-        addMapping(PlanterItem.BASEMODEL + key + ".winter", String.format("%s.dae?%s.texture=farm_winter.jpg", model, dirtname));
-        addMapping(PlanterItem.BASEMODEL + key + ".decayed.winter", String.format("%s.dae?%s.texture=woodbridge_decay.png&%s.texture=farm_winter.jpg", model, woodName, dirtname));
+    private static void generateVariants(String key, String model, String woodName, String dirtName) {
+        addMapping(PlanterItem.BASEMODEL + key, String.format("%s", model));
+        addMapping(PlanterItem.BASEMODEL + key + ".decayed", String.format("%s?%s.texture=woodbridge_decay.png&%s.texture=farmland.jpg", model, woodName, dirtName));
+        addMapping(PlanterItem.BASEMODEL + key + ".winter", String.format("%s?%s.texture=farm_winter.jpg", model, dirtName));
+        addMapping(PlanterItem.BASEMODEL + key + ".decayed.winter", String.format("%s?%s.texture=woodbridge_decay.png&%s.texture=farm_winter.jpg", model, woodName, dirtName));
     }
 
-    private static void generateVariantsSprite(String key, String model, String woodName, String dirtname, String spriteTex, String spriteFile) {
-        addMapping(PlanterItem.BASEMODEL + key, String.format("%s.dae?%s.texture=%s", model, spriteTex, spriteFile));
-        addMapping(PlanterItem.BASEMODEL + key + ".decayed", String.format("%s.dae?%s.texture=%s&%s.texture=woodbridge_decay.png", model, spriteTex, spriteFile, woodName));
-        addMapping(PlanterItem.BASEMODEL + key + ".winter", String.format("%s.dae?%s.texture=%s&%s.texture=farm_winter.jpg", model, spriteTex, spriteFile, dirtname));
-        addMapping(PlanterItem.BASEMODEL + key + ".decayed.winter", String.format("%s.dae?%s.texture=%s&%s.texture=woodbridge_decay.png&%s.texture=farm_winter.jpg", model, spriteTex, spriteFile, woodName, dirtname));
+    private static void generateVariantsSprite(String key, String model, String woodName, String dirtName, String spriteTex, String spriteFile) {
+        addMapping(PlanterItem.BASEMODEL + key, String.format("%s?%s.texture=%s", model, spriteTex, spriteFile));
+        addMapping(PlanterItem.BASEMODEL + key + ".decayed", String.format("%s?%s.texture=%s&%s.texture=woodbridge_decay.png&%s.texture=farmland.jpg", model, spriteTex, spriteFile, woodName, dirtName));
+        addMapping(PlanterItem.BASEMODEL + key + ".winter", String.format("%s?%s.texture=%s&%s.texture=farm_winter.jpg", model, spriteTex, spriteFile, dirtName));
+        addMapping(PlanterItem.BASEMODEL + key + ".decayed.winter", String.format("%s?%s.texture=%s&%s.texture=woodbridge_decay.png&%s.texture=farm_winter.jpg", model, spriteTex, spriteFile, woodName, dirtName));
     }
 
     private static String fixedTexName(Plantable plant) {
@@ -61,29 +61,29 @@ public class GenMappings {
     }
 
     public static void main(String[] args) {
-        addMapping(PlanterItem.BASEMODEL, "planterbed.dae");
-        addMapping(PlanterItem.BASEMODEL + "unfinished", "planterunfinished.dae");
-        generateVariants("dirt", "planterbed", "oakplank", "farmwurm");
+        addMapping(PlanterItem.BASEMODEL, "planter.wom");
+        addMapping(PlanterItem.BASEMODEL + "unfinished", "planter-unfinished.wom");
+        generateVariants("dirt", "planter.wom", "oakplank", "farmwurm");
         emitSection("Base");
         for (Plantable plant : Plantable.values()) {
             if (plant.modelName.contains("mushroom")) {
                 continue; //skip for now
             } else if (plant == Plantable.Cabbage) {
-                generateVariants(plant.modelName + "young", "cabbage-tended", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "young.untended", "cabbage-young", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "ripe", "cabbage-ripe", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "ripe.wilted", "cabbage-wilted", "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "young", "cabbage-tended.wom", "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "young.untended", "cabbage-young.wom", "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "ripe", "cabbage-ripe.wom", "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "ripe.wilted", "cabbage-wilted.wom", "oakplank", "farmwurm");
             } else if (plant == Plantable.Pumpkin) {
-                generateVariants(plant.modelName + "young", "pumpkin-tended", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "young.untended", "pumpkin-young", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "ripe", "pumpkin-ripe", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "ripe.wilted", "pumpkin-wilted", "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "young", "pumpkin-tended.wom", "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "young.untended", "pumpkin-young.wom", "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "ripe", "pumpkin-ripe.wom", "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "ripe.wilted", "pumpkin-wilted.wom", "oakplank", "farmwurm");
             } else {
                 // Sprite crops
-                generateVariantsSprite(plant.modelName + "young", "sprite-tended", "oakplank", "farmwurm", "sprite_wheat", fixedTexName(plant));
-                generateVariantsSprite(plant.modelName + "young.untended", "sprite-young", "oakplank", "farmwurm", "sprite_wheat", fixedTexName(plant));
-                generateVariantsSprite(plant.modelName + "ripe", "sprite-ripe", "oakplank", "farmwurm", "sprite_wheat", fixedTexName(plant));
-                generateVariantsSprite(plant.modelName + "ripe.wilted", "sprite-wilted", "oakplank", "farmwurm", "sprite_wheat", fixedTexName(plant));
+                generateVariantsSprite(plant.modelName + "young", "sprite-tended.wom", "oakplank", "farmwurm", "sprite_wheat", fixedTexName(plant));
+                generateVariantsSprite(plant.modelName + "young.untended", "sprite-young.wom", "oakplank", "farmwurm", "sprite_wheat", fixedTexName(plant));
+                generateVariantsSprite(plant.modelName + "ripe", "sprite-ripe.wom", "oakplank", "farmwurm", "sprite_wheat", fixedTexName(plant));
+                generateVariantsSprite(plant.modelName + "ripe.wilted", "sprite-wilted.wom", "oakplank", "farmwurm", "sprite_wheat", fixedTexName(plant));
             }
             emitSection(plant.displayName);
         }
