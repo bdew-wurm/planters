@@ -56,8 +56,8 @@ public class GenMappings {
     }
 
     private static String fixedTexName(Plantable plant) {
-        if (texNames.containsKey(plant)) return texNames.get(plant) + ".dds";
-        return plant.modelName + "dds";
+        if (texNames.containsKey(plant)) return "crops/" + texNames.get(plant) + ".dds";
+        return "crops/" + plant.modelName + "dds";
     }
 
     public static void main(String[] args) {
