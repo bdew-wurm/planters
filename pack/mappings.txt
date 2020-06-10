@@ -6,6 +6,120 @@ model.structure.farmbox.dirt.decayed        = planter.wom?oakplank.texture=woodb
 model.structure.farmbox.dirt.winter         = planter.wom?farmwurm.texture=farm_winter.jpg
 model.structure.farmbox.dirt.decayed.winter = planter.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
 
+########## black mushroom #########
+
+model.structure.farmbox.mushroom.black.young                         = shroom-black-young.wom
+model.structure.farmbox.mushroom.black.young.decayed                 = shroom-black-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.black.young.winter                  = shroom-black-young.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.black.young.decayed.winter          = shroom-black-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.black.young.untended                = shroom-black-tended.wom
+model.structure.farmbox.mushroom.black.young.untended.decayed        = shroom-black-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.black.young.untended.winter         = shroom-black-tended.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.black.young.untended.decayed.winter = shroom-black-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.black.ripe                          = shroom-black-ripe.wom
+model.structure.farmbox.mushroom.black.ripe.decayed                  = shroom-black-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.black.ripe.winter                   = shroom-black-ripe.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.black.ripe.decayed.winter           = shroom-black-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.black.ripe.wilted                   = shroom-black-wilted.wom
+model.structure.farmbox.mushroom.black.ripe.wilted.decayed           = shroom-black-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.black.ripe.wilted.winter            = shroom-black-wilted.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.black.ripe.wilted.decayed.winter    = shroom-black-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## red mushroom #########
+
+model.structure.farmbox.mushroom.red.young                         = shroom-red-young.wom
+model.structure.farmbox.mushroom.red.young.decayed                 = shroom-red-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.red.young.winter                  = shroom-red-young.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.red.young.decayed.winter          = shroom-red-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.red.young.untended                = shroom-red-tended.wom
+model.structure.farmbox.mushroom.red.young.untended.decayed        = shroom-red-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.red.young.untended.winter         = shroom-red-tended.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.red.young.untended.decayed.winter = shroom-red-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.red.ripe                          = shroom-red-ripe.wom
+model.structure.farmbox.mushroom.red.ripe.decayed                  = shroom-red-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.red.ripe.winter                   = shroom-red-ripe.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.red.ripe.decayed.winter           = shroom-red-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.red.ripe.wilted                   = shroom-red-wilted.wom
+model.structure.farmbox.mushroom.red.ripe.wilted.decayed           = shroom-red-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.red.ripe.wilted.winter            = shroom-red-wilted.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.red.ripe.wilted.decayed.winter    = shroom-red-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## brown mushroom #########
+
+model.structure.farmbox.mushroom.brown.young                         = shroom-brown-young.wom
+model.structure.farmbox.mushroom.brown.young.decayed                 = shroom-brown-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.brown.young.winter                  = shroom-brown-young.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.brown.young.decayed.winter          = shroom-brown-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.brown.young.untended                = shroom-brown-tended.wom
+model.structure.farmbox.mushroom.brown.young.untended.decayed        = shroom-brown-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.brown.young.untended.winter         = shroom-brown-tended.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.brown.young.untended.decayed.winter = shroom-brown-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.brown.ripe                          = shroom-brown-ripe.wom
+model.structure.farmbox.mushroom.brown.ripe.decayed                  = shroom-brown-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.brown.ripe.winter                   = shroom-brown-ripe.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.brown.ripe.decayed.winter           = shroom-brown-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.brown.ripe.wilted                   = shroom-brown-wilted.wom
+model.structure.farmbox.mushroom.brown.ripe.wilted.decayed           = shroom-brown-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.brown.ripe.wilted.winter            = shroom-brown-wilted.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.brown.ripe.wilted.decayed.winter    = shroom-brown-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## blue mushroom #########
+
+model.structure.farmbox.mushroom.blue.young                         = shroom-blue-young.wom
+model.structure.farmbox.mushroom.blue.young.decayed                 = shroom-blue-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.blue.young.winter                  = shroom-blue-young.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.blue.young.decayed.winter          = shroom-blue-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.blue.young.untended                = shroom-blue-tended.wom
+model.structure.farmbox.mushroom.blue.young.untended.decayed        = shroom-blue-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.blue.young.untended.winter         = shroom-blue-tended.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.blue.young.untended.decayed.winter = shroom-blue-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.blue.ripe                          = shroom-blue-ripe.wom
+model.structure.farmbox.mushroom.blue.ripe.decayed                  = shroom-blue-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.blue.ripe.winter                   = shroom-blue-ripe.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.blue.ripe.decayed.winter           = shroom-blue-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.blue.ripe.wilted                   = shroom-blue-wilted.wom
+model.structure.farmbox.mushroom.blue.ripe.wilted.decayed           = shroom-blue-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.blue.ripe.wilted.winter            = shroom-blue-wilted.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.blue.ripe.wilted.decayed.winter    = shroom-blue-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## yellow mushroom #########
+
+model.structure.farmbox.mushroom.yellow.young                         = shroom-yellow-young.wom
+model.structure.farmbox.mushroom.yellow.young.decayed                 = shroom-yellow-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.yellow.young.winter                  = shroom-yellow-young.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.yellow.young.decayed.winter          = shroom-yellow-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.yellow.young.untended                = shroom-yellow-tended.wom
+model.structure.farmbox.mushroom.yellow.young.untended.decayed        = shroom-yellow-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.yellow.young.untended.winter         = shroom-yellow-tended.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.yellow.young.untended.decayed.winter = shroom-yellow-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.yellow.ripe                          = shroom-yellow-ripe.wom
+model.structure.farmbox.mushroom.yellow.ripe.decayed                  = shroom-yellow-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.yellow.ripe.winter                   = shroom-yellow-ripe.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.yellow.ripe.decayed.winter           = shroom-yellow-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.yellow.ripe.wilted                   = shroom-yellow-wilted.wom
+model.structure.farmbox.mushroom.yellow.ripe.wilted.decayed           = shroom-yellow-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.yellow.ripe.wilted.winter            = shroom-yellow-wilted.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.yellow.ripe.wilted.decayed.winter    = shroom-yellow-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
+########## green mushroom #########
+
+model.structure.farmbox.mushroom.green.young                         = shroom-green-young.wom
+model.structure.farmbox.mushroom.green.young.decayed                 = shroom-green-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.green.young.winter                  = shroom-green-young.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.green.young.decayed.winter          = shroom-green-young.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.green.young.untended                = shroom-green-tended.wom
+model.structure.farmbox.mushroom.green.young.untended.decayed        = shroom-green-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.green.young.untended.winter         = shroom-green-tended.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.green.young.untended.decayed.winter = shroom-green-tended.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.green.ripe                          = shroom-green-ripe.wom
+model.structure.farmbox.mushroom.green.ripe.decayed                  = shroom-green-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.green.ripe.winter                   = shroom-green-ripe.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.green.ripe.decayed.winter           = shroom-green-ripe.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.green.ripe.wilted                   = shroom-green-wilted.wom
+model.structure.farmbox.mushroom.green.ripe.wilted.decayed           = shroom-green-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farmland.jpg
+model.structure.farmbox.mushroom.green.ripe.wilted.winter            = shroom-green-wilted.wom?farmwurm.texture=farm_winter.jpg
+model.structure.farmbox.mushroom.green.ripe.wilted.decayed.winter    = shroom-green-wilted.wom?oakplank.texture=woodbridge_decay.png&farmwurm.texture=farm_winter.jpg
+
 ########## cabbage #########
 
 model.structure.farmbox.cabbage.young                         = cabbage-tended.wom

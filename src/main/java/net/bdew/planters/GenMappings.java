@@ -67,7 +67,11 @@ public class GenMappings {
         emitSection("Base");
         for (Plantable plant : Plantable.values()) {
             if (plant.modelName.contains("mushroom")) {
-                continue; //skip for now
+                String color = plant.modelName.split("\\.")[1];
+                generateVariants(plant.modelName + "young", String.format("shroom-%s-young.wom", color), "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "young.untended", String.format("shroom-%s-tended.wom", color), "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "ripe", String.format("shroom-%s-ripe.wom", color), "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "ripe.wilted", String.format("shroom-%s-wilted.wom", color), "oakplank", "farmwurm");
             } else if (plant == Plantable.Cabbage) {
                 generateVariants(plant.modelName + "young", "cabbage-tended.wom", "oakplank", "farmwurm");
                 generateVariants(plant.modelName + "young.untended", "cabbage-young.wom", "oakplank", "farmwurm");
