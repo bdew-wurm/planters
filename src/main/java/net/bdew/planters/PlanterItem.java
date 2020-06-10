@@ -7,6 +7,7 @@ import com.wurmonline.server.structures.Structure;
 import com.wurmonline.server.zones.VolaTile;
 import com.wurmonline.server.zones.Zones;
 import com.wurmonline.shared.constants.IconConstants;
+import com.wurmonline.shared.util.MaterialUtilities;
 import org.gotti.wurmunlimited.modsupport.ItemTemplateBuilder;
 import org.gotti.wurmunlimited.modsupport.items.ModItems;
 
@@ -99,6 +100,8 @@ public class PlanterItem {
                         sb.append("winter.");
                 }
             }
+
+            sb.append(MaterialUtilities.getMaterialString(item.getMaterial()));
 
             return sb.toString();
         }));
