@@ -47,7 +47,8 @@ public class PlanterItem {
                         ItemTypes.ITEM_TYPE_ONE_PER_TILE,
                         ItemTypes.ITEM_TYPE_TILE_ALIGNED,
                         ItemTypes.ITEM_TYPE_HASDATA,
-                        ItemTypes.ITEM_TYPE_NORENAME
+                        ItemTypes.ITEM_TYPE_NORENAME,
+                        ItemTypes.ITEM_TYPE_COLORABLE,
                 })
                 .decayTime(9072000L)
                 .dimensions(200, 200, 30)
@@ -57,6 +58,8 @@ public class PlanterItem {
                 .primarySkill(SkillList.CARPENTRY)
                 .difficulty(70)
                 .build();
+
+        template.setDyeAmountGrams(1000);
 
         id = template.getTemplateId();
 

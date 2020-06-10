@@ -18,6 +18,7 @@ public class GmCommands {
         try {
             Item itm = ItemFactory.createItem(PlanterItem.id, 99f, tileX * 4f + 2f, tileY * 4f + 2f, 0, true, Materials.MATERIAL_WOOD_BIRCH, (byte) 0, -10L, null);
             itm.setDamage(damage);
+//            itm.setColor(WurmColor.createColor(Server.rand.nextInt(255) + 1, Server.rand.nextInt(255) + 1, Server.rand.nextInt(255) + 1));
             if (plant != null)
                 PlanterItem.updateData(itm, plant, age, tended, 0, 0);
         } catch (NoSuchTemplateException | FailedException e) {
