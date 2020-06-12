@@ -41,11 +41,11 @@ public class GenMappings {
         mappings.clear();
     }
 
-    private static void generateVariants(String key, String model, String woodName, String dirtName) {
+    private static void generateVariants(String key, String model, String woodName, String dirtName, String winterTex) {
         addMapping(PlanterItem.BASEMODEL + key, String.format("%s", model));
         addMapping(PlanterItem.BASEMODEL + key + ".decayed", String.format("%s?%s.texture=woodbridge_decay.png&%s.texture=farmland.jpg", model, woodName, dirtName));
-        addMapping(PlanterItem.BASEMODEL + key + ".winter", String.format("%s?%s.texture=farm_winter.jpg", model, dirtName));
-        addMapping(PlanterItem.BASEMODEL + key + ".decayed.winter", String.format("%s?%s.texture=woodbridge_decay.png&%s.texture=farm_winter.jpg", model, woodName, dirtName));
+        addMapping(PlanterItem.BASEMODEL + key + ".winter", String.format("%s?%s.texture=%s", model, dirtName, winterTex));
+        addMapping(PlanterItem.BASEMODEL + key + ".decayed.winter", String.format("%s?%s.texture=woodbridge_decay.png&%s.texture=%s", model, woodName, dirtName, winterTex));
     }
 
     private static void generateVariantsSprite(String key, String model, String woodName, String dirtName, String spriteTex, String spriteFile) {
@@ -63,25 +63,25 @@ public class GenMappings {
     public static void main(String[] args) {
         addMapping(PlanterItem.BASEMODEL, "planter.wom");
         addMapping(PlanterItem.BASEMODEL + "unfinished", "planter-unfinished.wom");
-        generateVariants("dirt", "planter.wom", "oakplank", "farmwurm");
+        generateVariants("dirt", "planter.wom", "oakplank", "farmwurm", "farm_winter.jpg");
         emitSection("Base");
         for (Plantable plant : Plantable.values()) {
             if (plant.modelName.contains("mushroom")) {
                 String color = plant.modelName.split("\\.")[1];
-                generateVariants(plant.modelName + "young", String.format("shroom-%s-young.wom", color), "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "young.untended", String.format("shroom-%s-tended.wom", color), "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "ripe", String.format("shroom-%s-ripe.wom", color), "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "ripe.wilted", String.format("shroom-%s-wilted.wom", color), "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "young", String.format("shroom-%s-tended.wom", color), "oakplank", "Soil","dirt_winter.jpg");
+                generateVariants(plant.modelName + "young.untended", String.format("shroom-%s-young.wom", color), "oakplank", "Soil","dirt_winter.jpg");
+                generateVariants(plant.modelName + "ripe", String.format("shroom-%s-ripe.wom", color), "oakplank", "Soil","dirt_winter.jpg");
+                generateVariants(plant.modelName + "ripe.wilted", String.format("shroom-%s-wilted.wom", color), "oakplank", "Soil","dirt_winter.jpg");
             } else if (plant == Plantable.Cabbage) {
-                generateVariants(plant.modelName + "young", "cabbage-tended.wom", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "young.untended", "cabbage-young.wom", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "ripe", "cabbage-ripe.wom", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "ripe.wilted", "cabbage-wilted.wom", "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "young", "cabbage-tended.wom", "oakplank", "farmwurm", "farm_winter.jpg");
+                generateVariants(plant.modelName + "young.untended", "cabbage-young.wom", "oakplank", "farmwurm", "farm_winter.jpg");
+                generateVariants(plant.modelName + "ripe", "cabbage-ripe.wom", "oakplank", "farmwurm", "farm_winter.jpg");
+                generateVariants(plant.modelName + "ripe.wilted", "cabbage-wilted.wom", "oakplank", "farmwurm", "farm_winter.jpg");
             } else if (plant == Plantable.Pumpkin) {
-                generateVariants(plant.modelName + "young", "pumpkin-tended.wom", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "young.untended", "pumpkin-young.wom", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "ripe", "pumpkin-ripe.wom", "oakplank", "farmwurm");
-                generateVariants(plant.modelName + "ripe.wilted", "pumpkin-wilted.wom", "oakplank", "farmwurm");
+                generateVariants(plant.modelName + "young", "pumpkin-tended.wom", "oakplank", "farmwurm", "farm_winter.jpg");
+                generateVariants(plant.modelName + "young.untended", "pumpkin-young.wom", "oakplank", "farmwurm", "farm_winter.jpg");
+                generateVariants(plant.modelName + "ripe", "pumpkin-ripe.wom", "oakplank", "farmwurm", "farm_winter.jpg");
+                generateVariants(plant.modelName + "ripe.wilted", "pumpkin-wilted.wom", "oakplank", "farmwurm", "farm_winter.jpg");
             } else {
                 // Sprite crops
                 generateVariantsSprite(plant.modelName + "young", "sprite-tended.wom", "oakplank", "farmwurm", "sprite_wheat", fixedTexName(plant));
