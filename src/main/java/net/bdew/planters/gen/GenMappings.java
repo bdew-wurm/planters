@@ -132,13 +132,13 @@ public class GenMappings {
         addMapping(PlanterItem.BASEMODEL, model("planter-wood.wom"));
         addMapping(PlanterItem.BASEMODEL + "unfinished", model("unfinished-wood.wom"));
         addMapping(PlanterItem.BASEMODEL + "unfinished.stone", model("unfinished-stone.wom"));
-        generateVariants("dirt", "", model("planter-wood.wom"), "oakplank", "woodbridge_decay.png", "dirtwurm", "farm_winter.jpg", null);
-        generateVariants("dirt", ".stone", model("planter-stone.wom"), "stone", "SmallStoneDmg.jpg", "dirtwurm", "farm_winter.jpg", null);
+        generateVariants("dirt", "", model("planter-wood.wom"), "oakplank", "woodbridge_decay.png", "dirtwurm", "dirt_winter.jpg", null);
+        generateVariants("dirt", ".stone", model("planter-stone.wom"), "stone", "SmallStoneDmg.jpg", "dirtwurm", "dirt_winter.jpg", null);
         emitSection("Base");
         for (Plantable plant : Plantable.values()) {
             if (plant.modelName.contains("mushroom")) {
                 String color = plant.modelName.split("\\.")[1];
-                generateStages(plant, "shroom-" + color, "Soil", "snow_winter.jpg", null);
+                generateStages(plant, "shroom-" + color, "Soil", "dirt_winter.jpg", null);
             } else if (plant == Plantable.Cabbage) {
                 generateStages(plant, "cabbage", "farmwurm", "farm_winter.jpg", "farmland.jpg");
             } else if (plant == Plantable.Pumpkin) {

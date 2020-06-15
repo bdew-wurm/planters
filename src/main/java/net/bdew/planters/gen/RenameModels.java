@@ -59,7 +59,16 @@ public class RenameModels {
                 }
             } else if (sp.length > 3 && sp[3].startsWith("unfinished")) {
                 String material = sp[sp.length - 2].equals("stone") ? "stone" : "wood";
+                if (material.equals("stone"))
+                    doRename(file, out, "shroom", "magic", material, "unfinished");
+                else
+                    doRename(file, out, "unfinished", material);
+            } else if (sp.length > 3 && sp[3].equals("generics")) {
+                String material = sp[sp.length - 2].equals("stone") ? "stone" : "wood";
                 doRename(file, out, "unfinished", material);
+            } else if (sp.length > 3 && sp[3].equals("magic")) {
+                String material = sp[sp.length - 2].equals("stone") ? "stone" : "wood";
+                doRename(file, out, "shroom", "magic", material, "unfinished");
             } else if (sp.length > 3 && !sp[3].startsWith("cultivated") && !sp[3].startsWith("decayed")) {
                 String material = sp[sp.length - 2].equals("stone") ? "stone" : "wood";
                 doRename(file, out, "planter", material);

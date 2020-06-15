@@ -427,6 +427,14 @@
             </meshMask>
         </modelProperties>
     </shroom-magic-stone-tended.wom>
+    <shroom-magic-stone-unfinished.wom>
+        <modelProperties>
+            <meshMask>
+                <mesh>SmallStoneUnf_SmallStoneUnf1</mesh>
+                <mask>planter_pm.png</mask>
+            </meshMask>
+        </modelProperties>
+    </shroom-magic-stone-unfinished.wom>
     <shroom-magic-stone-wilted.wom>
         <modelProperties>
             <meshMask>
@@ -463,6 +471,14 @@
             </meshMask>
         </modelProperties>
     </shroom-magic-wood-tended.wom>
+    <shroom-magic-wood-unfinished.wom>
+        <modelProperties>
+            <meshMask>
+                <mesh>planks_Cube.004</mesh>
+                <mask>planter_pm.png</mask>
+            </meshMask>
+        </modelProperties>
+    </shroom-magic-wood-unfinished.wom>
     <shroom-magic-wood-wilted.wom>
         <modelProperties>
             <meshMask>
