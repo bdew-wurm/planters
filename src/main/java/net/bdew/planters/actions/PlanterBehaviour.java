@@ -14,7 +14,7 @@ import java.util.List;
 public class PlanterBehaviour implements BehaviourProvider {
     @Override
     public List<ActionEntry> getBehavioursFor(Creature performer, Item target) {
-        if (performer instanceof Player && target != null && target.getTemplateId() == PlanterItem.id) {
+        if (performer instanceof Player && target != null && PlanterItem.isPlanter(target)) {
             List<ActionEntry> list = new ArrayList<>();
             if (HarvestPerformer.canUse(performer, null, target)) list.add(Actions.actionEntrys[Actions.HARVEST]);
             return list;
@@ -23,7 +23,7 @@ public class PlanterBehaviour implements BehaviourProvider {
 
     @Override
     public List<ActionEntry> getBehavioursFor(Creature performer, Item source, Item target) {
-        if (performer instanceof Player && target != null && target.getTemplateId() == PlanterItem.id) {
+        if (performer instanceof Player && target != null && PlanterItem.isPlanter(target)) {
             List<ActionEntry> list = new ArrayList<>();
             if (SowPerformer.canUse(performer, source, target)) list.add(Actions.actionEntrys[Actions.SOW]);
             if (CultivatePerformer.canUse(performer, source, target)) list.add(Actions.actionEntrys[Actions.CULTIVATE]);

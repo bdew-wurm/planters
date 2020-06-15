@@ -12,7 +12,7 @@ public class Hooks {
     private static long lastPolledPlanters = System.currentTimeMillis();
 
     public static void addItemLoading(Item item) {
-        if (item.getTemplateId() == PlanterItem.id && PlanterItem.needsPolling(item)) {
+        if (PlanterItem.isPlanter(item) && PlanterItem.needsPolling(item)) {
             PlanterTracker.addPlanter(item);
         }
     }

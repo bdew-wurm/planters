@@ -26,7 +26,7 @@ public class HarvestPerformer implements ActionPerformer {
     }
 
     public static boolean canUse(Creature performer, Item source, Item target) {
-        if (target.getTemplateId() == PlanterItem.id && target.getAuxData() != 0 && target.getParentId() == -10L && PlanterItem.getGrowthStage(target) == 5) {
+        if (PlanterItem.isPlanter(target) && target.getAuxData() != 0 && target.getParentId() == -10L && PlanterItem.getGrowthStage(target) == 5) {
             Plantable crop = PlanterItem.getPlantable(target);
             if (crop == null) return false;
             if (crop.needsScythe && (source == null || source.getTemplateId() != ItemList.scythe)) return false;
@@ -45,7 +45,7 @@ public class HarvestPerformer implements ActionPerformer {
     @Override
     public boolean action(Action action, Creature performer, Item source, Item target, short num, float counter) {
         if (!canUse(performer, source, target))
-            if (target.getTemplateId() == PlanterItem.id)
+            if (PlanterItem.isPlanter(target))
                 return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
             else
                 return propagate(action, ActionPropagation.SERVER_PROPAGATION, ActionPropagation.ACTION_PERFORMER_PROPAGATION);

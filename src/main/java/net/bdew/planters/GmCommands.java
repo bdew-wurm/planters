@@ -14,10 +14,11 @@ public class GmCommands {
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     public static Optional<Boolean> forceWinter = Optional.empty();
 
-    private static void spawnTestPlanter(int tileX, int tileY, Plantable plant, int age, boolean tended, float damage) {
+    private static void spawnTestPlanter(int id, int tileX, int tileY, Plantable plant, int age, boolean tended, float damage) {
         try {
-            Item itm = ItemFactory.createItem(PlanterItem.id, 99f, tileX * 4f + 2f, tileY * 4f + 2f, 0, true, Materials.MATERIAL_WOOD_BIRCH, (byte) 0, -10L, null);
+            Item itm = ItemFactory.createItem(id, 99f, tileX * 4f + 2f, tileY * 4f + 2f, 0, true, id == PlanterItem.woodId ? Materials.MATERIAL_WOOD_BIRCH : Materials.MATERIAL_STONE, (byte) 0, -10L, null);
             itm.setDamage(damage);
+//            itm.setColor(WurmColor.createColor(255, 1, 127));
 //            itm.setColor(WurmColor.createColor(Server.rand.nextInt(255) + 1, Server.rand.nextInt(255) + 1, Server.rand.nextInt(255) + 1));
             if (plant != null)
                 PlanterItem.updateData(itm, plant, age, tended, 0, 0);
@@ -32,33 +33,53 @@ public class GmCommands {
             int x = communicator.player.getTileX();
             int y = py;
 
-            spawnTestPlanter(x, y++, null, 0, false, 0);
-            spawnTestPlanter(x, y++, null, 0, false, 75);
+            spawnTestPlanter(PlanterItem.woodId, x, y++, null, 0, false, 0);
+            spawnTestPlanter(PlanterItem.woodId, x, y++, null, 0, false, 75);
 
             try {
-                Item itm = ItemFactory.createItem(ItemList.unfinishedItem, 99f, x * 4f + 2f, y * 4f + 2f, 0, true, Materials.MATERIAL_WOOD_BIRCH, (byte) 0, -10L, null);
-                itm.setRealTemplate(PlanterItem.id);
+                Item itm = ItemFactory.createItem(ItemList.unfinishedItem, 99f, x * 4f + 2f, (y++) * 4f + 2f, 0, true, Materials.MATERIAL_WOOD_BIRCH, (byte) 0, -10L, null);
+                itm.setRealTemplate(PlanterItem.woodId);
             } catch (NoSuchTemplateException | FailedException e) {
                 throw new RuntimeException(e);
             }
 
+            spawnTestPlanter(PlanterItem.stoneId, x, y++, null, 0, false, 0);
+            spawnTestPlanter(PlanterItem.stoneId, x, y++, null, 0, false, 75);
+
+            try {
+                Item itm = ItemFactory.createItem(ItemList.unfinishedItem, 99f, x * 4f + 2f, y * 4f + 2f, 0, true, Materials.MATERIAL_STONE, (byte) 0, -10L, null);
+                itm.setRealTemplate(PlanterItem.stoneId);
+            } catch (NoSuchTemplateException | FailedException e) {
+                throw new RuntimeException(e);
+            }
+
+
             for (Plantable plant : Plantable.values()) {
                 x++;
                 y = py;
-                spawnTestPlanter(x, y++, plant, 3, false, 0);
-                spawnTestPlanter(x, y++, plant, 3, true, 0);
-                spawnTestPlanter(x, y++, plant, 5, false, 0);
-                spawnTestPlanter(x, y++, plant, 6, false, 0);
-                spawnTestPlanter(x, y++, plant, 3, false, 75f);
-                spawnTestPlanter(x, y++, plant, 3, true, 75f);
-                spawnTestPlanter(x, y++, plant, 5, false, 75f);
-                spawnTestPlanter(x, y++, plant, 6, false, 75f);
+                spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 3, false, 0);
+                spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 3, true, 0);
+                spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 5, false, 0);
+                spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 6, false, 0);
+                spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 3, false, 75f);
+                spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 3, true, 75f);
+                spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 5, false, 75f);
+                spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 6, false, 75f);
+
+                spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 3, false, 0);
+                spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 3, true, 0);
+                spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 5, false, 0);
+                spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 6, false, 0);
+                spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 3, false, 75f);
+                spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 3, true, 75f);
+                spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 5, false, 75f);
+                spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 6, false, 75f);
             }
             communicator.sendNormalServerMessage("Spawned test planters.");
             return MessagePolicy.DISCARD;
         } else if (message.equals("#deleteplanters")) {
             Arrays.stream(Items.getAllItems())
-                    .filter(i -> i.getTemplateId() == PlanterItem.id)
+                    .filter(PlanterItem::isPlanter)
                     .forEach(i -> Items.destroyItem(i.getWurmId()));
             communicator.sendNormalServerMessage("Deleted all planters.");
             return MessagePolicy.DISCARD;
