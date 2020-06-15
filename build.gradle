@@ -15,6 +15,7 @@ dependencies {
 
 jar {
     archiveFileName = "${project.name}.jar"
+    exclude 'net/bdew/planters/gen/**'
 }
 
 task pack(type: Zip) {
