@@ -27,7 +27,7 @@ public class PlanterItem {
     };
 
     public static void register() throws IOException {
-        woodTemplate = new ItemTemplateBuilder("bdew.water.planter")
+        woodTemplate = new ItemTemplateBuilder("bdew.planters.wood")
                 .name("large planter", "large planters", "A large wooden planter suitable for growing crops.")
                 .modelName(BASEMODEL)
                 .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
@@ -38,6 +38,7 @@ public class PlanterItem {
                         ItemTypes.ITEM_TYPE_TRANSPORTABLE,
                         ItemTypes.ITEM_TYPE_NOTAKE,
                         ItemTypes.ITEM_TYPE_TURNABLE,
+                        ItemTypes.ITEM_TYPE_NOMOVE,
                         ItemTypes.ITEM_TYPE_ONE_PER_TILE,
                         ItemTypes.ITEM_TYPE_TILE_ALIGNED,
                         ItemTypes.ITEM_TYPE_HASDATA,
@@ -57,7 +58,7 @@ public class PlanterItem {
 
         woodId = woodTemplate.getTemplateId();
 
-        stoneTemplate = new ItemTemplateBuilder("bdew.water.planter_stone")
+        stoneTemplate = new ItemTemplateBuilder("bdew.planters.stone")
                 .name("large stone planter", "large planters", "A large stone planter suitable for growing crops.")
                 .modelName(BASEMODEL)
                 .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
@@ -68,6 +69,7 @@ public class PlanterItem {
                         ItemTypes.ITEM_TYPE_TRANSPORTABLE,
                         ItemTypes.ITEM_TYPE_NOTAKE,
                         ItemTypes.ITEM_TYPE_TURNABLE,
+                        ItemTypes.ITEM_TYPE_NOMOVE,
                         ItemTypes.ITEM_TYPE_ONE_PER_TILE,
                         ItemTypes.ITEM_TYPE_TILE_ALIGNED,
                         ItemTypes.ITEM_TYPE_HASDATA,
@@ -101,8 +103,12 @@ public class PlanterItem {
         ModItems.addModelNameProvider(stoneId, new PlanterModelProvider());
     }
 
+    public static boolean isPlanter(int templateId) {
+        return templateId == woodId || templateId == stoneId;
+    }
+
     public static boolean isPlanter(Item item) {
-        return item.getTemplateId() == woodId || item.getTemplateId() == stoneId;
+        return isPlanter(item.getTemplateId());
     }
 
     public static void updateData(Item item, Plantable crop, int growthStage, boolean tended, int tendCount, int tendPower) {
