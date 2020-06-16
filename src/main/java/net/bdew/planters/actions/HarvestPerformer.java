@@ -26,7 +26,7 @@ public class HarvestPerformer implements ActionPerformer {
     }
 
     public static boolean canUse(Creature performer, Item source, Item target) {
-        if (PlanterItem.isPlanter(target) && target.getAuxData() != 0 && target.getParentId() == -10L && PlanterItem.getGrowthStage(target) == 5) {
+        if (performer.isPlayer() && PlanterItem.isPlanter(target) && target.getAuxData() != 0 && target.getParentId() == -10L && PlanterItem.getGrowthStage(target) == 5) {
             Plantable crop = PlanterItem.getPlantable(target);
             if (crop == null) return false;
             if (crop.needsScythe && (source == null || source.getTemplateId() != ItemList.scythe)) return false;

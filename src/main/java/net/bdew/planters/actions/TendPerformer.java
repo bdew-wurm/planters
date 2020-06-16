@@ -27,7 +27,7 @@ public class TendPerformer implements ActionPerformer {
     }
 
     public static boolean canUse(Creature performer, Item source, Item target) {
-        if (PlanterItem.isPlanter(target) && target.getAuxData() != 0 && target.getParentId() == -10L && source.getTemplateId() == ItemList.rake &&
+        if (performer.isPlayer() && PlanterItem.isPlanter(target) && target.getAuxData() != 0 && target.getParentId() == -10L && source.getTemplateId() == ItemList.rake &&
                 PlanterItem.getGrowthStage(target) < 5 && !PlanterItem.isTended(target)) {
             Village village = Villages.getVillage(target.getTileX(), target.getTileY(), target.isOnSurface());
             if (village == null) return true;

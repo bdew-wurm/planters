@@ -55,6 +55,11 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
 
             classPool.getCtClass("com.wurmonline.server.Server")
                     .getMethod("run", "()V").insertAfter("net.bdew.planters.Hooks.pollPlanters();");
+
+            classPool.get("com.wurmonline.server.items.Item")
+                    .getMethod("getSizeMod", "()F")
+                    .insertBefore("if (this.getTemplateId() == net.bdew.planters.MiscItems.stumpId) return net.bdew.planters.MiscItems.stumpSizeMod(this);");
+
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
@@ -66,6 +71,7 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
         ModActions.registerActionPerformer(new CultivatePerformer());
         ModActions.registerActionPerformer(new TendPerformer());
         ModActions.registerActionPerformer(new HarvestPerformer());
+        ModActions.registerActionPerformer(new DigStumpPerformer());
         ModActions.registerBehaviourProvider(new PlanterBehaviour());
 
         logInfo(String.format("Loaded %d planters that need polling", PlanterTracker.trackedCount()));
@@ -74,6 +80,7 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
     @Override
     public void onItemTemplatesCreated() {
         try {
+            MiscItems.register();
             PlanterItem.register();
         } catch (IOException e) {
             throw new RuntimeException(e);

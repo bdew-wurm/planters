@@ -23,7 +23,7 @@ public class CultivatePerformer implements ActionPerformer {
     }
 
     public static boolean canUse(Creature performer, Item source, Item target) {
-        if (PlanterItem.isPlanter(target) && target.getAuxData() != 0 && target.getParentId() == -10L &&
+        if (performer.isPlayer() && PlanterItem.isPlanter(target) && target.getAuxData() != 0 && target.getParentId() == -10L &&
                 (source.getTemplateId() == ItemList.shovel || source.getTemplateId() == ItemList.rake)) {
             Village village = Villages.getVillage(target.getTileX(), target.getTileY(), target.isOnSurface());
             if (village == null) return true;
