@@ -1,5 +1,6 @@
 package net.bdew.planters;
 
+import com.wurmonline.server.behaviours.Actions;
 import com.wurmonline.server.creatures.Communicator;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -89,6 +90,8 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
         ModActions.registerActionPerformer(new HarvestPerformer());
         ModActions.registerActionPerformer(new DigStumpPerformer());
         ModActions.registerBehaviourProvider(new PlanterBehaviour());
+
+        ModActions.registerActionPerformer(new PreventPlanterPerformer(Actions.LOAD_CARGO));
 
         logInfo(String.format("Loaded %d planters that need polling", PlanterTracker.trackedCount()));
     }
