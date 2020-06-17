@@ -45,6 +45,7 @@ public class PlanterItem {
                         ItemTypes.ITEM_TYPE_HASDATA,
                         ItemTypes.ITEM_TYPE_NORENAME,
                         ItemTypes.ITEM_TYPE_COLORABLE,
+                        ItemTypes.ITEM_TYPE_DECORATION,
                 })
                 .decayTime(9072000L)
                 .dimensions(200, 200, 30)
@@ -85,6 +86,7 @@ public class PlanterItem {
                         ItemTypes.ITEM_TYPE_HASDATA,
                         ItemTypes.ITEM_TYPE_NORENAME,
                         ItemTypes.ITEM_TYPE_COLORABLE,
+                        ItemTypes.ITEM_TYPE_DECORATION,
                 })
                 .decayTime(9072000L)
                 .dimensions(200, 200, 30)
@@ -126,6 +128,7 @@ public class PlanterItem {
                         ItemTypes.ITEM_TYPE_HASDATA,
                         ItemTypes.ITEM_TYPE_NORENAME,
                         ItemTypes.ITEM_TYPE_COLORABLE,
+                        ItemTypes.ITEM_TYPE_DECORATION,
                 })
                 .decayTime(9072000L)
                 .dimensions(200, 200, 30)
@@ -168,6 +171,7 @@ public class PlanterItem {
                         ItemTypes.ITEM_TYPE_HASDATA,
                         ItemTypes.ITEM_TYPE_NORENAME,
                         ItemTypes.ITEM_TYPE_COLORABLE,
+                        ItemTypes.ITEM_TYPE_DECORATION,
                 })
                 .decayTime(9072000L)
                 .dimensions(200, 200, 30)
