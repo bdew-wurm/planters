@@ -3,6 +3,7 @@ package net.bdew.planters;
 import com.wurmonline.server.Server;
 import com.wurmonline.server.Servers;
 import com.wurmonline.server.WurmCalendar;
+import com.wurmonline.server.creatures.Communicator;
 import com.wurmonline.server.items.Item;
 import com.wurmonline.server.sounds.SoundPlayer;
 
@@ -57,5 +58,21 @@ public class Hooks {
 
         PlantersMod.logInfo(String.format("Polled %d planters, took %dms, remaining %d", planters.size(), System.currentTimeMillis() - start, PlanterTracker.trackedCount()));
         lastPolledPlanters = start;
+    }
+
+    public static void sendItemHook(Communicator comm, Item item) {
+        if (PlanterItem.getPlanterType(item.getTemplateId()) == PlanterType.MAGIC) {
+            if (item.getAuxData() != 0 && PlanterItem.getGrowthStage(item) < 6) {
+                comm.sendRemoveEffect(item.getWurmId());
+                comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 1, (byte) 255, (byte) 255, (byte) 255);
+                comm.sendAddEffect(item.getWurmId(), item.getWurmId(), (short) 27, item.getPosX(), item.getPosY(), item.getPosZ(), (byte) 0, "reindeer", Float.MAX_VALUE, 0f);
+            }
+        }
+    }
+
+    public static void removeItemHook(Communicator comm, Item item) {
+        if (PlanterItem.getPlanterType(item.getTemplateId()) == PlanterType.MAGIC) {
+            comm.sendRemoveEffect(item.getWurmId());
+        }
     }
 }

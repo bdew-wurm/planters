@@ -2,6 +2,7 @@ package net.bdew.planters;
 
 import com.wurmonline.server.creatures.Communicator;
 import javassist.ClassPool;
+import javassist.CtClass;
 import net.bdew.planters.actions.*;
 import org.gotti.wurmunlimited.modloader.classhooks.HookManager;
 import org.gotti.wurmunlimited.modloader.interfaces.*;
@@ -65,6 +66,15 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
             classPool.get("com.wurmonline.server.items.Item")
                     .getMethod("getSizeMod", "()F")
                     .insertBefore("if (this.getTemplateId() == net.bdew.planters.MiscItems.stumpId) return net.bdew.planters.MiscItems.stumpSizeMod(this);");
+
+            CtClass ctCommunicator = classPool.getCtClass("com.wurmonline.server.creatures.Communicator");
+
+            ctCommunicator.getMethod("sendItem", "(Lcom/wurmonline/server/items/Item;JZ)V")
+                    .insertAfter("net.bdew.planters.Hooks.sendItemHook(this, $1);");
+
+            ctCommunicator.getMethod("sendRemoveItem", "(Lcom/wurmonline/server/items/Item;)V")
+                    .insertAfter("net.bdew.planters.Hooks.removeItemHook(this, $1);");
+
 
         } catch (Throwable e) {
             throw new RuntimeException(e);
