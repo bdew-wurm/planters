@@ -5,6 +5,7 @@ import com.wurmonline.server.Items;
 import com.wurmonline.server.Server;
 import com.wurmonline.server.creatures.Communicator;
 import com.wurmonline.server.items.*;
+import com.wurmonline.shared.constants.ItemMaterials;
 import org.gotti.wurmunlimited.modloader.interfaces.MessagePolicy;
 
 import java.util.Arrays;
@@ -15,9 +16,9 @@ public class GmCommands {
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     public static Optional<Boolean> forceWinter = Optional.empty();
 
-    private static void spawnTestPlanter(int id, int tileX, int tileY, Plantable plant, int age, boolean tended, float damage) {
+    private static void spawnTestPlanter(int id, int tileX, int tileY, byte material, Plantable plant, int age, boolean tended, float damage) {
         try {
-            Item itm = ItemFactory.createItem(id, 99f, tileX * 4f + 2f, tileY * 4f + 2f, 0, true, id == PlanterItem.woodId ? Materials.MATERIAL_WOOD_BIRCH : Materials.MATERIAL_STONE, (byte) 0, -10L, null);
+            Item itm = ItemFactory.createItem(id, 99f, tileX * 4f + 2f, tileY * 4f + 2f, 0, true, material, (byte) 0, -10L, null);
             itm.setDamage(damage);
             if (plant != null)
                 PlanterItem.updateData(itm, plant, age, tended, 0, 0);
@@ -26,51 +27,54 @@ public class GmCommands {
         }
     }
 
+    private static void spawnBasePlanters(int id, int tileX, int tileY, byte material) {
+        spawnTestPlanter(id, tileX, tileY++, material, null, 0, false, 0);
+        spawnTestPlanter(id, tileX, tileY++, material, null, 0, false, 75);
+        try {
+            Item itm = ItemFactory.createItem(ItemList.unfinishedItem, 99f, tileX * 4f + 2f, tileY * 4f + 2f, 0, true, material, (byte) 0, -10L, null);
+            itm.setRealTemplate(id);
+            itm.updateIfGroundItem();
+        } catch (NoSuchTemplateException | FailedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private static int spawnPlantersRow(int x, int y, int tpl, byte material, Plantable plant) {
+        spawnTestPlanter(tpl, x, y++, material, plant, 3, false, 0);
+        spawnTestPlanter(tpl, x, y++, material, plant, 3, true, 0);
+        spawnTestPlanter(tpl, x, y++, material, plant, 5, false, 0);
+        spawnTestPlanter(tpl, x, y++, material, plant, 6, false, 0);
+        spawnTestPlanter(tpl, x, y++, material, plant, 3, false, 75f);
+        spawnTestPlanter(tpl, x, y++, material, plant, 3, true, 75f);
+        spawnTestPlanter(tpl, x, y++, material, plant, 5, false, 75f);
+        spawnTestPlanter(tpl, x, y++, material, plant, 6, false, 75f);
+        return y;
+    }
+
     private static void spawnPlanters(Communicator communicator) {
         int py = communicator.player.getTileY();
         int x = communicator.player.getTileX();
         int y = py;
 
-        spawnTestPlanter(PlanterItem.woodId, x, y++, null, 0, false, 0);
-        spawnTestPlanter(PlanterItem.woodId, x, y++, null, 0, false, 75);
+        spawnBasePlanters(PlanterItem.woodId, x++, y, ItemMaterials.MATERIAL_WOOD_CEDAR);
+        spawnBasePlanters(PlanterItem.stoneId, x++, y, ItemMaterials.MATERIAL_STONE);
 
-        try {
-            Item itm = ItemFactory.createItem(ItemList.unfinishedItem, 99f, x * 4f + 2f, (y++) * 4f + 2f, 0, true, Materials.MATERIAL_WOOD_BIRCH, (byte) 0, -10L, null);
-            itm.setRealTemplate(PlanterItem.woodId);
-        } catch (NoSuchTemplateException | FailedException e) {
-            throw new RuntimeException(e);
-        }
-
-        spawnTestPlanter(PlanterItem.stoneId, x, y++, null, 0, false, 0);
-        spawnTestPlanter(PlanterItem.stoneId, x, y++, null, 0, false, 75);
-
-        try {
-            Item itm = ItemFactory.createItem(ItemList.unfinishedItem, 99f, x * 4f + 2f, y * 4f + 2f, 0, true, Materials.MATERIAL_STONE, (byte) 0, -10L, null);
-            itm.setRealTemplate(PlanterItem.stoneId);
-        } catch (NoSuchTemplateException | FailedException e) {
-            throw new RuntimeException(e);
+        if (PlantersMod.magicMushrooms) {
+            spawnBasePlanters(PlanterItem.magicWoodId, x++, y, ItemMaterials.MATERIAL_WOOD_CEDAR);
+            spawnBasePlanters(PlanterItem.magicStoneId, x++, y, ItemMaterials.MATERIAL_STONE);
         }
 
         for (Plantable plant : Plantable.values()) {
-            x++;
             y = py;
-            spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 3, false, 0);
-            spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 3, true, 0);
-            spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 5, false, 0);
-            spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 6, false, 0);
-            spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 3, false, 75f);
-            spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 3, true, 75f);
-            spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 5, false, 75f);
-            spawnTestPlanter(PlanterItem.woodId, x, y++, plant, 6, false, 75f);
-
-            spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 3, false, 0);
-            spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 3, true, 0);
-            spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 5, false, 0);
-            spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 6, false, 0);
-            spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 3, false, 75f);
-            spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 3, true, 75f);
-            spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 5, false, 75f);
-            spawnTestPlanter(PlanterItem.stoneId, x, y++, plant, 6, false, 75f);
+            if (plant.planterType == PlanterType.NORMAL) {
+                y = spawnPlantersRow(x, y, PlanterItem.woodId, ItemMaterials.MATERIAL_WOOD_CEDAR, plant);
+                y = spawnPlantersRow(x, y, PlanterItem.stoneId, ItemMaterials.MATERIAL_STONE, plant);
+            } else if (plant.planterType == PlanterType.MAGIC && PlantersMod.magicMushrooms) {
+                y = spawnPlantersRow(x, y, PlanterItem.magicWoodId, ItemMaterials.MATERIAL_WOOD_CEDAR, plant);
+                y = spawnPlantersRow(x, y, PlanterItem.magicStoneId, ItemMaterials.MATERIAL_STONE, plant);
+            }
+            x++;
         }
 
         communicator.sendNormalServerMessage("Spawned test planters.");
@@ -78,7 +82,7 @@ public class GmCommands {
 
     private static void deletePlanters(Communicator communicator) {
         Arrays.stream(Items.getAllItems())
-                .filter(item -> PlanterItem.isPlanter(item) || (item.getTemplateId() == ItemList.unfinishedItem && PlanterItem.isPlanter(item.getTemplateId())))
+                .filter(item -> PlanterItem.isPlanter(item) || (item.getTemplateId() == ItemList.unfinishedItem && PlanterItem.isPlanter(item.getRealTemplateId())))
                 .forEach(i -> Items.destroyItem(i.getWurmId()));
         communicator.sendNormalServerMessage("Deleted all planters.");
     }

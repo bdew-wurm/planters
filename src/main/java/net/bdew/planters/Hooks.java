@@ -39,6 +39,12 @@ public class Hooks {
             if (stage == 5 && PlantersMod.canWilt && Server.rand.nextFloat() < 0.5f) stage = 6;
             if (stage < 5) stage++;
 
+            if (crop.planterType == PlanterType.MAGIC && !PlanterItem.isTended(planter)) {
+                if (Server.rand.nextFloat() < PlantersMod.magicUntendedDeathChance) {
+                    stage = 6;
+                }
+            }
+
             PlanterItem.updateData(planter, crop, stage, stage >= 5, tendCount, tendPower);
 
             if (!PlanterItem.needsPolling(planter)) PlanterTracker.removePlanter(planter);

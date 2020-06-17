@@ -2,6 +2,7 @@ package net.bdew.planters.gen;
 
 import net.bdew.planters.Plantable;
 import net.bdew.planters.PlanterItem;
+import net.bdew.planters.PlanterType;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -83,44 +84,46 @@ public class GenMappings {
         mappings.clear();
     }
 
-    private static void generateVariants(String key, String suffix, ResURL base, String matName, String decayMatTex, String dirtName, String winterTex, String decaySoilTex) {
+    private static void generateVariants(String key, String suffix, ResURL base, String matName, String decayMatTex, String dirtName, String winterTex, String decaySoilTex, String extraDecayMat, String extraDecayTex) {
         ResURL decay = base.tex(matName, decayMatTex);
-        addMapping(PlanterItem.BASEMODEL + key + suffix, base);
-        addMapping(PlanterItem.BASEMODEL + key + ".decayed" + suffix, decaySoilTex == null ? decay : decay.tex(dirtName, decaySoilTex));
-        addMapping(PlanterItem.BASEMODEL + key + ".winter" + suffix, base.tex(dirtName, winterTex));
-        addMapping(PlanterItem.BASEMODEL + key + ".decayed.winter" + suffix, decay.tex(dirtName, winterTex));
+        if (extraDecayMat != null && extraDecayTex != null)
+            decay = decay.tex(extraDecayMat, extraDecayTex);
+        addMapping(key + suffix, base);
+        addMapping(key + ".decayed" + suffix, decaySoilTex == null ? decay : decay.tex(dirtName, decaySoilTex));
+        addMapping(key + ".winter" + suffix, base.tex(dirtName, winterTex));
+        addMapping(key + ".decayed.winter" + suffix, decay.tex(dirtName, winterTex));
     }
 
     private static void generateVariantsSprite(String key, String suffix, ResURL base, String matName, String decayMatTex, String dirtName, String spriteTex, String spriteFile) {
         ResURL spr = base.tex(spriteTex, spriteFile);
-        addMapping(PlanterItem.BASEMODEL + key + suffix, spr);
-        addMapping(PlanterItem.BASEMODEL + key + ".decayed" + suffix, spr.tex(matName, decayMatTex).tex(dirtName, "farmland.jpg"));
-        addMapping(PlanterItem.BASEMODEL + key + ".winter" + suffix, spr.tex(dirtName, "farm_winter.jpg"));
-        addMapping(PlanterItem.BASEMODEL + key + ".decayed.winter" + suffix, spr.tex(matName, decayMatTex).tex(dirtName, "farm_winter.jpg"));
+        addMapping(key + suffix, spr);
+        addMapping(key + ".decayed" + suffix, spr.tex(matName, decayMatTex).tex(dirtName, "farmland.jpg"));
+        addMapping(key + ".winter" + suffix, spr.tex(dirtName, "farm_winter.jpg"));
+        addMapping(key + ".decayed.winter" + suffix, spr.tex(matName, decayMatTex).tex(dirtName, "farm_winter.jpg"));
     }
 
-    private static void generateStages(Plantable plant, String base, String soilMat, String winterSoilTex, String decaySoilTex) {
-        generateVariants(plant.modelName + "young", "", model(String.format("%s-wood-tended.wom", base)), "oakplank", "woodbridge_decay.png", soilMat, winterSoilTex, decaySoilTex);
-        generateVariants(plant.modelName + "young.untended", "", model(String.format("%s-wood-young.wom", base)), "oakplank", "woodbridge_decay.png", soilMat, winterSoilTex, decaySoilTex);
-        generateVariants(plant.modelName + "ripe", "", model(String.format("%s-wood-ripe.wom", base)), "oakplank", "woodbridge_decay.png", soilMat, winterSoilTex, decaySoilTex);
-        generateVariants(plant.modelName + "ripe.wilted", "", model(String.format("%s-wood-wilted.wom", base)), "oakplank", "woodbridge_decay.png", soilMat, winterSoilTex, decaySoilTex);
+    private static void generateStages(String baseModel, Plantable plant, String base, String soilMat, String winterSoilTex, String decaySoilTex, String extraDecayMat, String extraDecayTex) {
+        generateVariants(baseModel + plant.modelName + "young", "", model(String.format("%s-wood-tended.wom", base)), "oakplank", "woodbridge_decay.png", soilMat, winterSoilTex, decaySoilTex, extraDecayMat, extraDecayTex);
+        generateVariants(baseModel + plant.modelName + "young.untended", "", model(String.format("%s-wood-young.wom", base)), "oakplank", "woodbridge_decay.png", soilMat, winterSoilTex, decaySoilTex, extraDecayMat, extraDecayTex);
+        generateVariants(baseModel + plant.modelName + "ripe", "", model(String.format("%s-wood-ripe.wom", base)), "oakplank", "woodbridge_decay.png", soilMat, winterSoilTex, decaySoilTex, extraDecayMat, extraDecayTex);
+        generateVariants(baseModel + plant.modelName + "ripe.wilted", "", model(String.format("%s-wood-wilted.wom", base)), "oakplank", "woodbridge_decay.png", soilMat, winterSoilTex, decaySoilTex, extraDecayMat, extraDecayTex);
 
-        generateVariants(plant.modelName + "young", ".stone", model(String.format("%s-stone-tended.wom", base)), "stone", "SmallStoneDmg.jpg", soilMat, winterSoilTex, decaySoilTex);
-        generateVariants(plant.modelName + "young.untended", ".stone", model(String.format("%s-stone-young.wom", base)), "stone", "SmallStoneDmg.jpg", soilMat, winterSoilTex, decaySoilTex);
-        generateVariants(plant.modelName + "ripe", ".stone", model(String.format("%s-stone-ripe.wom", base)), "stone", "SmallStoneDmg.jpg", soilMat, winterSoilTex, decaySoilTex);
-        generateVariants(plant.modelName + "ripe.wilted", ".stone", model(String.format("%s-stone-wilted.wom", base)), "stone", "SmallStoneDmg.jpg", soilMat, winterSoilTex, decaySoilTex);
+        generateVariants(baseModel + plant.modelName + "young", ".stone", model(String.format("%s-stone-tended.wom", base)), "stone", "SmallStoneDmg.jpg", soilMat, winterSoilTex, decaySoilTex, extraDecayMat, extraDecayTex);
+        generateVariants(baseModel + plant.modelName + "young.untended", ".stone", model(String.format("%s-stone-young.wom", base)), "stone", "SmallStoneDmg.jpg", soilMat, winterSoilTex, decaySoilTex, extraDecayMat, extraDecayTex);
+        generateVariants(baseModel + plant.modelName + "ripe", ".stone", model(String.format("%s-stone-ripe.wom", base)), "stone", "SmallStoneDmg.jpg", soilMat, winterSoilTex, decaySoilTex, extraDecayMat, extraDecayTex);
+        generateVariants(baseModel + plant.modelName + "ripe.wilted", ".stone", model(String.format("%s-stone-wilted.wom", base)), "stone", "SmallStoneDmg.jpg", soilMat, winterSoilTex, decaySoilTex, extraDecayMat, extraDecayTex);
     }
 
     private static void generateStagesSprite(Plantable plant, String base) {
-        generateVariantsSprite(plant.modelName + "young", "", model(String.format("%s-wood-tended.wom", base)), "oakplank", "woodbridge_decay.png", "farmwurm", "sprite_wheat", fixedTexName(plant));
-        generateVariantsSprite(plant.modelName + "young.untended", "", model(String.format("%s-wood-young.wom", base)), "oakplank", "woodbridge_decay.png", "farmwurm", "sprite_wheat", fixedTexName(plant));
-        generateVariantsSprite(plant.modelName + "ripe", "", model(String.format("%s-wood-ripe.wom", base)), "oakplank", "woodbridge_decay.png", "farmwurm", "sprite_wheat", fixedTexName(plant));
-        generateVariantsSprite(plant.modelName + "ripe.wilted", "", model(String.format("%s-wood-wilted.wom", base)), "oakplank", "woodbridge_decay.png", "farmwurm", "sprite_wheat", fixedTexName(plant));
+        generateVariantsSprite(PlanterItem.BASEMODEL + plant.modelName + "young", "", model(String.format("%s-wood-tended.wom", base)), "oakplank", "woodbridge_decay.png", "farmwurm", "sprite_wheat", fixedTexName(plant));
+        generateVariantsSprite(PlanterItem.BASEMODEL + plant.modelName + "young.untended", "", model(String.format("%s-wood-young.wom", base)), "oakplank", "woodbridge_decay.png", "farmwurm", "sprite_wheat", fixedTexName(plant));
+        generateVariantsSprite(PlanterItem.BASEMODEL + plant.modelName + "ripe", "", model(String.format("%s-wood-ripe.wom", base)), "oakplank", "woodbridge_decay.png", "farmwurm", "sprite_wheat", fixedTexName(plant));
+        generateVariantsSprite(PlanterItem.BASEMODEL + plant.modelName + "ripe.wilted", "", model(String.format("%s-wood-wilted.wom", base)), "oakplank", "woodbridge_decay.png", "farmwurm", "sprite_wheat", fixedTexName(plant));
 
-        generateVariantsSprite(plant.modelName + "young", ".stone", model(String.format("%s-stone-tended.wom", base)), "stone", "SmallStoneDmg.jpg", "farmwurm", "sprite_wheat", fixedTexName(plant));
-        generateVariantsSprite(plant.modelName + "young.untended", ".stone", model(String.format("%s-stone-young.wom", base)), "stone", "SmallStoneDmg.jpg", "farmwurm", "sprite_wheat", fixedTexName(plant));
-        generateVariantsSprite(plant.modelName + "ripe", ".stone", model(String.format("%s-stone-ripe.wom", base)), "stone", "SmallStoneDmg.jpg", "farmwurm", "sprite_wheat", fixedTexName(plant));
-        generateVariantsSprite(plant.modelName + "ripe.wilted", ".stone", model(String.format("%s-stone-wilted.wom", base)), "stone", "SmallStoneDmg.jpg", "farmwurm", "sprite_wheat", fixedTexName(plant));
+        generateVariantsSprite(PlanterItem.BASEMODEL + plant.modelName + "young", ".stone", model(String.format("%s-stone-tended.wom", base)), "stone", "SmallStoneDmg.jpg", "farmwurm", "sprite_wheat", fixedTexName(plant));
+        generateVariantsSprite(PlanterItem.BASEMODEL + plant.modelName + "young.untended", ".stone", model(String.format("%s-stone-young.wom", base)), "stone", "SmallStoneDmg.jpg", "farmwurm", "sprite_wheat", fixedTexName(plant));
+        generateVariantsSprite(PlanterItem.BASEMODEL + plant.modelName + "ripe", ".stone", model(String.format("%s-stone-ripe.wom", base)), "stone", "SmallStoneDmg.jpg", "farmwurm", "sprite_wheat", fixedTexName(plant));
+        generateVariantsSprite(PlanterItem.BASEMODEL + plant.modelName + "ripe.wilted", ".stone", model(String.format("%s-stone-wilted.wom", base)), "stone", "SmallStoneDmg.jpg", "farmwurm", "sprite_wheat", fixedTexName(plant));
     }
 
     private static String fixedTexName(Plantable plant) {
@@ -132,17 +135,27 @@ public class GenMappings {
         addMapping(PlanterItem.BASEMODEL, model("planter-wood.wom"));
         addMapping(PlanterItem.BASEMODEL + "unfinished", model("unfinished-wood.wom"));
         addMapping(PlanterItem.BASEMODEL + "unfinished.stone", model("unfinished-stone.wom"));
-        generateVariants("dirt", "", model("planter-wood.wom"), "oakplank", "woodbridge_decay.png", "dirtwurm", "dirt_winter.jpg", null);
-        generateVariants("dirt", ".stone", model("planter-stone.wom"), "stone", "SmallStoneDmg.jpg", "dirtwurm", "dirt_winter.jpg", null);
+        generateVariants(PlanterItem.BASEMODEL + "dirt", "", model("planter-wood.wom"), "oakplank", "woodbridge_decay.png", "dirtwurm", "dirt_winter.jpg", null, null, null);
+        generateVariants(PlanterItem.BASEMODEL + "dirt", ".stone", model("planter-stone.wom"), "stone", "SmallStoneDmg.jpg", "dirtwurm", "dirt_winter.jpg", null, null, null);
         emitSection("Base");
+
+        addMapping(PlanterItem.BASEMODEL + "magic", model("magic-wood.wom"));
+        addMapping(PlanterItem.BASEMODEL + "magic.unfinished", model("magic-wood-unfinished.wom"));
+        addMapping(PlanterItem.BASEMODEL + "magic.unfinished.stone", model("magic-stone-unfinished.wom"));
+        generateVariants(PlanterItem.BASEMODEL + "magic.dirt", "", model("magic-wood.wom"), "oakplank", "woodbridge_decay.png", "moss", "moss_winter.png", "moss.jpg", "treeMat", "oaktex Old.png");
+        generateVariants(PlanterItem.BASEMODEL + "magic.dirt", ".stone", model("magic-stone.wom"), "stone", "SmallStoneDmg.jpg", "moss", "moss_winter.png", "moss.jpg", "treeMat", "oaktex Old.png");
+        emitSection("Magic");
+
         for (Plantable plant : Plantable.values()) {
             if (plant.modelName.contains("mushroom")) {
                 String color = plant.modelName.split("\\.")[1];
-                generateStages(plant, "shroom-" + color, "Soil", "dirt_winter.jpg", null);
+                generateStages(PlanterItem.BASEMODEL, plant, "shroom-" + color, "Soil", "dirt_winter.jpg", null, null, null);
+            } else if (plant.planterType == PlanterType.MAGIC) {
+                generateStages(PlanterItem.BASEMODEL + "magic.", plant, "shroom-magic", "moss", "moss_winter.png", "moss.jpg", "treeMat", "oaktex Old.png");
             } else if (plant == Plantable.Cabbage) {
-                generateStages(plant, "cabbage", "farmwurm", "farm_winter.jpg", "farmland.jpg");
+                generateStages(PlanterItem.BASEMODEL, plant, "cabbage", "farmwurm", "farm_winter.jpg", "farmland.jpg", null, null);
             } else if (plant == Plantable.Pumpkin) {
-                generateStages(plant, "pumpkin", "farmwurm", "farm_winter.jpg", "farmland.jpg");
+                generateStages(PlanterItem.BASEMODEL, plant, "pumpkin", "farmwurm", "farm_winter.jpg", "farmland.jpg", null, null);
             } else {
                 // Sprite crops
                 if (plant.water) {

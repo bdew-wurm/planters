@@ -12,6 +12,20 @@ model.structure.farmbox.dirt.decayed.stone        = planter-stone.wom?stone.text
 model.structure.farmbox.dirt.winter.stone         = planter-stone.wom?dirtwurm.texture=dirt_winter.jpg
 model.structure.farmbox.dirt.decayed.winter.stone = planter-stone.wom?stone.texture=SmallStoneDmg.jpg&dirtwurm.texture=dirt_winter.jpg
 
+########## Magic #########
+
+model.structure.farmbox.magic                           = magic-wood.wom
+model.structure.farmbox.magic.unfinished                = magic-wood-unfinished.wom
+model.structure.farmbox.magic.unfinished.stone          = magic-stone-unfinished.wom
+model.structure.farmbox.magic.dirt                      = magic-wood.wom
+model.structure.farmbox.magic.dirt.decayed              = magic-wood.wom?oakplank.texture=woodbridge_decay.png&treeMat.texture=oaktex Old.png&moss.texture=moss.jpg
+model.structure.farmbox.magic.dirt.winter               = magic-wood.wom?moss.texture=moss_winter.png
+model.structure.farmbox.magic.dirt.decayed.winter       = magic-wood.wom?oakplank.texture=woodbridge_decay.png&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
+model.structure.farmbox.magic.dirt.stone                = magic-stone.wom
+model.structure.farmbox.magic.dirt.decayed.stone        = magic-stone.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss.jpg
+model.structure.farmbox.magic.dirt.winter.stone         = magic-stone.wom?moss.texture=moss_winter.png
+model.structure.farmbox.magic.dirt.decayed.winter.stone = magic-stone.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
+
 ########## black mushroom #########
 
 model.structure.farmbox.mushroom.black.young                               = shroom-black-wood-tended.wom
@@ -956,3 +970,38 @@ model.structure.farmbox.reed.ripe.wilted.stone                   = water-stone-w
 model.structure.farmbox.reed.ripe.wilted.decayed.stone           = water-stone-wilted.wom?stone.texture=SmallStoneDmg.jpg&farmwurm.texture=farmland.jpg&sprite_wheat.texture=crops/reed.dds
 model.structure.farmbox.reed.ripe.wilted.winter.stone            = water-stone-wilted.wom?farmwurm.texture=farm_winter.jpg&sprite_wheat.texture=crops/reed.dds
 model.structure.farmbox.reed.ripe.wilted.decayed.winter.stone    = water-stone-wilted.wom?stone.texture=SmallStoneDmg.jpg&farmwurm.texture=farm_winter.jpg&sprite_wheat.texture=crops/reed.dds
+
+########## magic mushroom #########
+
+model.structure.farmbox.magic.magic.young                               = shroom-magic-wood-tended.wom
+model.structure.farmbox.magic.magic.young.decayed                       = shroom-magic-wood-tended.wom?oakplank.texture=woodbridge_decay.png&treeMat.texture=oaktex Old.png&moss.texture=moss.jpg
+model.structure.farmbox.magic.magic.young.winter                        = shroom-magic-wood-tended.wom?moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.young.decayed.winter                = shroom-magic-wood-tended.wom?oakplank.texture=woodbridge_decay.png&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.young.untended                      = shroom-magic-wood-young.wom
+model.structure.farmbox.magic.magic.young.untended.decayed              = shroom-magic-wood-young.wom?oakplank.texture=woodbridge_decay.png&treeMat.texture=oaktex Old.png&moss.texture=moss.jpg
+model.structure.farmbox.magic.magic.young.untended.winter               = shroom-magic-wood-young.wom?moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.young.untended.decayed.winter       = shroom-magic-wood-young.wom?oakplank.texture=woodbridge_decay.png&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.ripe                                = shroom-magic-wood-ripe.wom
+model.structure.farmbox.magic.magic.ripe.decayed                        = shroom-magic-wood-ripe.wom?oakplank.texture=woodbridge_decay.png&treeMat.texture=oaktex Old.png&moss.texture=moss.jpg
+model.structure.farmbox.magic.magic.ripe.winter                         = shroom-magic-wood-ripe.wom?moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.ripe.decayed.winter                 = shroom-magic-wood-ripe.wom?oakplank.texture=woodbridge_decay.png&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.ripe.wilted                         = shroom-magic-wood-wilted.wom
+model.structure.farmbox.magic.magic.ripe.wilted.decayed                 = shroom-magic-wood-wilted.wom?oakplank.texture=woodbridge_decay.png&treeMat.texture=oaktex Old.png&moss.texture=moss.jpg
+model.structure.farmbox.magic.magic.ripe.wilted.winter                  = shroom-magic-wood-wilted.wom?moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.ripe.wilted.decayed.winter          = shroom-magic-wood-wilted.wom?oakplank.texture=woodbridge_decay.png&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.young.stone                         = shroom-magic-stone-tended.wom
+model.structure.farmbox.magic.magic.young.decayed.stone                 = shroom-magic-stone-tended.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss.jpg
+model.structure.farmbox.magic.magic.young.winter.stone                  = shroom-magic-stone-tended.wom?moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.young.decayed.winter.stone          = shroom-magic-stone-tended.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.young.untended.stone                = shroom-magic-stone-young.wom
+model.structure.farmbox.magic.magic.young.untended.decayed.stone        = shroom-magic-stone-young.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss.jpg
+model.structure.farmbox.magic.magic.young.untended.winter.stone         = shroom-magic-stone-young.wom?moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.young.untended.decayed.winter.stone = shroom-magic-stone-young.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.ripe.stone                          = shroom-magic-stone-ripe.wom
+model.structure.farmbox.magic.magic.ripe.decayed.stone                  = shroom-magic-stone-ripe.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss.jpg
+model.structure.farmbox.magic.magic.ripe.winter.stone                   = shroom-magic-stone-ripe.wom?moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.ripe.decayed.winter.stone           = shroom-magic-stone-ripe.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.ripe.wilted.stone                   = shroom-magic-stone-wilted.wom
+model.structure.farmbox.magic.magic.ripe.wilted.decayed.stone           = shroom-magic-stone-wilted.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss.jpg
+model.structure.farmbox.magic.magic.ripe.wilted.winter.stone            = shroom-magic-stone-wilted.wom?moss.texture=moss_winter.png
+model.structure.farmbox.magic.magic.ripe.wilted.decayed.winter.stone    = shroom-magic-stone-wilted.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png

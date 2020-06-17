@@ -9,13 +9,19 @@ import com.wurmonline.shared.util.MaterialUtilities;
 import org.gotti.wurmunlimited.modsupport.items.ModelNameProvider;
 
 public class PlanterModelProvider implements ModelNameProvider {
+    public final String baseModel;
+
+    public PlanterModelProvider(String baseModel) {
+        this.baseModel = baseModel;
+    }
+
     private static boolean isWinter() {
         return GmCommands.forceWinter.orElse(WurmCalendar.isWinter());
     }
 
     @Override
     public String getModelName(Item item) {
-        StringBuilder sb = new StringBuilder(PlanterItem.BASEMODEL);
+        StringBuilder sb = new StringBuilder(baseModel);
         Plantable plant = PlanterItem.getPlantable(item);
 
         if (plant != null) {

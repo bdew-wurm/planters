@@ -63,6 +63,38 @@
             </meshMask>
         </modelProperties>
     </cabbage-wood-young.wom>
+    <magic-stone-unfinished.wom>
+        <modelProperties>
+            <meshMask>
+                <mesh>SmallStoneUnf_SmallStoneUnf1</mesh>
+                <mask>planter_pm.png</mask>
+            </meshMask>
+        </modelProperties>
+    </magic-stone-unfinished.wom>
+    <magic-stone.wom>
+        <modelProperties>
+            <meshMask>
+                <mesh>SmallStones_SmallStone1.007</mesh>
+                <mask>planter_pm.png</mask>
+            </meshMask>
+        </modelProperties>
+    </magic-stone.wom>
+    <magic-wood-unfinished.wom>
+        <modelProperties>
+            <meshMask>
+                <mesh>planks_Cube.004</mesh>
+                <mask>planter_pm.png</mask>
+            </meshMask>
+        </modelProperties>
+    </magic-wood-unfinished.wom>
+    <magic-wood.wom>
+        <modelProperties>
+            <meshMask>
+                <mesh>planter_bed_Cube.03</mesh>
+                <mask>planter_pm.png</mask>
+            </meshMask>
+        </modelProperties>
+    </magic-wood.wom>
     <planter-stone.wom>
         <modelProperties>
             <meshMask>
@@ -403,14 +435,6 @@
             </meshMask>
         </modelProperties>
     </shroom-green-wood-young.wom>
-    <shroom-magic-stone-decayed.wom>
-        <modelProperties>
-            <meshMask>
-                <mesh>SmallStonesDmg_SmallStone1.007</mesh>
-                <mask>planter_pm.png</mask>
-            </meshMask>
-        </modelProperties>
-    </shroom-magic-stone-decayed.wom>
     <shroom-magic-stone-ripe.wom>
         <modelProperties>
             <meshMask>
@@ -427,14 +451,6 @@
             </meshMask>
         </modelProperties>
     </shroom-magic-stone-tended.wom>
-    <shroom-magic-stone-unfinished.wom>
-        <modelProperties>
-            <meshMask>
-                <mesh>SmallStoneUnf_SmallStoneUnf1</mesh>
-                <mask>planter_pm.png</mask>
-            </meshMask>
-        </modelProperties>
-    </shroom-magic-stone-unfinished.wom>
     <shroom-magic-stone-wilted.wom>
         <modelProperties>
             <meshMask>
@@ -451,10 +467,6 @@
             </meshMask>
         </modelProperties>
     </shroom-magic-stone-young.wom>
-    <shroom-magic-wood-decayed.wom>
-        <modelProperties>
-        </modelProperties>
-    </shroom-magic-wood-decayed.wom>
     <shroom-magic-wood-ripe.wom>
         <modelProperties>
             <meshMask>
@@ -471,14 +483,6 @@
             </meshMask>
         </modelProperties>
     </shroom-magic-wood-tended.wom>
-    <shroom-magic-wood-unfinished.wom>
-        <modelProperties>
-            <meshMask>
-                <mesh>planks_Cube.004</mesh>
-                <mask>planter_pm.png</mask>
-            </meshMask>
-        </modelProperties>
-    </shroom-magic-wood-unfinished.wom>
     <shroom-magic-wood-wilted.wom>
         <modelProperties>
             <meshMask>
@@ -558,11 +562,7 @@
     <shroom-red-wood-young.wom>
         <modelProperties>
             <meshMask>
-                <mesh>planter_bed_top_4_Cube.023</mesh>
-                <mask>planter_pm.png</mask>
-            </meshMask>
-            <meshMask>
-                <mesh>oakplank_Plank_oak.dds.001</mesh>
+                <mesh>planter_bed_top_3_Cube.021</mesh>
                 <mask>planter_pm.png</mask>
             </meshMask>
         </modelProperties>

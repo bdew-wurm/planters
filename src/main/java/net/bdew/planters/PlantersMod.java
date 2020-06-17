@@ -32,11 +32,17 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
 
     public static boolean canWilt = true;
     public static int extraHarvest = 0;
+    public static boolean allowStumpDigging = true;
+    public static boolean magicMushrooms = true;
+    public static float magicUntendedDeathChance = 0.5f;
 
     @Override
     public void configure(Properties properties) {
         extraHarvest = Integer.parseInt(properties.getProperty("extraHarvest", "3"));
         canWilt = !Boolean.parseBoolean(properties.getProperty("disableWeeds", "true"));
+        allowStumpDigging = Boolean.parseBoolean(properties.getProperty("allowStumpDigging", "true"));
+        magicMushrooms = allowStumpDigging && Boolean.parseBoolean(properties.getProperty("magicMushrooms", "true"));
+        magicUntendedDeathChance = Float.parseFloat(properties.getProperty("magicUntendedDeathChance", "0.2"));
     }
 
     @Override

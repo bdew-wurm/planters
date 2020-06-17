@@ -39,9 +39,13 @@ public class RenameModels {
             String[] sp = file.getName().replace(" .", ".").toLowerCase().split("[ .]");
             if (sp.length > 4 && sp[4].equals("mushroom")) {
                 String color = sp[3];
-                String state = pickState(sp, 5);
                 String material = sp[sp.length - 2].equals("stone") ? "stone" : "wood";
-                doRename(file, out, "shroom", color, material, state);
+                if (color.equals("magic") && sp.length > 5 && sp[5].equals("not")) {
+                    doRename(file, out, "magic", material);
+                } else {
+                    String state = pickState(sp, 5);
+                    doRename(file, out, "shroom", color, material, state);
+                }
             } else if (sp.length > 3 && (sp[3].equals("pumpkin") || sp[3].equals("cabbage"))) {
                 String crop = sp[3];
                 String state = pickState(sp, 4);
@@ -60,7 +64,7 @@ public class RenameModels {
             } else if (sp.length > 3 && sp[3].startsWith("unfinished")) {
                 String material = sp[sp.length - 2].equals("stone") ? "stone" : "wood";
                 if (material.equals("stone"))
-                    doRename(file, out, "shroom", "magic", material, "unfinished");
+                    doRename(file, out, "magic", material, "unfinished");
                 else
                     doRename(file, out, "unfinished", material);
             } else if (sp.length > 3 && sp[3].equals("generics")) {
@@ -68,7 +72,7 @@ public class RenameModels {
                 doRename(file, out, "unfinished", material);
             } else if (sp.length > 3 && sp[3].equals("magic")) {
                 String material = sp[sp.length - 2].equals("stone") ? "stone" : "wood";
-                doRename(file, out, "shroom", "magic", material, "unfinished");
+                doRename(file, out, "magic", material, "unfinished");
             } else if (sp.length > 3 && !sp[3].startsWith("cultivated") && !sp[3].startsWith("decayed")) {
                 String material = sp[sp.length - 2].equals("stone") ? "stone" : "wood";
                 doRename(file, out, "planter", material);

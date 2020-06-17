@@ -24,7 +24,8 @@ public class SowPerformer implements ActionPerformer {
 
     public static boolean canUse(Creature performer, Item source, Item target) {
         if (performer.isPlayer() && PlanterItem.isPlanter(target) && target.getAuxData() == 0 && target.getParentId() == -10L) {
-            if (Plantable.findSeed(source.getTemplateId()) == null) return false;
+            if (Plantable.findSeed(source.getTemplateId(), PlanterItem.getPlanterType(target.getTemplateId())) == null)
+                return false;
             Village village = Villages.getVillage(target.getTileX(), target.getTileY(), target.isOnSurface());
             if (village == null) return true;
             VillageRole role = village.getRoleFor(performer);
@@ -40,7 +41,7 @@ public class SowPerformer implements ActionPerformer {
             else
                 return propagate(action, ActionPropagation.SERVER_PROPAGATION, ActionPropagation.ACTION_PERFORMER_PROPAGATION);
 
-        Plantable crop = Plantable.findSeed(source.getTemplateId());
+        Plantable crop = Plantable.findSeed(source.getTemplateId(), PlanterItem.getPlanterType(target.getTemplateId()));
         if (crop == null)
             return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
 
