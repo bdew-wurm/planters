@@ -134,7 +134,7 @@ public class GmCommands {
     }
 
     public static MessagePolicy handle(Communicator communicator, String message, String title) {
-        if (message.startsWith("#planters ")) {
+        if (message.startsWith("#planters")) {
             final StringTokenizer tokens = new StringTokenizer(message);
             tokens.nextToken();
             if (tokens.hasMoreTokens()) {

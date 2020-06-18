@@ -37,6 +37,8 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
     public static boolean allowStumpDigging = true;
     public static boolean magicMushrooms = true;
     public static float magicUntendedDeathChance = 0.5f;
+    public static float magicMushroomFavorPerQL = 1f;
+    public static float magicMushroomKarmaPerQL = 0.5f;
 
     @Override
     public void configure(Properties properties) {
@@ -45,6 +47,8 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
         allowStumpDigging = Boolean.parseBoolean(properties.getProperty("allowStumpDigging", "true"));
         magicMushrooms = allowStumpDigging && Boolean.parseBoolean(properties.getProperty("magicMushrooms", "true"));
         magicUntendedDeathChance = Float.parseFloat(properties.getProperty("magicUntendedDeathChance", "0.2"));
+        magicMushroomFavorPerQL = Float.parseFloat(properties.getProperty("magicMushroomFavorPerQL", "1"));
+        magicMushroomKarmaPerQL = Float.parseFloat(properties.getProperty("magicMushroomKarmaPerQL", "0.5"));
     }
 
     @Override
@@ -62,21 +66,23 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
                     .insertAfter("if ($4) net.bdew.planters.Hooks.addItemLoading($1);");
 
             classPool.getCtClass("com.wurmonline.server.Server")
-                    .getMethod("run", "()V").insertAfter("net.bdew.planters.Hooks.pollPlanters();");
+                    .getMethod("run", "()V").insertAfter("net.bdew.planters.Hooks.serverTick();");
 
-            classPool.get("com.wurmonline.server.items.Item")
-                    .getMethod("getSizeMod", "()F")
-                    .insertBefore("if (this.getTemplateId() == net.bdew.planters.MiscItems.stumpId) return net.bdew.planters.MiscItems.stumpSizeMod(this);");
+            if (allowStumpDigging) {
+                classPool.get("com.wurmonline.server.items.Item")
+                        .getMethod("getSizeMod", "()F")
+                        .insertBefore("if (this.getTemplateId() == net.bdew.planters.MiscItems.stumpId) return net.bdew.planters.MiscItems.stumpSizeMod(this);");
+            }
 
-            CtClass ctCommunicator = classPool.getCtClass("com.wurmonline.server.creatures.Communicator");
+            if (magicMushrooms) {
+                CtClass ctCommunicator = classPool.getCtClass("com.wurmonline.server.creatures.Communicator");
 
-            ctCommunicator.getMethod("sendItem", "(Lcom/wurmonline/server/items/Item;JZ)V")
-                    .insertAfter("net.bdew.planters.Hooks.sendItemHook(this, $1);");
+                ctCommunicator.getMethod("sendItem", "(Lcom/wurmonline/server/items/Item;JZ)V")
+                        .insertAfter("net.bdew.planters.Hooks.sendItemHook(this, $1);");
 
-            ctCommunicator.getMethod("sendRemoveItem", "(Lcom/wurmonline/server/items/Item;)V")
-                    .insertAfter("net.bdew.planters.Hooks.removeItemHook(this, $1);");
-
-
+                ctCommunicator.getMethod("sendRemoveItem", "(Lcom/wurmonline/server/items/Item;)V")
+                        .insertAfter("net.bdew.planters.Hooks.removeItemHook(this, $1);");
+            }
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
@@ -92,6 +98,10 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
         ModActions.registerBehaviourProvider(new PlanterBehaviour());
 
         ModActions.registerActionPerformer(new PreventPlanterPerformer(Actions.LOAD_CARGO));
+
+        if (magicMushrooms) {
+            ModActions.registerActionPerformer(new EatMagicShroomPerformer());
+        }
 
         logInfo(String.format("Loaded %d planters that need polling", PlanterTracker.trackedCount()));
     }

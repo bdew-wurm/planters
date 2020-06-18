@@ -30,7 +30,11 @@ public enum Plantable {
     Cucumber(25, "cucumber", PlanterType.NORMAL, ItemList.cucumberSeeds, ItemList.cucumber, "cucumber", 15, false, false),
     Rice(26, "rice", PlanterType.NORMAL, ItemList.rice, ItemList.rice, "rice", 80, false, true),
     Reeds(27, "reeds", PlanterType.NORMAL, ItemList.reedSeed, ItemList.reed, "reed", 20, false, true),
-    MagicMushroom(28, "magic mushroom", PlanterType.MAGIC, ItemList.sourceSalt, ItemList.source, "magic", 80, false, false);
+    MagicMushroom(28, "magic mushroom", PlanterType.MAGIC, ItemList.sourceSalt, MiscItems.magicShroomId, "magic", 80, false, false);
+
+    static {
+        PlantersMod.logInfo("Plantable enum init, magic shroom id = " + MagicMushroom.cropItem);
+    }
 
     public final int number;
     public final String displayName;
