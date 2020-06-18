@@ -13,6 +13,7 @@ import com.wurmonline.server.villages.Villages;
 import net.bdew.planters.Plantable;
 import net.bdew.planters.PlanterItem;
 import net.bdew.planters.PlanterTracker;
+import net.bdew.planters.PlanterType;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPerformer;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPropagation;
 
@@ -46,8 +47,12 @@ public class SowPerformer implements ActionPerformer {
             return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
 
         if (counter == 1f) {
-            performer.getCommunicator().sendNormalServerMessage("You start sowing the seeds.");
-            Server.getInstance().broadCastAction(performer.getName() + " starts sowing some seeds.", performer, 5);
+            if (crop.planterType == PlanterType.MAGIC) {
+                performer.getCommunicator().sendNormalServerMessage("You start throwing source salt into the planter.");
+            } else {
+                performer.getCommunicator().sendNormalServerMessage("You start sowing the seeds.");
+                Server.getInstance().broadCastAction(performer.getName() + " starts sowing some seeds.", performer, 5);
+            }
             int time = Actions.getQuickActionTime(performer, performer.getSkills().getSkillOrLearn(SkillList.FARMING), null, 0.0);
             performer.sendActionControl("sowing", true, time);
             action.setTimeLeft(time);
@@ -58,9 +63,14 @@ public class SowPerformer implements ActionPerformer {
                 farming.skillCheck(crop.difficulty, 0.0, false, 1f);
                 PlanterItem.updateData(target, crop, 0, true, 0, 0);
                 target.setData2((int) (100.0 - farming.getKnowledge() + source.getQualityLevel() + source.getRarity() * 20 + action.getRarity() * 50));
-                performer.getCommunicator().sendNormalServerMessage("You sow the " + crop.displayName + ".");
                 source.setWeight(source.getWeightGrams() - source.getTemplate().getWeightGrams(), true);
-                Server.getInstance().broadCastAction(performer.getName() + " sows some seeds.", performer, 5);
+                if (crop.planterType == PlanterType.MAGIC) {
+                    performer.getCommunicator().sendNormalServerMessage("Mushrooms should pop any minute now!");
+                    Server.getInstance().broadCastAction(performer.getName() + " drops some powder on a planter.", performer, 5);
+                } else {
+                    performer.getCommunicator().sendNormalServerMessage("You sow the " + crop.displayName + ".");
+                    Server.getInstance().broadCastAction(performer.getName() + " sows some seeds.", performer, 5);
+                }
                 PlanterTracker.addPlanter(target);
                 return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
             }
