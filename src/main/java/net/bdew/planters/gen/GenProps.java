@@ -17,14 +17,14 @@ public class GenProps {
 
     public static void main(String[] args) {
         File dir = new File("pack");
-        try (PrintStream out = new PrintStream("properties.xml")) {
+        try (PrintStream out = new PrintStream("pack/properties.xml")) {
             out.println("<properties>");
             for (File file : Objects.requireNonNull(dir.listFiles())) {
                 if (!file.canRead() || !file.getName().endsWith(".wom")) continue;
-                out.println(String.format("<%s><modelProperties>", file.getName()));
                 int totalFaces = 0;
                 int totalVerts = 0;
                 int totalMats = 0;
+                StringBuilder outSb = new StringBuilder();
                 try (LittleEndianDataInputStream in = new LittleEndianDataInputStream(new BufferedInputStream(new FileInputStream(file)))) {
                     int meshes = in.readInt();
                     for (int m = 0; m < meshes; m++) {
@@ -65,6 +65,7 @@ public class GenProps {
 
                         int mats = in.readInt();
                         boolean hadPlank = false;
+                        boolean hadCloth = false;
 
                         totalFaces += faces;
                         totalVerts += verts;
@@ -77,6 +78,8 @@ public class GenProps {
 
                             if (tex.contains("Plank_oak")) hadPlank = true;
                             if (tex.contains("SmallStone")) hadPlank = true;
+                            if (tex.contains("wicker")) hadPlank = true;
+                            if (tex.contains("cloth")) hadCloth = true;
 
                             in.readByte(); // enabled
 
@@ -104,12 +107,17 @@ public class GenProps {
 //                            System.out.println(String.format("    - %s -> %s", matName, tex));
                         }
                         if (hadPlank) {
-                            out.println(String.format("<meshMask><mesh>%s</mesh><mask>planter_pm.png</mask></meshMask>", name));
+                            outSb.append(String.format("<meshMask><mesh>%s</mesh><mask>planter_pm.png</mask></meshMask>", name));
+                        }
+                        if (hadCloth) {
+                            outSb.append(String.format("<meshMask><mesh>%s</mesh><mask>cloth_pm.png</mask></meshMask>", name));
                         }
                     }
                     System.out.println(String.format("%s: %d meshes / %d vertices / %d faces / %d materials", file.getName(), meshes, totalVerts, totalFaces / 3, totalMats));
                 }
-                out.println(String.format("</modelProperties></%s>", file.getName()));
+                if (outSb.length() > 0) {
+                    out.println(String.format("<%s><modelProperties>%s</modelProperties></%s>", file.getName(), outSb.toString(), file.getName()));
+                }
             }
             out.println("</properties>");
         } catch (IOException e) {

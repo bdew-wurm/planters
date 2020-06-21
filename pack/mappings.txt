@@ -26,6 +26,15 @@ model.structure.farmbox.magic.dirt.decayed.stone        = magic-stone.wom?stone.
 model.structure.farmbox.magic.dirt.winter.stone         = magic-stone.wom?moss.texture=moss_winter.png
 model.structure.farmbox.magic.dirt.decayed.winter.stone = magic-stone.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
 
+########## Items #########
+
+model.food.mushroom.magic             = shroom-item.wom
+model.pile.magicmushroom              = basket-magic.wom
+model.container.basket                = basket-empty.wom
+model.container.basket.fabric         = basket-fabric.wom
+model.container.basket.mushroom       = basket-mixed.wom
+model.container.basket.mushroom.magic = basket-magic.wom
+
 ########## black mushroom #########
 
 model.structure.farmbox.mushroom.black.young                               = shroom-black-wood-tended.wom
@@ -1005,3 +1014,4 @@ model.structure.farmbox.magic.magic.ripe.wilted.stone                   = shroom
 model.structure.farmbox.magic.magic.ripe.wilted.decayed.stone           = shroom-magic-stone-wilted.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss.jpg
 model.structure.farmbox.magic.magic.ripe.wilted.winter.stone            = shroom-magic-stone-wilted.wom?moss.texture=moss_winter.png
 model.structure.farmbox.magic.magic.ripe.wilted.decayed.winter.stone    = shroom-magic-stone-wilted.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
+

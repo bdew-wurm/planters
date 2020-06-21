@@ -37,7 +37,18 @@ public class RenameModels {
         for (File file : Objects.requireNonNull(dir.listFiles())) {
             if (!file.canRead() || !file.getName().endsWith(".wom")) continue;
             String[] sp = file.getName().replace(" .", ".").toLowerCase().split("[ .]");
-            if (sp.length > 4 && sp[4].equals("mushroom")) {
+            if (sp.length > 1 && sp[0].equals("item")) {
+                doRename(file, out, "shroom", "item");
+            } else if (sp.length > 2 && sp[0].equals("wicker")) {
+                String kind = "empty";
+                if (sp.length > 3) {
+                    if (sp[2].equals("magic") || sp[2].equals("mixed"))
+                        kind = sp[2];
+                    else if (sp[3].equals("fabric"))
+                        kind = sp[3];
+                }
+                doRename(file, out, "basket", kind);
+            } else if (sp.length > 4 && sp[4].equals("mushroom")) {
                 String color = sp[3];
                 String material = sp[sp.length - 2].equals("stone") ? "stone" : "wood";
                 if (color.equals("magic") && sp.length > 5 && sp[5].equals("not")) {

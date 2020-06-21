@@ -107,16 +107,21 @@ public class Hooks {
     }
 
     public static void sendItemHook(Communicator comm, Item item) {
-        if (item.getTemplateId() == MiscItems.magicShroomId || (PlanterItem.getPlanterType(item.getTemplateId()) == PlanterType.MAGIC &&
+        if (item.getTemplateId() == MiscItems.magicShroomId || item.getTemplateId() == MiscItems.basketMagicId || (PlanterItem.getPlanterType(item.getTemplateId()) == PlanterType.MAGIC &&
                 item.getAuxData() != 0 && PlanterItem.getGrowthStage(item) < 6)) {
             comm.sendRemoveEffect(item.getWurmId());
-            comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 1, (byte) 255, (byte) 255, (byte) 255);
-            comm.sendAddEffect(item.getWurmId(), item.getWurmId(), (short) 27, item.getPosX(), item.getPosY(), item.getPosZ(), (byte) 0, "reindeer", Float.MAX_VALUE, 0f);
+            if (item.getTemplateId() == MiscItems.magicShroomId) {
+                comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 1, (byte) 128, (byte) 128, (byte) 100);
+                comm.sendAddEffect(item.getWurmId(), item.getWurmId(), (short) 27, item.getPosX(), item.getPosY(), item.getPosZ() - 0.5f, (byte) 0, "reindeer", Float.MAX_VALUE, 0f);
+            } else {
+                comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 1, (byte) 255, (byte) 255, (byte) 255);
+                comm.sendAddEffect(item.getWurmId(), item.getWurmId(), (short) 27, item.getPosX(), item.getPosY(), item.getPosZ(), (byte) 0, "reindeer", Float.MAX_VALUE, 0f);
+            }
         }
     }
 
     public static void removeItemHook(Communicator comm, Item item) {
-        if (item.getTemplateId() == MiscItems.magicShroomId || PlanterItem.getPlanterType(item.getTemplateId()) == PlanterType.MAGIC) {
+        if (item.getTemplateId() == MiscItems.magicShroomId || item.getTemplateId() == MiscItems.basketMagicId || PlanterItem.getPlanterType(item.getTemplateId()) == PlanterType.MAGIC) {
             comm.sendRemoveEffect(item.getWurmId());
         }
     }
