@@ -24,7 +24,8 @@ public class GenProps {
                 int totalFaces = 0;
                 int totalVerts = 0;
                 int totalMats = 0;
-                StringBuilder outSb = new StringBuilder();
+                StringBuilder modelPropsSB = new StringBuilder();
+                StringBuilder generalSB = new StringBuilder();
                 try (LittleEndianDataInputStream in = new LittleEndianDataInputStream(new BufferedInputStream(new FileInputStream(file)))) {
                     int meshes = in.readInt();
                     for (int m = 0; m < meshes; m++) {
@@ -107,16 +108,24 @@ public class GenProps {
 //                            System.out.println(String.format("    - %s -> %s", matName, tex));
                         }
                         if (hadPlank) {
-                            outSb.append(String.format("<meshMask><mesh>%s</mesh><mask>planter_pm.png</mask></meshMask>", name));
+                            modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>planter_pm.png</mask></meshMask>", name));
                         }
                         if (hadCloth) {
-                            outSb.append(String.format("<meshMask><mesh>%s</mesh><mask>cloth_pm.png</mask></meshMask>", name));
+                            modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>cloth_pm.png</mask></meshMask>", name));
                         }
                     }
                     System.out.println(String.format("%s: %d meshes / %d vertices / %d faces / %d materials", file.getName(), meshes, totalVerts, totalFaces / 3, totalMats));
                 }
-                if (outSb.length() > 0) {
-                    out.println(String.format("<%s><modelProperties>%s</modelProperties></%s>", file.getName(), outSb.toString(), file.getName()));
+
+                if ((file.getName().contains("shroom-magic") && !file.getName().contains("wilted")) || file.getName().contains("basket-magic") || file.getName().contains("shroom-item")) {
+                    generalSB.append("<customEffect><reindeer><nullName>sparkle</nullName></reindeer></customEffect>");
+
+                }
+
+                if (modelPropsSB.length() > 0) {
+                    out.println(String.format("<%s><modelProperties>%s</modelProperties>%s</%s>", file.getName(), modelPropsSB.toString(), generalSB.toString(), file.getName()));
+                } else if (generalSB.length() > 0) {
+                    out.println(String.format("<%s>%s</%s>", file.getName(), generalSB.toString(), file.getName()));
                 }
             }
             out.println("</properties>");

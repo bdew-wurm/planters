@@ -112,10 +112,8 @@ public class Hooks {
             comm.sendRemoveEffect(item.getWurmId());
             if (item.getTemplateId() == MiscItems.magicShroomId) {
                 comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 1, (byte) 128, (byte) 128, (byte) 100);
-                comm.sendAddEffect(item.getWurmId(), item.getWurmId(), (short) 27, item.getPosX(), item.getPosY(), item.getPosZ() - 0.5f, (byte) 0, "reindeer", Float.MAX_VALUE, 0f);
             } else {
                 comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 1, (byte) 255, (byte) 255, (byte) 255);
-                comm.sendAddEffect(item.getWurmId(), item.getWurmId(), (short) 27, item.getPosX(), item.getPosY(), item.getPosZ(), (byte) 0, "reindeer", Float.MAX_VALUE, 0f);
             }
         }
     }

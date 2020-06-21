@@ -70,11 +70,13 @@ public class GenMappings {
     private static ArrayList<Mapping> mappings = new ArrayList<>();
     private static int longest = 0;
     private static PrintStream output = System.out;
+    private static int totalMappings = 0;
 
     private static void addMapping(String key, ResURL val) {
         if (key.endsWith(".")) key = key.substring(0, key.length() - 1);
         mappings.add(new Mapping(key, val.build()));
         if (key.length() > longest) longest = key.length();
+        totalMappings++;
     }
 
     private static void emitSection(String title) {
@@ -189,5 +191,6 @@ public class GenMappings {
                 output.close();
             }
         }
+        System.out.println(String.format("Generated %d mappings", totalMappings));
     }
 }

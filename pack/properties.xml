@@ -42,6 +42,11 @@
                 <mask>planter_pm.png</mask>
             </meshMask>
         </modelProperties>
+        <customEffect>
+            <reindeer>
+                <nullName>sparkle</nullName>
+            </reindeer>
+        </customEffect>
     </basket-magic.wom>
     <basket-mixed.wom>
         <modelProperties>
@@ -495,6 +500,13 @@
             </meshMask>
         </modelProperties>
     </shroom-green-wood-young.wom>
+    <shroom-item.wom>
+        <customEffect>
+            <reindeer>
+                <nullName>sparkle</nullName>
+            </reindeer>
+        </customEffect>
+    </shroom-item.wom>
     <shroom-magic-stone-ripe.wom>
         <modelProperties>
             <meshMask>
@@ -502,6 +514,11 @@
                 <mask>planter_pm.png</mask>
             </meshMask>
         </modelProperties>
+        <customEffect>
+            <reindeer>
+                <nullName>sparkle</nullName>
+            </reindeer>
+        </customEffect>
     </shroom-magic-stone-ripe.wom>
     <shroom-magic-stone-tended.wom>
         <modelProperties>
@@ -510,6 +527,11 @@
                 <mask>planter_pm.png</mask>
             </meshMask>
         </modelProperties>
+        <customEffect>
+            <reindeer>
+                <nullName>sparkle</nullName>
+            </reindeer>
+        </customEffect>
     </shroom-magic-stone-tended.wom>
     <shroom-magic-stone-wilted.wom>
         <modelProperties>
@@ -526,6 +548,11 @@
                 <mask>planter_pm.png</mask>
             </meshMask>
         </modelProperties>
+        <customEffect>
+            <reindeer>
+                <nullName>sparkle</nullName>
+            </reindeer>
+        </customEffect>
     </shroom-magic-stone-young.wom>
     <shroom-magic-wood-ripe.wom>
         <modelProperties>
@@ -534,6 +561,11 @@
                 <mask>planter_pm.png</mask>
             </meshMask>
         </modelProperties>
+        <customEffect>
+            <reindeer>
+                <nullName>sparkle</nullName>
+            </reindeer>
+        </customEffect>
     </shroom-magic-wood-ripe.wom>
     <shroom-magic-wood-tended.wom>
         <modelProperties>
@@ -542,6 +574,11 @@
                 <mask>planter_pm.png</mask>
             </meshMask>
         </modelProperties>
+        <customEffect>
+            <reindeer>
+                <nullName>sparkle</nullName>
+            </reindeer>
+        </customEffect>
     </shroom-magic-wood-tended.wom>
     <shroom-magic-wood-wilted.wom>
         <modelProperties>
@@ -558,6 +595,11 @@
                 <mask>planter_pm.png</mask>
             </meshMask>
         </modelProperties>
+        <customEffect>
+            <reindeer>
+                <nullName>sparkle</nullName>
+            </reindeer>
+        </customEffect>
     </shroom-magic-wood-young.wom>
     <shroom-red-stone-ripe.wom>
         <modelProperties>
