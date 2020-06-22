@@ -11,12 +11,11 @@ import com.wurmonline.server.items.RuneUtilities;
 import com.wurmonline.server.skills.NoSuchSkillException;
 import com.wurmonline.server.skills.Skill;
 import com.wurmonline.server.skills.SkillList;
-import com.wurmonline.server.villages.Village;
 import com.wurmonline.server.villages.VillageRole;
-import com.wurmonline.server.villages.Villages;
 import net.bdew.planters.Plantable;
 import net.bdew.planters.PlanterItem;
 import net.bdew.planters.PlantersMod;
+import net.bdew.planters.Utils;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPerformer;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPropagation;
 
@@ -27,13 +26,14 @@ public class TendPerformer implements ActionPerformer {
     }
 
     public static boolean canUse(Creature performer, Item source, Item target) {
-        if (performer.isPlayer() && PlanterItem.isPlanter(target) && target.getAuxData() != 0 && target.getParentId() == -10L && source.getTemplateId() == ItemList.rake &&
-                PlanterItem.getGrowthStage(target) < 5 && !PlanterItem.isTended(target)) {
-            Village village = Villages.getVillage(target.getTileX(), target.getTileY(), target.isOnSurface());
-            if (village == null) return true;
-            VillageRole role = village.getRoleFor(performer);
-            return role != null && role.mayFarm();
-        } else return false;
+        return performer.isPlayer()
+                && PlanterItem.isPlanter(target)
+                && target.getAuxData() != 0
+                && target.getParentId() == -10L
+                && source.getTemplateId() == ItemList.rake
+                && PlanterItem.getGrowthStage(target) < 5
+                && !PlanterItem.isTended(target)
+                && Utils.checkRoleAllows(performer, target, VillageRole::mayFarm);
     }
 
     @Override
@@ -109,5 +109,4 @@ public class TendPerformer implements ActionPerformer {
 
         return propagate(action, ActionPropagation.CONTINUE_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
     }
-
 }

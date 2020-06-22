@@ -10,12 +10,11 @@ import com.wurmonline.server.items.*;
 import com.wurmonline.server.skills.NoSuchSkillException;
 import com.wurmonline.server.skills.Skill;
 import com.wurmonline.server.skills.SkillList;
-import com.wurmonline.server.villages.Village;
 import com.wurmonline.server.villages.VillageRole;
-import com.wurmonline.server.villages.Villages;
 import net.bdew.planters.Plantable;
 import net.bdew.planters.PlanterItem;
 import net.bdew.planters.PlantersMod;
+import net.bdew.planters.Utils;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPerformer;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPropagation;
 
@@ -30,10 +29,7 @@ public class HarvestPerformer implements ActionPerformer {
             Plantable crop = PlanterItem.getPlantable(target);
             if (crop == null) return false;
             if (crop.needsScythe && (source == null || source.getTemplateId() != ItemList.scythe)) return false;
-            Village village = Villages.getVillage(target.getTileX(), target.getTileY(), target.isOnSurface());
-            if (village == null) return true;
-            VillageRole role = village.getRoleFor(performer);
-            return role != null && role.mayFarm();
+            return Utils.checkRoleAllows(performer, target, VillageRole::mayFarm);
         } else return false;
     }
 
@@ -151,5 +147,4 @@ public class HarvestPerformer implements ActionPerformer {
         }
         return propagate(action, ActionPropagation.CONTINUE_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
     }
-
 }

@@ -12,11 +12,10 @@ import com.wurmonline.server.items.ItemFactory;
 import com.wurmonline.server.items.ItemList;
 import com.wurmonline.server.items.NoSuchTemplateException;
 import com.wurmonline.server.skills.SkillList;
-import com.wurmonline.server.villages.Village;
 import com.wurmonline.server.villages.VillageRole;
-import com.wurmonline.server.villages.Villages;
 import net.bdew.planters.MiscItems;
 import net.bdew.planters.PlantersMod;
+import net.bdew.planters.Utils;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPerformer;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPropagation;
 
@@ -27,12 +26,11 @@ public class DigStumpPerformer implements ActionPerformer {
     }
 
     public static boolean canUse(Creature performer, Item source, Item target) {
-        if (performer.isPlayer() && target.getTemplateId() == ItemList.treeStump && source.getTemplateId() == ItemList.shovel && target.getParentOrNull() == null) {
-            Village village = Villages.getVillage(target.getTileX(), target.getTileY(), target.isOnSurface());
-            if (village == null) return true;
-            VillageRole role = village.getRoleFor(performer);
-            return role != null && role.mayTerraform();
-        } else return false;
+        return performer.isPlayer()
+                && target.getTemplateId() == ItemList.treeStump
+                && source.getTemplateId() == ItemList.shovel
+                && target.getParentOrNull() == null
+                && Utils.checkRoleAllows(performer, target, VillageRole::mayTerraform);
     }
 
     @Override
@@ -84,5 +82,4 @@ public class DigStumpPerformer implements ActionPerformer {
         return propagate(action, ActionPropagation.CONTINUE_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
 
     }
-
 }

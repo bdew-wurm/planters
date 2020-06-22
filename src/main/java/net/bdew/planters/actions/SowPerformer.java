@@ -7,13 +7,8 @@ import com.wurmonline.server.creatures.Creature;
 import com.wurmonline.server.items.Item;
 import com.wurmonline.server.skills.Skill;
 import com.wurmonline.server.skills.SkillList;
-import com.wurmonline.server.villages.Village;
 import com.wurmonline.server.villages.VillageRole;
-import com.wurmonline.server.villages.Villages;
-import net.bdew.planters.Plantable;
-import net.bdew.planters.PlanterItem;
-import net.bdew.planters.PlanterTracker;
-import net.bdew.planters.PlanterType;
+import net.bdew.planters.*;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPerformer;
 import org.gotti.wurmunlimited.modsupport.actions.ActionPropagation;
 
@@ -27,10 +22,7 @@ public class SowPerformer implements ActionPerformer {
         if (performer.isPlayer() && PlanterItem.isPlanter(target) && target.getAuxData() == 0 && target.getParentId() == -10L) {
             if (Plantable.findSeed(source.getTemplateId(), PlanterItem.getPlanterType(target.getTemplateId())) == null)
                 return false;
-            Village village = Villages.getVillage(target.getTileX(), target.getTileY(), target.isOnSurface());
-            if (village == null) return true;
-            VillageRole role = village.getRoleFor(performer);
-            return role != null && role.mayFarm();
+            return Utils.checkRoleAllows(performer, target, VillageRole::mayFarm);
         } else return false;
     }
 
