@@ -41,7 +41,7 @@ public class DigStumpPerformer implements ActionPerformer {
             return propagate(action, ActionPropagation.ACTION_PERFORMER_PROPAGATION, ActionPropagation.SERVER_PROPAGATION);
         if (!canUse(performer, source, target))
             return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION, ActionPropagation.NO_SERVER_PROPAGATION);
-        if (!performer.canCarry(MiscItems.stump.getWeightGrams())) {
+        if (!performer.canCarry(target.getWeightGrams() / 4)) {
             performer.getCommunicator().sendAlertServerMessage("The stump is too heavy for you to carry.");
             return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION, ActionPropagation.NO_SERVER_PROPAGATION);
         }
