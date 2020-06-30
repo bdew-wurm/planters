@@ -70,6 +70,8 @@ public class Hooks {
         if (start - lastPolledPlanters < Servers.localServer.getFieldGrowthTime())
             return;
 
+        lastPolledPlanters = start;
+
         List<Item> planters = PlanterTracker.getPlanters();
         if (planters.isEmpty()) return;
 
@@ -103,7 +105,6 @@ public class Hooks {
         }
 
         PlantersMod.logInfo(String.format("Polled %d planters, took %dms, remaining %d", planters.size(), System.currentTimeMillis() - start, PlanterTracker.trackedCount()));
-        lastPolledPlanters = start;
     }
 
     public static void sendItemHook(Communicator comm, Item item) {
