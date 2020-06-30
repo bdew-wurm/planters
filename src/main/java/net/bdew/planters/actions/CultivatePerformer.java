@@ -27,7 +27,7 @@ public class CultivatePerformer implements ActionPerformer {
                 && target.getAuxData() != 0
                 && target.getParentId() == -10L
                 && (source.getTemplateId() == ItemList.shovel || source.getTemplateId() == ItemList.rake)
-                && Utils.checkRoleAllows(performer, target, VillageRole::mayFarm);
+                && Utils.checkRoleAllows(performer, target, VillageRole::mayCultivate);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class SowPerformer implements ActionPerformer {
         if (performer.isPlayer() && PlanterItem.isPlanter(target) && target.getAuxData() == 0 && target.getParentId() == -10L) {
             if (Plantable.findSeed(source.getTemplateId(), PlanterItem.getPlanterType(target.getTemplateId())) == null)
                 return false;
-            return Utils.checkRoleAllows(performer, target, VillageRole::mayFarm);
+            return Utils.checkRoleAllows(performer, target, VillageRole::maySowFields);
         } else return false;
     }
 

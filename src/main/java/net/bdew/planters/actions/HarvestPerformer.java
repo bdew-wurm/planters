@@ -29,7 +29,7 @@ public class HarvestPerformer implements ActionPerformer {
             Plantable crop = PlanterItem.getPlantable(target);
             if (crop == null) return false;
             if (crop.needsScythe && (source == null || source.getTemplateId() != ItemList.scythe)) return false;
-            return Utils.checkRoleAllows(performer, target, VillageRole::mayFarm);
+            return Utils.checkRoleAllows(performer, target, VillageRole::mayHarvestFields);
         } else return false;
     }
 
