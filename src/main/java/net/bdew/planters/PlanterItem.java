@@ -29,7 +29,7 @@ public class PlanterItem {
 
     private static void registerNormalWood(ModelNameProvider modelProvider) throws IOException {
         wood = new ItemTemplateBuilder("bdew.planters.wood")
-                .name("large planter", "large planters", "A large wooden planter suitable for growing crops.")
+                .name("large planter", "large wood planters", "A large wooden planter suitable for growing crops.")
                 .modelName(BASEMODEL)
                 .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
                 .itemTypes(new short[]{
@@ -70,7 +70,7 @@ public class PlanterItem {
 
     private static void registerNormalStone(ModelNameProvider modelProvider) throws IOException {
         stone = new ItemTemplateBuilder("bdew.planters.stone")
-                .name("large stone planter", "large planters", "A large stone planter suitable for growing crops.")
+                .name("large stone planter", "large stone planters", "A large stone planter suitable for growing crops.")
                 .modelName(BASEMODEL)
                 .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
                 .itemTypes(new short[]{
@@ -112,7 +112,7 @@ public class PlanterItem {
 
     private static void registerMagicWood(ModelNameProvider modelProvider) throws IOException {
         magicWood = new ItemTemplateBuilder("bdew.planters.wood.magic")
-                .name("magic planter", "large planters", "A large wooden planter suitable for growing magical mushrooms.")
+                .name("magic planter", "magic wood planters", "A large wooden planter suitable for growing magical mushrooms.")
                 .modelName(BASEMODEL + "magic.")
                 .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
                 .itemTypes(new short[]{
@@ -155,7 +155,7 @@ public class PlanterItem {
 
     private static void registerMagicStone(ModelNameProvider modelProvider) throws IOException {
         magicStone = new ItemTemplateBuilder("bdew.planters.stone.magic")
-                .name("magic stone planter", "large planters", "A large stone planter suitable for growing magical mushrooms.")
+                .name("magic stone planter", "magic stone planters", "A large stone planter suitable for growing magical mushrooms.")
                 .modelName(BASEMODEL + "magic.")
                 .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
                 .itemTypes(new short[]{
