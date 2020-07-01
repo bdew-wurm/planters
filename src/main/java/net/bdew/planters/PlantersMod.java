@@ -5,6 +5,7 @@ import com.wurmonline.server.creatures.Communicator;
 import javassist.ClassPool;
 import javassist.CtClass;
 import net.bdew.planters.actions.*;
+import net.bdew.planters.area.BetterFarmHandler;
 import org.gotti.wurmunlimited.modloader.classhooks.HookManager;
 import org.gotti.wurmunlimited.modloader.interfaces.*;
 import org.gotti.wurmunlimited.modsupport.actions.ModActions;
@@ -90,6 +91,13 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
 
     @Override
     public void onServerStarted() {
+        try {
+            Class.forName("net.bdew.wurm.betterfarm.api.BetterFarmAPI");
+            BetterFarmHandler.install();
+        } catch (ClassNotFoundException e) {
+            logInfo("Better Farm not installed or is too old, skipping integration");
+        }
+
         ModActions.registerActionPerformer(new SowPerformer());
         ModActions.registerActionPerformer(new CultivatePerformer());
         ModActions.registerActionPerformer(new TendPerformer());

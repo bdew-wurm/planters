@@ -26,6 +26,39 @@ public class SowPerformer implements ActionPerformer {
         } else return false;
     }
 
+    public static boolean actionStart(Creature performer, Item source, Item target) {
+        Plantable crop = Plantable.findSeed(source.getTemplateId(), PlanterItem.getPlanterType(target.getTemplateId()));
+        if (crop == null) return false;
+        if (crop.planterType == PlanterType.MAGIC) {
+            performer.getCommunicator().sendNormalServerMessage("You start throwing source salt into the planter.");
+        } else {
+            performer.getCommunicator().sendNormalServerMessage("You start sowing the seeds.");
+            Server.getInstance().broadCastAction(performer.getName() + " starts sowing some seeds.", performer, 5);
+        }
+        return true;
+    }
+
+    public static boolean actionEnd(Creature performer, Item source, Item target, byte rarity) {
+        if (rarity != 0) performer.playPersonalSound("sound.fx.drumroll");
+        Plantable crop = Plantable.findSeed(source.getTemplateId(), PlanterItem.getPlanterType(target.getTemplateId()));
+        if (crop == null) return false;
+        performer.getStatus().modifyStamina(-2000f);
+        Skill farming = performer.getSkills().getSkillOrLearn(SkillList.FARMING);
+        farming.skillCheck(crop.difficulty, 0.0, false, 1f);
+        PlanterItem.updateData(target, crop, 0, true, 0, 0);
+        target.setData2((int) (100.0 - farming.getKnowledge() + source.getQualityLevel() + source.getRarity() * 20 + rarity * 50));
+        source.setWeight(source.getWeightGrams() - source.getTemplate().getWeightGrams(), true);
+        if (crop.planterType == PlanterType.MAGIC) {
+            performer.getCommunicator().sendNormalServerMessage("Mushrooms should pop any minute now!");
+            Server.getInstance().broadCastAction(performer.getName() + " drops some powder on a planter.", performer, 5);
+        } else {
+            performer.getCommunicator().sendNormalServerMessage("You sow the " + crop.displayName + ".");
+            Server.getInstance().broadCastAction(performer.getName() + " sows some seeds.", performer, 5);
+        }
+        PlanterTracker.addPlanter(target);
+        return true;
+    }
+
     @Override
     public boolean action(Action action, Creature performer, Item source, Item target, short num, float counter) {
         if (!canUse(performer, source, target))
@@ -34,36 +67,15 @@ public class SowPerformer implements ActionPerformer {
             else
                 return propagate(action, ActionPropagation.SERVER_PROPAGATION, ActionPropagation.ACTION_PERFORMER_PROPAGATION);
 
-        Plantable crop = Plantable.findSeed(source.getTemplateId(), PlanterItem.getPlanterType(target.getTemplateId()));
-        if (crop == null)
-            return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
-
         if (counter == 1f) {
-            if (crop.planterType == PlanterType.MAGIC) {
-                performer.getCommunicator().sendNormalServerMessage("You start throwing source salt into the planter.");
-            } else {
-                performer.getCommunicator().sendNormalServerMessage("You start sowing the seeds.");
-                Server.getInstance().broadCastAction(performer.getName() + " starts sowing some seeds.", performer, 5);
-            }
+            if (!actionStart(performer, source, target))
+                return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
             int time = Actions.getQuickActionTime(performer, performer.getSkills().getSkillOrLearn(SkillList.FARMING), null, 0.0);
             performer.sendActionControl("sowing", true, time);
             action.setTimeLeft(time);
         } else {
             if (counter * 10f > action.getTimeLeft()) {
-                performer.getStatus().modifyStamina(-2000f);
-                Skill farming = performer.getSkills().getSkillOrLearn(SkillList.FARMING);
-                farming.skillCheck(crop.difficulty, 0.0, false, 1f);
-                PlanterItem.updateData(target, crop, 0, true, 0, 0);
-                target.setData2((int) (100.0 - farming.getKnowledge() + source.getQualityLevel() + source.getRarity() * 20 + action.getRarity() * 50));
-                source.setWeight(source.getWeightGrams() - source.getTemplate().getWeightGrams(), true);
-                if (crop.planterType == PlanterType.MAGIC) {
-                    performer.getCommunicator().sendNormalServerMessage("Mushrooms should pop any minute now!");
-                    Server.getInstance().broadCastAction(performer.getName() + " drops some powder on a planter.", performer, 5);
-                } else {
-                    performer.getCommunicator().sendNormalServerMessage("You sow the " + crop.displayName + ".");
-                    Server.getInstance().broadCastAction(performer.getName() + " sows some seeds.", performer, 5);
-                }
-                PlanterTracker.addPlanter(target);
+                actionEnd(performer, source, target, action.getRarity());
                 return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
             }
         }
