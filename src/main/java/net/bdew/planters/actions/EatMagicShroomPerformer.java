@@ -1,6 +1,5 @@
 package net.bdew.planters.actions;
 
-import com.wurmonline.server.Items;
 import com.wurmonline.server.Server;
 import com.wurmonline.server.behaviours.Action;
 import com.wurmonline.server.behaviours.Actions;
@@ -81,7 +80,7 @@ public class EatMagicShroomPerformer implements ActionPerformer {
             performer.modifyKarma((int) (PlantersMod.magicMushroomKarmaPerQL * target.getQualityLevel()));
         }
 
-        Items.destroyItem(target.getWurmId());
+        target.setWeight(target.getWeightGrams() - target.getTemplate().getWeightGrams(), true);
 
         return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION, ActionPropagation.NO_SERVER_PROPAGATION);
     }
