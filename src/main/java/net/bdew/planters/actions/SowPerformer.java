@@ -29,6 +29,7 @@ public class SowPerformer implements ActionPerformer {
     public static boolean actionStart(Creature performer, Item source, Item target) {
         Plantable crop = Plantable.findSeed(source.getTemplateId(), PlanterItem.getPlanterType(target.getTemplateId()));
         if (crop == null) return false;
+        performer.playAnimation("drop", false);
         if (crop.planterType == PlanterType.MAGIC) {
             performer.getCommunicator().sendNormalServerMessage("You start throwing source salt into the planter.");
         } else {
