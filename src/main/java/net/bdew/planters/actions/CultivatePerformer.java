@@ -7,6 +7,7 @@ import com.wurmonline.server.behaviours.Methods;
 import com.wurmonline.server.creatures.Creature;
 import com.wurmonline.server.items.Item;
 import com.wurmonline.server.items.ItemList;
+import com.wurmonline.server.skills.Skill;
 import com.wurmonline.server.skills.SkillList;
 import com.wurmonline.server.villages.VillageRole;
 import net.bdew.planters.PlanterItem;
@@ -30,6 +31,34 @@ public class CultivatePerformer implements ActionPerformer {
                 && Utils.checkRoleAllows(performer, target, VillageRole::mayCultivate);
     }
 
+
+    public static boolean actionStart(Creature performer, Item source, Item target) {
+        performer.getCommunicator().sendNormalServerMessage("You start to cultivate the planter.");
+        Server.getInstance().broadCastAction(performer.getName() + " starts to cultivate the planter.", performer, 5);
+        performer.getStatus().modifyStamina(-1000f);
+        performer.playAnimation("farm", false);
+        return true;
+    }
+
+    public static boolean actionEnd(Creature performer, Item source, Item target, byte rarity) {
+        Methods.sendSound(performer, String.format("sound.work.digging%d", Server.rand.nextInt(3) + 1));
+
+        Skill digging = performer.getSkills().getSkillOrLearn(SkillList.DIGGING);
+        digging.skillCheck(14.0D, source, 0.0D, false, 10);
+
+        performer.getCommunicator().sendNormalServerMessage("The planter is cultivated and ready to sow now.");
+        PlanterItem.clearData(target);
+        PlanterTracker.removePlanter(target);
+
+        if (source.setDamage(source.getDamage() + 0.0015F * source.getDamageModifier())) {
+            performer.getCommunicator().sendNormalServerMessage(String.format("Your %s broke!", source.getName().toLowerCase()));
+            return false;
+        }
+
+        return true;
+    }
+
+
     @Override
     public boolean action(Action action, Creature performer, Item source, Item target, short num, float counter) {
         if (!canUse(performer, source, target))
@@ -39,24 +68,13 @@ public class CultivatePerformer implements ActionPerformer {
                 return propagate(action, ActionPropagation.SERVER_PROPAGATION, ActionPropagation.ACTION_PERFORMER_PROPAGATION);
 
         if (counter == 1f) {
-            performer.getCommunicator().sendNormalServerMessage("You start to cultivate the planter.");
-            Server.getInstance().broadCastAction(performer.getName() + " starts to cultivate the planter.", performer, 5);
             int time = Actions.getQuickActionTime(performer, performer.getSkills().getSkillOrLearn(SkillList.FARMING), null, 0.0);
             performer.sendActionControl("cultivating", true, time);
             action.setTimeLeft(time);
-            performer.getStatus().modifyStamina(-1000f);
-
+            actionStart(performer, source, target);
         } else {
-            if (action.justTickedSecond()) {
-                source.setDamage(source.getDamage() + 0.0003f * source.getDamageModifier());
-                performer.getStatus().modifyStamina(-2000f);
-                if (action.mayPlaySound())
-                    Methods.sendSound(performer, String.format("sound.work.digging%d", Server.rand.nextInt(3) + 1));
-            }
             if (counter * 10f > action.getTimeLeft()) {
-                performer.getCommunicator().sendNormalServerMessage("The planter is cultivated and ready to sow now.");
-                PlanterItem.clearData(target);
-                PlanterTracker.removePlanter(target);
+                actionEnd(performer, source, target, action.getRarity());
                 return propagate(action, ActionPropagation.FINISH_ACTION, ActionPropagation.NO_SERVER_PROPAGATION, ActionPropagation.NO_ACTION_PERFORMER_PROPAGATION);
             }
         }
