@@ -2,6 +2,7 @@ package net.bdew.planters;
 
 import com.wurmonline.server.items.*;
 import com.wurmonline.server.skills.SkillList;
+import com.wurmonline.server.zones.VirtualZone;
 import com.wurmonline.server.zones.VolaTile;
 import com.wurmonline.server.zones.Zones;
 import com.wurmonline.shared.constants.IconConstants;
@@ -10,12 +11,16 @@ import org.gotti.wurmunlimited.modsupport.items.ModItems;
 import org.gotti.wurmunlimited.modsupport.items.ModelNameProvider;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class PlanterItem {
     public static ItemTemplate wood, stone, magicWood, magicStone;
     public static int woodId, stoneId, magicWoodId, magicStoneId;
 
     public static final String BASEMODEL = "model.structure.farmbox.";
+
+    private static final int FLAG_TENDED = 0x100;
+    private static final int FLAG_INFECTED = 0x200;
 
     private static final String[] AGES = new String[]{
             "freshly sown",
@@ -216,21 +221,12 @@ public class PlanterItem {
     }
 
     public static void updateData(Item item, Plantable crop, int growthStage, boolean tended, int tendCount, int tendPower) {
-        StringBuilder description = new StringBuilder();
-
-        if (growthStage >= 0 && growthStage <= 6) {
-            description.append(AGES[growthStage]);
-            if (growthStage < 5 && !tended) {
-                description.append(", ").append("untended");
-            }
-        }
-
         VolaTile vt = Zones.getOrCreateTile(item.getTilePos(), item.isOnSurface());
         vt.makeInvisible(item);
         item.setAuxData((byte) crop.number);
-        item.setName(item.getTemplate().getName() + " - " + crop.displayName);
-        item.setDescription(description.toString());
-        item.setData((growthStage & 0xFF) | (tended ? 0x100 : 0), (tendCount & 0xFF) | (tendPower << 8));
+        boolean infected = isInfected(item);
+        item.setData((growthStage & 0xFF) | (tended ? FLAG_TENDED : 0) | (infected ? FLAG_INFECTED : 0), (tendCount & 0xFF) | (tendPower << 8));
+        updateName(item, crop, growthStage, tended, infected);
         vt.makeVisible(item);
     }
 
@@ -238,10 +234,31 @@ public class PlanterItem {
         VolaTile vt = Zones.getOrCreateTile(item.getTilePos(), item.isOnSurface());
         vt.makeInvisible(item);
         item.setAuxData((byte) 0);
-        item.setData(0, 0);
-        item.setName(item.getTemplate().getName());
-        item.setDescription("");
+        boolean infected = isInfected(item);
+        item.setData((infected ? FLAG_INFECTED : 0), 0);
+        updateName(item, null, 0, false, infected);
         vt.makeVisible(item);
+    }
+
+    public static void updateName(Item item, Plantable crop, int growthStage, boolean tended, boolean infected) {
+        StringBuilder nameBuilder = new StringBuilder();
+        StringBuilder descBuilder = new StringBuilder();
+
+        if (infected) nameBuilder.append("infected ");
+        nameBuilder.append(item.getTemplate().getName());
+
+        if (crop != null) {
+            nameBuilder.append(" - ").append(crop.displayName);
+            if (growthStage >= 0 && growthStage <= 6) {
+                descBuilder.append(AGES[growthStage]);
+                if (growthStage < 5 && !tended) {
+                    descBuilder.append(", ").append("untended");
+                }
+            }
+        }
+
+        item.setName(nameBuilder.toString());
+        item.setDescription(descBuilder.toString());
     }
 
     public static Plantable getPlantable(Item item) {
@@ -254,7 +271,27 @@ public class PlanterItem {
     }
 
     public static boolean isTended(Item item) {
-        return (item.getData1() & 0x100) != 0;
+        return (item.getData1() & FLAG_TENDED) != 0;
+    }
+
+    public static boolean isInfected(Item item) {
+        return (item.getData1() != -1) && (item.getData1() & FLAG_INFECTED) != 0;
+    }
+
+    public static void setInfected(Item item, boolean infected) {
+        VolaTile vt = Zones.getOrCreateTile(item.getTilePos(), item.isOnSurface());
+        vt.makeInvisible(item);
+        Plantable crop = getPlantable(item);
+        int growthStage = getGrowthStage(item);
+        boolean tended = isTended(item);
+        item.setData1((growthStage & 0xFF) | (tended ? FLAG_TENDED : 0) | (infected ? FLAG_INFECTED : 0));
+        updateName(item, crop, growthStage, tended, infected);
+        vt.makeVisible(item);
+
+        Arrays.stream(vt.getWatchers())
+                .map(VirtualZone::getWatcher)
+                .filter(creature -> creature != null && creature.isPlayer())
+                .forEach(p -> p.getCommunicator().sendAttachEffect(item.getWurmId(), (byte) (infected ? 8 : 11), (byte) 0, (byte) 0, (byte) 0, (byte) 0));
     }
 
     public static int getTendCount(Item item) {

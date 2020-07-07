@@ -40,7 +40,9 @@ public class PlanterModelProvider implements ModelNameProvider {
             }
         } else sb.append("dirt.");
 
-        if (item.getDamage() >= 50f)
+        if (PlanterItem.isInfected(item))
+            sb.append("infected.");
+        else if (item.getDamage() >= 50f)
             sb.append("decayed.");
 
         if (isWinter() && item.isOnSurface()) {

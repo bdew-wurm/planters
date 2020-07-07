@@ -133,6 +133,23 @@ public class GmCommands {
         }
     }
 
+    private static void setInfected(Communicator communicator, String arg) {
+        boolean infected;
+        if (arg.equalsIgnoreCase("on")) {
+            infected = true;
+            communicator.sendNormalServerMessage("All planters are now infected.");
+        } else if (arg.equalsIgnoreCase("off")) {
+            infected = false;
+            communicator.sendNormalServerMessage("All planters are now clean.");
+        } else {
+            communicator.sendAlertServerMessage("Usage: #planters infected <on|off>");
+            return;
+        }
+        Arrays.stream(Items.getAllItems())
+                .filter(PlanterItem::isPlanter)
+                .forEach(i -> PlanterItem.setInfected(i, infected));
+    }
+
     public static MessagePolicy handle(Communicator communicator, String message, String title) {
         if (message.startsWith("#planters")) {
             final StringTokenizer tokens = new StringTokenizer(message);
@@ -158,6 +175,12 @@ public class GmCommands {
                             return MessagePolicy.DISCARD;
                         }
                         break;
+                    case "infected":
+                        if (tokens.hasMoreTokens()) {
+                            setInfected(communicator, tokens.nextToken());
+                            return MessagePolicy.DISCARD;
+                        }
+                        break;
                 }
             }
             communicator.sendAlertServerMessage("Usage:");
@@ -165,6 +188,7 @@ public class GmCommands {
             communicator.sendAlertServerMessage(" #planters delete");
             communicator.sendAlertServerMessage(" #planters winter <on|off|disable>");
             communicator.sendAlertServerMessage(" #planters paint <pink|random|remove>");
+            communicator.sendAlertServerMessage(" #planters infected <on|off>");
             return MessagePolicy.DISCARD;
         }
         return MessagePolicy.PASS;

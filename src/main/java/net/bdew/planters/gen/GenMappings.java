@@ -96,6 +96,8 @@ public class GenMappings {
         addMapping(key + ".decayed" + suffix, decaySoilTex == null ? decay : decay.tex(dirtName, decaySoilTex));
         addMapping(key + ".winter" + suffix, base.tex(dirtName, winterTex));
         addMapping(key + ".decayed.winter" + suffix, decay.tex(dirtName, winterTex));
+        addMapping(key + ".infected" + suffix, decay.tex(dirtName, "mycelium.dds"));
+        addMapping(key + ".infected.winter" + suffix, decay.tex(dirtName, "mycelium-winter.dds"));
     }
 
     private static void generateVariantsSprite(String key, String suffix, ResURL base, String matName, String decayMatTex, String dirtName, String spriteTex, String spriteFile) {
@@ -104,6 +106,8 @@ public class GenMappings {
         addMapping(key + ".decayed" + suffix, spr.tex(matName, decayMatTex).tex(dirtName, "farmland.jpg"));
         addMapping(key + ".winter" + suffix, spr.tex(dirtName, "farm_winter.jpg"));
         addMapping(key + ".decayed.winter" + suffix, spr.tex(matName, decayMatTex).tex(dirtName, "farm_winter.jpg"));
+        addMapping(key + ".infected" + suffix, spr.tex(matName, decayMatTex).tex(dirtName, "mycelium.dds"));
+        addMapping(key + ".infected.winter" + suffix, spr.tex(matName, decayMatTex).tex(dirtName, "mycelium-winter.dds"));
     }
 
     private static void generateStages(String baseModel, Plantable plant, String base, String soilMat, String winterSoilTex, String decaySoilTex, String extraDecayMat, String extraDecayTex) {

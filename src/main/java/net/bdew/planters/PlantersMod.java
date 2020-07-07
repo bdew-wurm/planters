@@ -107,6 +107,8 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
 
         ModActions.registerActionPerformer(new PreventPlanterPerformer(Actions.LOAD_CARGO));
 
+        ModActions.registerAction(new InfectAction());
+
         if (magicMushrooms) {
             ModActions.registerActionPerformer(new EatMagicShroomPerformer());
         }

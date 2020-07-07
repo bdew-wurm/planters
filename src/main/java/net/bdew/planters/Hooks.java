@@ -114,7 +114,10 @@ public class Hooks {
             if (item.getTemplateId() == MiscItems.magicShroomId) {
                 comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 1, (byte) 128, (byte) 128, (byte) 100);
             } else {
-                comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 1, (byte) 255, (byte) 255, (byte) 255);
+                if (PlanterItem.isPlanter(item) && PlanterItem.isInfected(item))
+                    comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 255, (byte) 1, (byte) 1, (byte) 255);
+                else
+                    comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 1, (byte) 255, (byte) 255, (byte) 255);
             }
         }
     }
