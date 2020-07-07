@@ -22,7 +22,7 @@ public class BetterFarmHandler {
     public static void install() {
         if (BetterFarmAPI.INSTANCE == null) {
             PlantersMod.logWarning("Better Farming is loaded but api is not initialized?");
-        } else if (BetterFarmAPI.INSTANCE.apiVersion() != 2) {
+        } else if (BetterFarmAPI.INSTANCE.apiVersion() != 3) {
             PlantersMod.logWarning("Better Farming API version mismatch - skipping");
         } else {
             PlantersMod.logInfo("Adding better farming support");
