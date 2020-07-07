@@ -26,7 +26,7 @@ public class MiscItems {
                         ItemTypes.ITEM_TYPE_COLORABLE,
                 })
                 .decayTime(9072000L)
-                .dimensions(40, 40, 200)
+                .dimensions(40, 40, 40)
                 .weightGrams(40000)
                 .material(Materials.MATERIAL_WOOD_BIRCH)
                 .behaviourType((short) 1)
