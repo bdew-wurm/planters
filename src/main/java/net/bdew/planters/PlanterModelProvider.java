@@ -24,7 +24,7 @@ public class PlanterModelProvider implements ModelNameProvider {
         StringBuilder sb = new StringBuilder(baseModel);
         Plantable plant = PlanterItem.getPlantable(item);
 
-        if (plant != null) {
+        if (plant != null && plant.planterType != PlanterType.TREE && plant.planterType != PlanterType.BUSH) {
             sb.append(plant.modelName);
 
             int growth = PlanterItem.getGrowthStage(item);

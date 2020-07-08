@@ -5,10 +5,13 @@ import com.wurmonline.server.creatures.Creature;
 import com.wurmonline.server.items.Item;
 import com.wurmonline.server.items.ItemFactory;
 import com.wurmonline.server.items.NoSuchTemplateException;
+import com.wurmonline.server.players.Player;
 import com.wurmonline.server.villages.Village;
 import com.wurmonline.server.villages.VillageRole;
 import com.wurmonline.server.villages.Villages;
 
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.function.Predicate;
 
 public class Utils {
@@ -52,5 +55,84 @@ public class Utils {
                 PlantersMod.logException("Error creating stacked item", e);
             }
         }
+    }
+
+    public static void sendPlanterTree(Player player, Item item, Plantable plant) {
+        if (player.hasLink() && item.getTemplateId() != 520) {
+            try {
+                final ByteBuffer bb = player.getCommunicator().getConnection().getBuffer();
+
+                bb.put((byte) (-9));
+
+                bb.putLong(item.getWurmId() + 1);
+                bb.putFloat(0); //x
+                bb.putFloat(0); //y
+                bb.putFloat(0); //r
+                bb.putFloat(0.5f); //z
+
+                int growthStage = PlanterItem.getGrowthStage(item);
+                float size = 5;
+                if (growthStage == 0) size *= 0.5f;
+                if (growthStage > 1) size *= (growthStage + 5) / 8f;
+
+                if (plant == Plantable.ThornBush) size *= 0.5f;
+                if (plant == Plantable.OakTree) size *= 0.7f;
+
+                byte[] tempStringArr = String.format("%s %s [%d - %.1f]", plant.displayName, plant.planterType == PlanterType.BUSH ? "bush" : "tree", growthStage, size)
+                        .getBytes(StandardCharsets.UTF_8);
+                bb.put((byte) tempStringArr.length);
+                bb.put(tempStringArr);
+
+                tempStringArr = "".getBytes(StandardCharsets.UTF_8);
+                bb.put((byte) tempStringArr.length);
+                bb.put(tempStringArr);
+
+
+                tempStringArr = String.format("%s%s", plant.modelName, growthStage < 2 ? "young." : "").getBytes(StandardCharsets.UTF_8);
+                bb.put((byte) tempStringArr.length);
+                bb.put(tempStringArr);
+
+                bb.put((byte) (item.isOnSurface() ? 0 : -1));
+
+                bb.put(plant.material);
+
+                tempStringArr = "".getBytes(StandardCharsets.UTF_8);
+                bb.put((byte) tempStringArr.length);
+                bb.put(tempStringArr);
+
+                bb.putShort(item.getImageNumber());
+
+                bb.put((byte) 0);
+
+                bb.putFloat(size);
+                bb.putLong(item.onBridge());
+                bb.put(item.getRarity());
+
+                bb.put((byte) 2);
+                bb.putLong(item.getWurmId());
+
+                bb.put((byte) 0);
+
+                player.getCommunicator().getConnection().flush();
+            } catch (Exception ex) {
+                PlantersMod.logException(String.format("Failed to send item %s (%d) to player %s (%d)", player.getName(), player.getWurmId(), item.getName(), item.getWurmId()), ex);
+                player.setLink(false);
+            }
+        }
+    }
+
+    public static void removePlanterTree(Player player, Item item) {
+        if (player != null && player.hasLink()) {
+            try {
+                ByteBuffer bb = player.getCommunicator().getConnection().getBuffer();
+                bb.put((byte) 10);
+                bb.putLong(item.getWurmId() + 1);
+                player.getCommunicator().getConnection().flush();
+            } catch (Exception ex) {
+                PlantersMod.logException(String.format("Failed to send remove item %s (%d) to player %s (%d)", player.getName(), player.getWurmId(), item.getName(), item.getWurmId()), ex);
+                player.setLink(false);
+            }
+        }
+
     }
 }

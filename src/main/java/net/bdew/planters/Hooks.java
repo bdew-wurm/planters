@@ -120,12 +120,16 @@ public class Hooks {
                     comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 1, (byte) 255, (byte) 255, (byte) 255);
             }
         }
+        if (PlanterItem.needsTopItem(item))
+            Utils.sendPlanterTree(comm.getPlayer(), item, PlanterItem.getPlantable(item));
     }
 
     public static void removeItemHook(Communicator comm, Item item) {
         if (item.getTemplateId() == MiscItems.magicShroomId || item.getTemplateId() == MiscItems.basketMagicId || PlanterItem.getPlanterType(item.getTemplateId()) == PlanterType.MAGIC) {
             comm.sendRemoveEffect(item.getWurmId());
         }
+        if (PlanterItem.needsTopItem(item))
+            Utils.removePlanterTree(comm.getPlayer(), item);
     }
 
     public static void addTickingEffect(long wurmId, int delay, TickingPlayerEffect eff) {

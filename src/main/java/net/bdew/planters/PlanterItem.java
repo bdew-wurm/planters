@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class PlanterItem {
-    public static ItemTemplate wood, stone, magicWood, magicStone;
-    public static int woodId, stoneId, magicWoodId, magicStoneId;
+    public static ItemTemplate wood, stone, magicWood, magicStone, treeWood, treeStone, bushWood, bushStone;
+    public static int woodId, stoneId, magicWoodId, magicStoneId, treeWoodId, treeStoneId, bushWoodId, bushStoneId;
 
     public static final String BASEMODEL = "model.structure.farmbox.";
 
@@ -34,7 +34,7 @@ public class PlanterItem {
 
     private static void registerNormalWood(ModelNameProvider modelProvider) throws IOException {
         wood = new ItemTemplateBuilder("bdew.planters.wood")
-                .name("large planter", "large wood planters", "A large wooden planter suitable for growing crops.")
+                .name("large planter", "wooden large planters", "A large wooden planter suitable for growing crops.")
                 .modelName(BASEMODEL)
                 .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
                 .itemTypes(new short[]{
@@ -75,7 +75,7 @@ public class PlanterItem {
 
     private static void registerNormalStone(ModelNameProvider modelProvider) throws IOException {
         stone = new ItemTemplateBuilder("bdew.planters.stone")
-                .name("large stone planter", "large stone planters", "A large stone planter suitable for growing crops.")
+                .name("large stone planter", "stone large planters", "A large stone planter suitable for growing crops.")
                 .modelName(BASEMODEL)
                 .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
                 .itemTypes(new short[]{
@@ -114,6 +114,169 @@ public class PlanterItem {
         ModItems.addModelNameProvider(stoneId, modelProvider);
     }
 
+    private static void registerTreeWood(ModelNameProvider modelProvider) throws IOException {
+        treeWood = new ItemTemplateBuilder("bdew.planters.wood.tree")
+                .name("tree planter", "wooden tree planters", "A large wooden planter suitable for growing trees.")
+                .modelName(BASEMODEL + "tree.")
+                .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
+                .itemTypes(new short[]{
+                        ItemTypes.ITEM_TYPE_WOOD,
+                        ItemTypes.ITEM_TYPE_REPAIRABLE,
+                        ItemTypes.ITEM_TYPE_PLANTABLE,
+                        ItemTypes.ITEM_TYPE_TRANSPORTABLE,
+                        ItemTypes.ITEM_TYPE_NOTAKE,
+                        ItemTypes.ITEM_TYPE_TURNABLE,
+                        ItemTypes.ITEM_TYPE_NOMOVE,
+                        ItemTypes.ITEM_TYPE_ONE_PER_TILE,
+                        ItemTypes.ITEM_TYPE_TILE_ALIGNED,
+                        ItemTypes.ITEM_TYPE_HASDATA,
+                        ItemTypes.ITEM_TYPE_NORENAME,
+                        ItemTypes.ITEM_TYPE_COLORABLE,
+                        ItemTypes.ITEM_TYPE_DECORATION,
+                })
+                .decayTime(9072000L)
+                .dimensions(200, 200, 30)
+                .weightGrams(10000)
+                .material(Materials.MATERIAL_WOOD_BIRCH)
+                .behaviourType((short) 1)
+                .primarySkill(SkillList.CARPENTRY)
+                .difficulty(70)
+                .build();
+
+        treeWood.setDyeAmountGrams(1000);
+
+        treeWoodId = treeWood.getTemplateId();
+
+        CreationEntryCreator.createAdvancedEntry(SkillList.CARPENTRY, ItemList.woodBeam, ItemList.woodBeam, treeWoodId, false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.woodBeam, 9, true))
+                .addRequirement(new CreationRequirement(2, ItemList.nailsIronLarge, 4, true))
+                .addRequirement(new CreationRequirement(3, ItemList.dirtPile, 1, true));
+
+        ModItems.addModelNameProvider(treeWoodId, modelProvider);
+    }
+
+    private static void registerTreeStone(ModelNameProvider modelProvider) throws IOException {
+        treeStone = new ItemTemplateBuilder("bdew.planters.stone.tree")
+                .name("stone tree planter", "stone tree planters", "A large stone planter suitable for growing trees.")
+                .modelName(BASEMODEL + "tree.")
+                .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
+                .itemTypes(new short[]{
+                        ItemTypes.ITEM_TYPE_STONE,
+                        ItemTypes.ITEM_TYPE_REPAIRABLE,
+                        ItemTypes.ITEM_TYPE_PLANTABLE,
+                        ItemTypes.ITEM_TYPE_TRANSPORTABLE,
+                        ItemTypes.ITEM_TYPE_NOTAKE,
+                        ItemTypes.ITEM_TYPE_TURNABLE,
+                        ItemTypes.ITEM_TYPE_NOMOVE,
+                        ItemTypes.ITEM_TYPE_ONE_PER_TILE,
+                        ItemTypes.ITEM_TYPE_TILE_ALIGNED,
+                        ItemTypes.ITEM_TYPE_HASDATA,
+                        ItemTypes.ITEM_TYPE_NORENAME,
+                        ItemTypes.ITEM_TYPE_COLORABLE,
+                        ItemTypes.ITEM_TYPE_DECORATION,
+                })
+                .decayTime(9072000L)
+                .dimensions(200, 200, 30)
+                .weightGrams(20000)
+                .material(Materials.MATERIAL_STONE)
+                .behaviourType((short) 1)
+                .primarySkill(SkillList.MASONRY)
+                .difficulty(70)
+                .build();
+
+        treeStone.setDyeAmountGrams(1000);
+
+        treeStoneId = treeStone.getTemplateId();
+
+        CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.rock, ItemList.rock, treeStoneId, false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.rock, 4, true))
+                .addRequirement(new CreationRequirement(2, ItemList.mortar, 2, true))
+                .addRequirement(new CreationRequirement(3, ItemList.dirtPile, 1, true));
+
+        ModItems.addModelNameProvider(treeStoneId, modelProvider);
+    }
+
+    private static void registerBushWood(ModelNameProvider modelProvider) throws IOException {
+        bushWood = new ItemTemplateBuilder("bdew.planters.wood.bush")
+                .name("bush planter", "wooden bush planters", "A large wooden planter suitable for growing bushes.")
+                .modelName(BASEMODEL + "bush.")
+                .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
+                .itemTypes(new short[]{
+                        ItemTypes.ITEM_TYPE_WOOD,
+                        ItemTypes.ITEM_TYPE_REPAIRABLE,
+                        ItemTypes.ITEM_TYPE_PLANTABLE,
+                        ItemTypes.ITEM_TYPE_TRANSPORTABLE,
+                        ItemTypes.ITEM_TYPE_NOTAKE,
+                        ItemTypes.ITEM_TYPE_TURNABLE,
+                        ItemTypes.ITEM_TYPE_NOMOVE,
+                        ItemTypes.ITEM_TYPE_ONE_PER_TILE,
+                        ItemTypes.ITEM_TYPE_TILE_ALIGNED,
+                        ItemTypes.ITEM_TYPE_HASDATA,
+                        ItemTypes.ITEM_TYPE_NORENAME,
+                        ItemTypes.ITEM_TYPE_COLORABLE,
+                        ItemTypes.ITEM_TYPE_DECORATION,
+                })
+                .decayTime(9072000L)
+                .dimensions(200, 200, 30)
+                .weightGrams(10000)
+                .material(Materials.MATERIAL_WOOD_BIRCH)
+                .behaviourType((short) 1)
+                .primarySkill(SkillList.CARPENTRY)
+                .difficulty(70)
+                .build();
+
+        bushWood.setDyeAmountGrams(1000);
+
+        bushWoodId = bushWood.getTemplateId();
+
+        CreationEntryCreator.createAdvancedEntry(SkillList.CARPENTRY, ItemList.woodBeam, ItemList.woodBeam, bushWoodId, false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.woodBeam, 9, true))
+                .addRequirement(new CreationRequirement(2, ItemList.nailsIronLarge, 4, true))
+                .addRequirement(new CreationRequirement(3, ItemList.dirtPile, 1, true));
+
+        ModItems.addModelNameProvider(bushWoodId, modelProvider);
+    }
+
+    private static void registerBushStone(ModelNameProvider modelProvider) throws IOException {
+        bushStone = new ItemTemplateBuilder("bdew.planters.stone.bush")
+                .name("bush stone planter", "bush stone planters", "A large stone planter suitable for growing bushes.")
+                .modelName(BASEMODEL + "bush.")
+                .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
+                .itemTypes(new short[]{
+                        ItemTypes.ITEM_TYPE_STONE,
+                        ItemTypes.ITEM_TYPE_REPAIRABLE,
+                        ItemTypes.ITEM_TYPE_PLANTABLE,
+                        ItemTypes.ITEM_TYPE_TRANSPORTABLE,
+                        ItemTypes.ITEM_TYPE_NOTAKE,
+                        ItemTypes.ITEM_TYPE_TURNABLE,
+                        ItemTypes.ITEM_TYPE_NOMOVE,
+                        ItemTypes.ITEM_TYPE_ONE_PER_TILE,
+                        ItemTypes.ITEM_TYPE_TILE_ALIGNED,
+                        ItemTypes.ITEM_TYPE_HASDATA,
+                        ItemTypes.ITEM_TYPE_NORENAME,
+                        ItemTypes.ITEM_TYPE_COLORABLE,
+                        ItemTypes.ITEM_TYPE_DECORATION,
+                })
+                .decayTime(9072000L)
+                .dimensions(200, 200, 30)
+                .weightGrams(20000)
+                .material(Materials.MATERIAL_STONE)
+                .behaviourType((short) 1)
+                .primarySkill(SkillList.MASONRY)
+                .difficulty(70)
+                .build();
+
+        bushStone.setDyeAmountGrams(1000);
+
+        bushStoneId = bushStone.getTemplateId();
+
+        CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.rock, ItemList.rock, bushStoneId, false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.rock, 4, true))
+                .addRequirement(new CreationRequirement(2, ItemList.mortar, 2, true))
+                .addRequirement(new CreationRequirement(3, ItemList.dirtPile, 1, true));
+
+        ModItems.addModelNameProvider(bushStoneId, modelProvider);
+    }
 
     private static void registerMagicWood(ModelNameProvider modelProvider) throws IOException {
         magicWood = new ItemTemplateBuilder("bdew.planters.wood.magic")
@@ -205,6 +368,10 @@ public class PlanterItem {
         ModelNameProvider normalModelProvider = new PlanterModelProvider(PlanterItem.BASEMODEL);
         registerNormalWood(normalModelProvider);
         registerNormalStone(normalModelProvider);
+        registerTreeWood(normalModelProvider);
+        registerTreeStone(normalModelProvider);
+        registerBushWood(normalModelProvider);
+        registerBushStone(normalModelProvider);
         if (PlantersMod.magicMushrooms) {
             ModelNameProvider magicModelProvider = new PlanterModelProvider(PlanterItem.BASEMODEL + "magic.");
             registerMagicWood(magicModelProvider);
@@ -213,7 +380,16 @@ public class PlanterItem {
     }
 
     public static boolean isPlanter(int templateId) {
-        return templateId == woodId || templateId == stoneId || (PlantersMod.magicMushrooms && (templateId == magicStoneId || templateId == magicWoodId));
+        return templateId == woodId || templateId == stoneId
+                || templateId == treeWoodId || templateId == treeStoneId
+                || templateId == bushWoodId || templateId == bushStoneId
+                || (PlantersMod.magicMushrooms && (templateId == magicStoneId || templateId == magicWoodId));
+    }
+
+    public static boolean needsTopItem(Item item) {
+        int templateId = item.getTemplateId();
+        return (templateId == treeWoodId || templateId == treeStoneId
+                || templateId == bushWoodId || templateId == bushStoneId) && item.getAuxData() != 0;
     }
 
     public static boolean isPlanter(Item item) {
@@ -310,6 +486,10 @@ public class PlanterItem {
     public static PlanterType getPlanterType(int tpl) {
         if (tpl == woodId || tpl == stoneId)
             return PlanterType.NORMAL;
+        if (tpl == treeWoodId || tpl == treeStoneId)
+            return PlanterType.TREE;
+        if (tpl == bushWoodId || tpl == bushStoneId)
+            return PlanterType.BUSH;
         if (PlantersMod.magicMushrooms && (tpl == magicWoodId || tpl == magicStoneId))
             return PlanterType.MAGIC;
         return null;

@@ -41,14 +41,25 @@ public class GmCommands {
     }
 
     private static int spawnPlantersRow(int x, int y, int tpl, byte material, Plantable plant) {
-        spawnTestPlanter(tpl, x, y++, material, plant, 3, false, 0);
-        spawnTestPlanter(tpl, x, y++, material, plant, 3, true, 0);
-        spawnTestPlanter(tpl, x, y++, material, plant, 5, false, 0);
-        spawnTestPlanter(tpl, x, y++, material, plant, 6, false, 0);
-        spawnTestPlanter(tpl, x, y++, material, plant, 3, false, 75f);
-        spawnTestPlanter(tpl, x, y++, material, plant, 3, true, 75f);
-        spawnTestPlanter(tpl, x, y++, material, plant, 5, false, 75f);
-        spawnTestPlanter(tpl, x, y++, material, plant, 6, false, 75f);
+        if (plant.planterType == PlanterType.TREE || plant.planterType == PlanterType.BUSH) {
+            spawnTestPlanter(tpl, x, y += 2, material, plant, 0, false, 0);
+            spawnTestPlanter(tpl, x, y += 2, material, plant, 1, false, 0);
+            spawnTestPlanter(tpl, x, y += 2, material, plant, 3, false, 0);
+            spawnTestPlanter(tpl, x, y += 2, material, plant, 5, false, 0);
+            spawnTestPlanter(tpl, x, y += 2, material, plant, 0, false, 75f);
+            spawnTestPlanter(tpl, x, y += 2, material, plant, 1, false, 75f);
+            spawnTestPlanter(tpl, x, y += 2, material, plant, 3, false, 75f);
+            spawnTestPlanter(tpl, x, y += 2, material, plant, 5, false, 75f);
+        } else {
+            spawnTestPlanter(tpl, x, y++, material, plant, 3, false, 0);
+            spawnTestPlanter(tpl, x, y++, material, plant, 3, true, 0);
+            spawnTestPlanter(tpl, x, y++, material, plant, 5, false, 0);
+            spawnTestPlanter(tpl, x, y++, material, plant, 6, false, 0);
+            spawnTestPlanter(tpl, x, y++, material, plant, 3, false, 75f);
+            spawnTestPlanter(tpl, x, y++, material, plant, 3, true, 75f);
+            spawnTestPlanter(tpl, x, y++, material, plant, 5, false, 75f);
+            spawnTestPlanter(tpl, x, y++, material, plant, 6, false, 75f);
+        }
         return y;
     }
 
@@ -65,6 +76,11 @@ public class GmCommands {
             spawnBasePlanters(PlanterItem.magicStoneId, x++, y, ItemMaterials.MATERIAL_STONE);
         }
 
+        spawnBasePlanters(PlanterItem.treeWoodId, x++, y, ItemMaterials.MATERIAL_WOOD_CEDAR);
+        spawnBasePlanters(PlanterItem.treeStoneId, x++, y, ItemMaterials.MATERIAL_STONE);
+        spawnBasePlanters(PlanterItem.bushWoodId, x++, y, ItemMaterials.MATERIAL_WOOD_CEDAR);
+        spawnBasePlanters(PlanterItem.bushStoneId, x++, y, ItemMaterials.MATERIAL_STONE);
+
         for (Plantable plant : Plantable.values()) {
             y = py;
             if (plant.planterType == PlanterType.NORMAL) {
@@ -73,6 +89,14 @@ public class GmCommands {
             } else if (plant.planterType == PlanterType.MAGIC && PlantersMod.magicMushrooms) {
                 y = spawnPlantersRow(x, y, PlanterItem.magicWoodId, ItemMaterials.MATERIAL_WOOD_CEDAR, plant);
                 y = spawnPlantersRow(x, y, PlanterItem.magicStoneId, ItemMaterials.MATERIAL_STONE, plant);
+            } else if (plant.planterType == PlanterType.TREE) {
+                y = spawnPlantersRow(x, y, PlanterItem.treeWoodId, ItemMaterials.MATERIAL_WOOD_CEDAR, plant) + 1;
+                y = spawnPlantersRow(x, y, PlanterItem.treeStoneId, ItemMaterials.MATERIAL_STONE, plant);
+                x++;
+            } else if (plant.planterType == PlanterType.BUSH) {
+                y = spawnPlantersRow(x, y, PlanterItem.bushWoodId, ItemMaterials.MATERIAL_WOOD_CEDAR, plant) + 1;
+                y = spawnPlantersRow(x, y, PlanterItem.bushStoneId, ItemMaterials.MATERIAL_STONE, plant);
+                x++;
             }
             x++;
         }

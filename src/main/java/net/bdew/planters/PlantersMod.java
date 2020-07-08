@@ -75,15 +75,13 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
                         .insertBefore("if (this.getTemplateId() == net.bdew.planters.MiscItems.stumpId) return net.bdew.planters.MiscItems.stumpSizeMod(this);");
             }
 
-            if (magicMushrooms) {
-                CtClass ctCommunicator = classPool.getCtClass("com.wurmonline.server.creatures.Communicator");
+            CtClass ctCommunicator = classPool.getCtClass("com.wurmonline.server.creatures.Communicator");
 
-                ctCommunicator.getMethod("sendItem", "(Lcom/wurmonline/server/items/Item;JZ)V")
-                        .insertAfter("net.bdew.planters.Hooks.sendItemHook(this, $1);");
+            ctCommunicator.getMethod("sendItem", "(Lcom/wurmonline/server/items/Item;JZ)V")
+                    .insertAfter("net.bdew.planters.Hooks.sendItemHook(this, $1);");
 
-                ctCommunicator.getMethod("sendRemoveItem", "(Lcom/wurmonline/server/items/Item;)V")
-                        .insertAfter("net.bdew.planters.Hooks.removeItemHook(this, $1);");
-            }
+            ctCommunicator.getMethod("sendRemoveItem", "(Lcom/wurmonline/server/items/Item;)V")
+                    .insertAfter("net.bdew.planters.Hooks.removeItemHook(this, $1);");
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
