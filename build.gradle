@@ -1,7 +1,7 @@
 apply plugin: 'java'
 
 group "net.bdew.wurm"
-version "1.1"
+version "1.2"
 
 repositories {
     mavenLocal()
@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.gotti.wurmunlimited:server-modlauncher:0.43-beta1'
+    compile 'org.gotti.wurmunlimited:server-modlauncher:0.43'
     compile 'com.github.bdew-wurm:betterfarm:2.0'
 }
 

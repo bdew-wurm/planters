@@ -155,8 +155,9 @@ public class HarvestPerformer implements ActionPerformer {
 
 
         if (replant) {
-            final int replantPower = (int) (100.0 - farming.getKnowledge() + ql + rarity * 50);
-            PlanterItem.updateData(target, crop, 0, false, 0, replantPower);
+            int replantPower = (int) (100.0 - farming.getKnowledge() + ql + rarity * 50);
+            PlanterItem.updateData(target, crop, 0, true, 0, replantPower);
+            PlanterTracker.addPlanter(target);
         } else PlanterItem.clearData(target);
 
 

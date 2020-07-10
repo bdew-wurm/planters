@@ -46,8 +46,8 @@ public class SowPerformer implements ActionPerformer {
         performer.getStatus().modifyStamina(-2000f);
         Skill farming = performer.getSkills().getSkillOrLearn(SkillList.FARMING);
         farming.skillCheck(crop.difficulty, 0.0, false, 1f);
-        PlanterItem.updateData(target, crop, 0, true, 0, 0);
-        target.setData2((int) (100.0 - farming.getKnowledge() + source.getQualityLevel() + source.getRarity() * 20 + rarity * 50));
+        int sowPower = (int) (100.0 - farming.getKnowledge() + source.getQualityLevel() + source.getRarity() * 20 + rarity * 50);
+        PlanterItem.updateData(target, crop, 0, true, 0, sowPower);
         source.setWeight(source.getWeightGrams() - source.getTemplate().getWeightGrams(), true);
         if (crop.planterType == PlanterType.MAGIC) {
             performer.getCommunicator().sendNormalServerMessage("Mushrooms should pop any minute now!");
