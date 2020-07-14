@@ -34,6 +34,63 @@ model.structure.farmbox.magic.dirt.decayed.winter.stone  = magic-stone.wom?stone
 model.structure.farmbox.magic.dirt.infected.stone        = magic-stone.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=mycelium.dds
 model.structure.farmbox.magic.dirt.infected.winter.stone = magic-stone.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=mycelium-winter.dds
 
+########## Trees #########
+
+model.structure.farmbox.tree                           = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_wood.dds
+model.structure.farmbox.tree.decayed                   = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_wood.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.winter                    = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_wood.dds
+model.structure.farmbox.tree.decayed.winter            = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_wood.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected                  = planter-tree.wom?dirt.texture=mycelium.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_wood.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.winter           = planter-tree.wom?dirt.texture=mycelium-winter.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_wood.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.pottery                   = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_brick.dds
+model.structure.farmbox.tree.decayed.pottery           = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_brick.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.winter.pottery            = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_brick.dds
+model.structure.farmbox.tree.decayed.winter.pottery    = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_brick.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.pottery          = planter-tree.wom?dirt.texture=mycelium.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_brick.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.winter.pottery   = planter-tree.wom?dirt.texture=mycelium-winter.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_brick.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.marble                    = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_marble.dds
+model.structure.farmbox.tree.decayed.marble            = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_marble.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.winter.marble             = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_marble.dds
+model.structure.farmbox.tree.decayed.winter.marble     = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_marble.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.marble           = planter-tree.wom?dirt.texture=mycelium.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_marble.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.winter.marble    = planter-tree.wom?dirt.texture=mycelium-winter.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_marble.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.clay                      = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_rendered.dds
+model.structure.farmbox.tree.decayed.clay              = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_rendered.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.winter.clay               = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_rendered.dds
+model.structure.farmbox.tree.decayed.winter.clay       = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_rendered.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.clay             = planter-tree.wom?dirt.texture=mycelium.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_rendered.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.winter.clay      = planter-tree.wom?dirt.texture=mycelium-winter.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_rendered.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.stone                     = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_rounded.dds
+model.structure.farmbox.tree.decayed.stone             = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_rounded.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.winter.stone              = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_rounded.dds
+model.structure.farmbox.tree.decayed.winter.stone      = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_rounded.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.stone            = planter-tree.wom?dirt.texture=mycelium.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_rounded.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.winter.stone     = planter-tree.wom?dirt.texture=mycelium-winter.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_rounded.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.sandstone                 = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_sandstone.dds
+model.structure.farmbox.tree.decayed.sandstone         = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_sandstone.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.winter.sandstone          = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_sandstone.dds
+model.structure.farmbox.tree.decayed.winter.sandstone  = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_sandstone.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.sandstone        = planter-tree.wom?dirt.texture=mycelium.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_sandstone.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.winter.sandstone = planter-tree.wom?dirt.texture=mycelium-winter.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_sandstone.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.slate                     = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_slate.dds
+model.structure.farmbox.tree.decayed.slate             = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_slate.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.winter.slate              = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_slate.dds
+model.structure.farmbox.tree.decayed.winter.slate      = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_slate.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.slate            = planter-tree.wom?dirt.texture=mycelium.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_slate.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.winter.slate     = planter-tree.wom?dirt.texture=mycelium-winter.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_slate.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.brick                     = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds
+model.structure.farmbox.tree.decayed.brick             = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.winter.brick              = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds
+model.structure.farmbox.tree.decayed.winter.brick      = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.brick            = planter-tree.wom?dirt.texture=mycelium.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.winter.brick     = planter-tree.wom?dirt.texture=mycelium-winter.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.brick                     = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds
+model.structure.farmbox.tree.decayed.brick             = planter-tree.wom?tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.winter.brick              = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds
+model.structure.farmbox.tree.decayed.winter.brick      = planter-tree.wom?dirt.texture=dirt_winter.jpg&tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.brick            = planter-tree.wom?dirt.texture=mycelium.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds&wood.texture=woodbridge_decay.png
+model.structure.farmbox.tree.infected.winter.brick     = planter-tree.wom?dirt.texture=mycelium-winter.dds&tree_planter.texture=~graphics.jar/texture/terrain/cave_stonehouse.dds&wood.texture=woodbridge_decay.png
+
 ########## Items #########
 
 model.food.mushroom.magic             = shroom-item.wom
@@ -1470,4 +1527,79 @@ model.structure.farmbox.magic.magic.ripe.wilted.winter.stone             = shroo
 model.structure.farmbox.magic.magic.ripe.wilted.decayed.winter.stone     = shroom-magic-stone-wilted.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=moss_winter.png
 model.structure.farmbox.magic.magic.ripe.wilted.infected.stone           = shroom-magic-stone-wilted.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=mycelium.dds
 model.structure.farmbox.magic.magic.ripe.wilted.infected.winter.stone    = shroom-magic-stone-wilted.wom?stone.texture=SmallStoneDmg.jpg&treeMat.texture=oaktex Old.png&moss.texture=mycelium-winter.dds
+
+########## birch #########
+
+
+########## pine #########
+
+
+########## oak #########
+
+
+########## cedar #########
+
+
+########## willow #########
+
+
+########## maple #########
+
+
+########## apple #########
+
+
+########## lemon #########
+
+
+########## olive #########
+
+
+########## cherry #########
+
+
+########## chestnut #########
+
+
+########## walnut #########
+
+
+########## fir #########
+
+
+########## linden #########
+
+
+########## orange #########
+
+
+########## lavender #########
+
+
+########## rose #########
+
+
+########## thorn #########
+
+
+########## grape #########
+
+
+########## camellia #########
+
+
+########## oleander #########
+
+
+########## hazelnut #########
+
+
+########## raspberry #########
+
+
+########## blueberry #########
+
+
+########## lingonberry #########
+
 

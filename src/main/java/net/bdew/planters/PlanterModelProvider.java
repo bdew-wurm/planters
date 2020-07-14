@@ -9,36 +9,33 @@ import com.wurmonline.shared.util.MaterialUtilities;
 import org.gotti.wurmunlimited.modsupport.items.ModelNameProvider;
 
 public class PlanterModelProvider implements ModelNameProvider {
-    public final String baseModel;
-
-    public PlanterModelProvider(String baseModel) {
-        this.baseModel = baseModel;
-    }
-
     private static boolean isWinter() {
         return GmCommands.forceWinter.orElse(WurmCalendar.isWinter());
     }
 
     @Override
     public String getModelName(Item item) {
-        StringBuilder sb = new StringBuilder(baseModel);
+        StringBuilder sb = new StringBuilder(item.getTemplate().getModelName());
         Plantable plant = PlanterItem.getPlantable(item);
+        PlanterType type = PlanterItem.getPlanterType(item.getTemplateId());
 
-        if (plant != null && plant.planterType != PlanterType.TREE && plant.planterType != PlanterType.BUSH) {
-            sb.append(plant.modelName);
+        if (type != PlanterType.TREE && type != PlanterType.BUSH) {
+            if (plant != null) {
+                sb.append(plant.modelName);
 
-            int growth = PlanterItem.getGrowthStage(item);
-            if (growth < 5) {
-                sb.append("young.");
-                if (!PlanterItem.isTended(item))
-                    sb.append("untended.");
-            } else {
-                sb.append("ripe.");
-                if (growth > 5) {
-                    sb.append("wilted.");
+                int growth = PlanterItem.getGrowthStage(item);
+                if (growth < 5) {
+                    sb.append("young.");
+                    if (!PlanterItem.isTended(item))
+                        sb.append("untended.");
+                } else {
+                    sb.append("ripe.");
+                    if (growth > 5) {
+                        sb.append("wilted.");
+                    }
                 }
-            }
-        } else sb.append("dirt.");
+            } else sb.append("dirt.");
+        }
 
         if (PlanterItem.isInfected(item))
             sb.append("infected.");
@@ -54,7 +51,12 @@ public class PlanterModelProvider implements ModelNameProvider {
             }
         }
 
-        sb.append(MaterialUtilities.getMaterialString(item.getMaterial()));
+        if (item.getTemplate() == PlanterItem.treeBrick)
+            sb.append("brick");
+        else if (item.getTemplate() == PlanterItem.treePottery)
+            sb.append("pottery");
+        else
+            sb.append(MaterialUtilities.getMaterialString(item.getMaterial()));
 
         return sb.toString();
 

@@ -41,68 +41,93 @@ public class GmCommands {
     }
 
     private static int spawnPlantersRow(int x, int y, int tpl, byte material, Plantable plant) {
-        if (plant.planterType == PlanterType.TREE || plant.planterType == PlanterType.BUSH) {
-            spawnTestPlanter(tpl, x, y += 2, material, plant, 0, false, 0);
-            spawnTestPlanter(tpl, x, y += 2, material, plant, 1, false, 0);
-            spawnTestPlanter(tpl, x, y += 2, material, plant, 3, false, 0);
-            spawnTestPlanter(tpl, x, y += 2, material, plant, 5, false, 0);
-            spawnTestPlanter(tpl, x, y += 2, material, plant, 0, false, 75f);
-            spawnTestPlanter(tpl, x, y += 2, material, plant, 1, false, 75f);
-            spawnTestPlanter(tpl, x, y += 2, material, plant, 3, false, 75f);
-            spawnTestPlanter(tpl, x, y += 2, material, plant, 5, false, 75f);
-        } else {
-            spawnTestPlanter(tpl, x, y++, material, plant, 3, false, 0);
-            spawnTestPlanter(tpl, x, y++, material, plant, 3, true, 0);
-            spawnTestPlanter(tpl, x, y++, material, plant, 5, false, 0);
-            spawnTestPlanter(tpl, x, y++, material, plant, 6, false, 0);
-            spawnTestPlanter(tpl, x, y++, material, plant, 3, false, 75f);
-            spawnTestPlanter(tpl, x, y++, material, plant, 3, true, 75f);
-            spawnTestPlanter(tpl, x, y++, material, plant, 5, false, 75f);
-            spawnTestPlanter(tpl, x, y++, material, plant, 6, false, 75f);
-        }
+        spawnTestPlanter(tpl, x, y++, material, plant, 3, false, 0);
+        spawnTestPlanter(tpl, x, y++, material, plant, 3, true, 0);
+        spawnTestPlanter(tpl, x, y++, material, plant, 5, false, 0);
+        spawnTestPlanter(tpl, x, y++, material, plant, 6, false, 0);
+        spawnTestPlanter(tpl, x, y++, material, plant, 3, false, 75f);
+        spawnTestPlanter(tpl, x, y++, material, plant, 3, true, 75f);
+        spawnTestPlanter(tpl, x, y++, material, plant, 5, false, 75f);
+        spawnTestPlanter(tpl, x, y++, material, plant, 6, false, 75f);
         return y;
     }
 
-    private static void spawnPlanters(Communicator communicator) {
+    private static int spawnPlantersRowTrees(int x, int y, Plantable plant, float damage) {
+        //a
+        spawnTestPlanter(PlanterItem.treeWood.getTemplateId(), x, y, Materials.MATERIAL_WOOD_CEDAR, plant, 0, false, damage);
+        spawnTestPlanter(PlanterItem.treeStone.getTemplateId(), x, y += 2, PlanterItem.treeStone.getMaterial(), plant, 1, false, damage);
+        spawnTestPlanter(PlanterItem.treeSandstone.getTemplateId(), x, y += 2, PlanterItem.treeSandstone.getMaterial(), plant, 2, false, damage);
+        spawnTestPlanter(PlanterItem.treeRendered.getTemplateId(), x, y += 2, PlanterItem.treeRendered.getMaterial(), plant, 3, false, damage);
+        spawnTestPlanter(PlanterItem.treeMarble.getTemplateId(), x, y += 2, PlanterItem.treeMarble.getMaterial(), plant, 4, false, damage);
+        spawnTestPlanter(PlanterItem.treeBrick.getTemplateId(), x, y += 2, PlanterItem.treeBrick.getMaterial(), plant, 4, false, damage);
+        spawnTestPlanter(PlanterItem.treePottery.getTemplateId(), x, y += 2, PlanterItem.treePottery.getMaterial(), plant, 5, false, damage);
+        spawnTestPlanter(PlanterItem.treeSlate.getTemplateId(), x, y += 2, PlanterItem.treeSlate.getMaterial(), plant, 5, false, damage);
+        return y;
+    }
+
+    private static void spawnPlanters(Communicator communicator, String mode) {
+        if (mode.equals("normal"))
+            spawnPlantersNormal(communicator);
+        else if (mode.equals("trees"))
+            spawnPlantersTrees(communicator);
+        else communicator.sendAlertServerMessage("Usage: #planters test <normal|trees>");
+    }
+
+    private static void spawnPlantersNormal(Communicator communicator) {
         int py = communicator.player.getTileY();
         int x = communicator.player.getTileX();
         int y = py;
 
-        spawnBasePlanters(PlanterItem.woodId, x++, y, ItemMaterials.MATERIAL_WOOD_CEDAR);
-        spawnBasePlanters(PlanterItem.stoneId, x++, y, ItemMaterials.MATERIAL_STONE);
+        spawnBasePlanters(PlanterItem.normalWood.getTemplateId(), x++, y, ItemMaterials.MATERIAL_WOOD_CEDAR);
+        spawnBasePlanters(PlanterItem.normalStone.getTemplateId(), x++, y, ItemMaterials.MATERIAL_STONE);
 
         if (PlantersMod.magicMushrooms) {
-            spawnBasePlanters(PlanterItem.magicWoodId, x++, y, ItemMaterials.MATERIAL_WOOD_CEDAR);
-            spawnBasePlanters(PlanterItem.magicStoneId, x++, y, ItemMaterials.MATERIAL_STONE);
+            spawnBasePlanters(PlanterItem.magicWood.getTemplateId(), x++, y, ItemMaterials.MATERIAL_WOOD_CEDAR);
+            spawnBasePlanters(PlanterItem.magicStone.getTemplateId(), x++, y, ItemMaterials.MATERIAL_STONE);
         }
-
-        spawnBasePlanters(PlanterItem.treeWoodId, x++, y, ItemMaterials.MATERIAL_WOOD_CEDAR);
-        spawnBasePlanters(PlanterItem.treeStoneId, x++, y, ItemMaterials.MATERIAL_STONE);
-        spawnBasePlanters(PlanterItem.bushWoodId, x++, y, ItemMaterials.MATERIAL_WOOD_CEDAR);
-        spawnBasePlanters(PlanterItem.bushStoneId, x++, y, ItemMaterials.MATERIAL_STONE);
 
         for (Plantable plant : Plantable.values()) {
             y = py;
             if (plant.planterType == PlanterType.NORMAL) {
-                y = spawnPlantersRow(x, y, PlanterItem.woodId, ItemMaterials.MATERIAL_WOOD_CEDAR, plant);
-                y = spawnPlantersRow(x, y, PlanterItem.stoneId, ItemMaterials.MATERIAL_STONE, plant);
+                y = spawnPlantersRow(x, y, PlanterItem.normalWood.getTemplateId(), ItemMaterials.MATERIAL_WOOD_CEDAR, plant);
+                y = spawnPlantersRow(x, y, PlanterItem.normalStone.getTemplateId(), ItemMaterials.MATERIAL_STONE, plant);
             } else if (plant.planterType == PlanterType.MAGIC && PlantersMod.magicMushrooms) {
-                y = spawnPlantersRow(x, y, PlanterItem.magicWoodId, ItemMaterials.MATERIAL_WOOD_CEDAR, plant);
-                y = spawnPlantersRow(x, y, PlanterItem.magicStoneId, ItemMaterials.MATERIAL_STONE, plant);
-            } else if (plant.planterType == PlanterType.TREE) {
-                y = spawnPlantersRow(x, y, PlanterItem.treeWoodId, ItemMaterials.MATERIAL_WOOD_CEDAR, plant) + 1;
-                y = spawnPlantersRow(x, y, PlanterItem.treeStoneId, ItemMaterials.MATERIAL_STONE, plant);
-                x++;
-            } else if (plant.planterType == PlanterType.BUSH) {
-                y = spawnPlantersRow(x, y, PlanterItem.bushWoodId, ItemMaterials.MATERIAL_WOOD_CEDAR, plant) + 1;
-                y = spawnPlantersRow(x, y, PlanterItem.bushStoneId, ItemMaterials.MATERIAL_STONE, plant);
-                x++;
-            }
+                y = spawnPlantersRow(x, y, PlanterItem.magicWood.getTemplateId(), ItemMaterials.MATERIAL_WOOD_CEDAR, plant);
+                y = spawnPlantersRow(x, y, PlanterItem.magicStone.getTemplateId(), ItemMaterials.MATERIAL_STONE, plant);
+            } else continue;
             x++;
         }
 
         communicator.sendNormalServerMessage("Spawned test planters.");
     }
+
+    private static void spawnPlantersTrees(Communicator communicator) {
+        int py = communicator.player.getTileY();
+        int x = communicator.player.getTileX();
+        int y = py;
+
+        spawnPlantersRowTrees(x++, y, null, 0);
+        spawnPlantersRowTrees(x++, y, null, 75);
+        x++;
+
+        for (Plantable plant : Plantable.values()) {
+            y = py;
+            if (plant.planterType == PlanterType.TREE) {
+                x++;
+                spawnPlantersRowTrees(x, y, plant, 0);
+                x += 2;
+                spawnPlantersRowTrees(x, y, plant, 75f);
+            } else if (plant.planterType == PlanterType.BUSH) {
+                x++;
+                y = spawnPlantersRow(x, y, PlanterItem.bushWood.getTemplateId(), ItemMaterials.MATERIAL_WOOD_CEDAR, plant) + 1;
+                y = spawnPlantersRow(x, y, PlanterItem.bushStone.getTemplateId(), ItemMaterials.MATERIAL_STONE, plant);
+            } else continue;
+            x++;
+        }
+
+        communicator.sendNormalServerMessage("Spawned test planters.");
+    }
+
 
     private static void deletePlanters(Communicator communicator) {
         Arrays.stream(Items.getAllItems())
@@ -182,8 +207,11 @@ public class GmCommands {
                 String cmd = tokens.nextToken().trim();
                 switch (cmd) {
                     case "test":
-                        spawnPlanters(communicator);
-                        return MessagePolicy.DISCARD;
+                        if (tokens.hasMoreTokens()) {
+                            spawnPlanters(communicator, tokens.nextToken());
+                            return MessagePolicy.DISCARD;
+                        }
+                        break;
                     case "delete":
                         deletePlanters(communicator);
                         return MessagePolicy.DISCARD;
@@ -208,7 +236,7 @@ public class GmCommands {
                 }
             }
             communicator.sendAlertServerMessage("Usage:");
-            communicator.sendAlertServerMessage(" #planters test");
+            communicator.sendAlertServerMessage(" #planters test <normal|trees>");
             communicator.sendAlertServerMessage(" #planters delete");
             communicator.sendAlertServerMessage(" #planters winter <on|off|disable>");
             communicator.sendAlertServerMessage(" #planters paint <pink|random|remove>");

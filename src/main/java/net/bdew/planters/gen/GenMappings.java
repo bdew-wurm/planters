@@ -162,6 +162,18 @@ public class GenMappings {
             generateVariants(PlanterItem.BASEMODEL + "magic.dirt", ".stone", model("magic-stone.wom"), "stone", "SmallStoneDmg.jpg", "moss", "moss_winter.png", "moss.jpg", "treeMat", "oaktex Old.png");
             emitSection("Magic");
 
+            generateVariants(PlanterItem.BASEMODEL + "tree", "", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_wood.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
+            generateVariants(PlanterItem.BASEMODEL + "tree", ".pottery", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_brick.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
+            generateVariants(PlanterItem.BASEMODEL + "tree", ".marble", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_marble.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
+            generateVariants(PlanterItem.BASEMODEL + "tree", ".clay", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_rendered.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
+            generateVariants(PlanterItem.BASEMODEL + "tree", ".stone", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_rounded.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
+            generateVariants(PlanterItem.BASEMODEL + "tree", ".sandstone", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_sandstone.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
+            generateVariants(PlanterItem.BASEMODEL + "tree", ".slate", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_slate.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
+            generateVariants(PlanterItem.BASEMODEL + "tree", ".brick", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_stonehouse.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
+            generateVariants(PlanterItem.BASEMODEL + "tree", ".brick", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_stonehouse.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
+
+            emitSection("Trees");
+
             addMapping("model.food.mushroom.magic", model("shroom-item.wom"));
             addMapping("model.pile.magicmushroom", model("basket-magic.wom"));
             addMapping("model.container.basket", model("basket-empty.wom"));
@@ -180,7 +192,7 @@ public class GenMappings {
                     generateStages(PlanterItem.BASEMODEL, plant, "cabbage", "farmwurm", "farm_winter.jpg", "farmland.jpg", null, null);
                 } else if (plant == Plantable.Pumpkin) {
                     generateStages(PlanterItem.BASEMODEL, plant, "pumpkin", "farmwurm", "farm_winter.jpg", "farmland.jpg", null, null);
-                } else {
+                } else if (plant.planterType != PlanterType.TREE && plant.planterType != PlanterType.BUSH) {
                     // Sprite crops
                     if (plant.water) {
                         generateStagesSprite(plant, "water");
