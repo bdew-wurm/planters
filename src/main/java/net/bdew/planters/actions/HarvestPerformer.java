@@ -110,7 +110,8 @@ public class HarvestPerformer implements ActionPerformer {
             PlantersMod.logException("Error checking encumbered", e);
         }
 
-        if (crop.planterType != PlanterType.NORMAL) {
+        if (replant && crop.planterType != PlanterType.NORMAL) {
+            performer.getCommunicator().sendNormalServerMessage(String.format("You can't replant %s as it requires something special to grow.", target.getTemplate().getName().toLowerCase()));
             replant = false;
         }
 
@@ -126,10 +127,6 @@ public class HarvestPerformer implements ActionPerformer {
         } else {
             performer.getCommunicator().sendNormalServerMessage("You managed to get a yield of " + quantity + " " + crop.displayName + ".");
             Server.getInstance().broadCastAction(performer.getName() + " has harvested the planter.", performer, 5);
-        }
-
-        if (crop.planterType != PlanterType.NORMAL) {
-            performer.getCommunicator().sendNormalServerMessage(String.format("You can't replant %s as it requires something special to grow.", target.getTemplate().getName().toLowerCase()));
         }
 
         if (crop.cropItem == ItemList.cotton && quantity >= 5) {
@@ -153,13 +150,11 @@ public class HarvestPerformer implements ActionPerformer {
             }
         }
 
-
         if (replant) {
             int replantPower = (int) (100.0 - farming.getKnowledge() + ql + rarity * 50);
             PlanterItem.updateData(target, crop, 0, true, 0, replantPower);
             PlanterTracker.addPlanter(target);
         } else PlanterItem.clearData(target);
-
 
         if (crop.needsScythe && source != null) {
             if (source.setDamage(source.getDamage() + 0.0015F * source.getDamageModifier())) {
