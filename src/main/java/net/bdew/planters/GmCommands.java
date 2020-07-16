@@ -18,10 +18,16 @@ public class GmCommands {
 
     private static void spawnTestPlanter(int id, int tileX, int tileY, byte material, Plantable plant, int age, boolean tended, float damage) {
         try {
-            Item itm = ItemFactory.createItem(id, 99f, tileX * 4f + 2f, tileY * 4f + 2f, 0, true, material, (byte) 0, -10L, null);
-            itm.setDamage(damage);
-            if (plant != null)
-                PlanterItem.updateData(itm, plant, age, tended, 0, 0);
+            if (damage < 0) {
+                Item itm = ItemFactory.createItem(ItemList.unfinishedItem, 99f, tileX * 4f + 2f, tileY * 4f + 2f, 0, true, material, (byte) 0, -10L, null);
+                itm.setRealTemplate(id);
+                itm.updateIfGroundItem();
+            } else {
+                Item itm = ItemFactory.createItem(id, 99f, tileX * 4f + 2f, tileY * 4f + 2f, 0, true, material, (byte) 0, -10L, null);
+                itm.setDamage(damage);
+                if (plant != null)
+                    PlanterItem.updateData(itm, plant, age, tended, 0, 0);
+            }
         } catch (NoSuchTemplateException | FailedException e) {
             throw new RuntimeException(e);
         }
@@ -30,14 +36,7 @@ public class GmCommands {
     private static void spawnBasePlanters(int id, int tileX, int tileY, byte material) {
         spawnTestPlanter(id, tileX, tileY++, material, null, 0, false, 0);
         spawnTestPlanter(id, tileX, tileY++, material, null, 0, false, 75);
-        try {
-            Item itm = ItemFactory.createItem(ItemList.unfinishedItem, 99f, tileX * 4f + 2f, tileY * 4f + 2f, 0, true, material, (byte) 0, -10L, null);
-            itm.setRealTemplate(id);
-            itm.updateIfGroundItem();
-        } catch (NoSuchTemplateException | FailedException e) {
-            throw new RuntimeException(e);
-        }
-
+        spawnTestPlanter(id, tileX, tileY++, material, null, 0, false, -1);
     }
 
     private static int spawnPlantersRow(int x, int y, int tpl, byte material, Plantable plant) {
@@ -53,15 +52,24 @@ public class GmCommands {
     }
 
     private static int spawnPlantersRowTrees(int x, int y, Plantable plant, float damage) {
-        //a
         spawnTestPlanter(PlanterItem.treeWood.getTemplateId(), x, y, Materials.MATERIAL_WOOD_CEDAR, plant, 0, false, damage);
-        spawnTestPlanter(PlanterItem.treeStone.getTemplateId(), x, y += 2, PlanterItem.treeStone.getMaterial(), plant, 1, false, damage);
-        spawnTestPlanter(PlanterItem.treeSandstone.getTemplateId(), x, y += 2, PlanterItem.treeSandstone.getMaterial(), plant, 2, false, damage);
-        spawnTestPlanter(PlanterItem.treeRendered.getTemplateId(), x, y += 2, PlanterItem.treeRendered.getMaterial(), plant, 3, false, damage);
-        spawnTestPlanter(PlanterItem.treeMarble.getTemplateId(), x, y += 2, PlanterItem.treeMarble.getMaterial(), plant, 4, false, damage);
-        spawnTestPlanter(PlanterItem.treeBrick.getTemplateId(), x, y += 2, PlanterItem.treeBrick.getMaterial(), plant, 4, false, damage);
-        spawnTestPlanter(PlanterItem.treePottery.getTemplateId(), x, y += 2, PlanterItem.treePottery.getMaterial(), plant, 5, false, damage);
-        spawnTestPlanter(PlanterItem.treeSlate.getTemplateId(), x, y += 2, PlanterItem.treeSlate.getMaterial(), plant, 5, false, damage);
+        spawnTestPlanter(PlanterItem.treeStone.getTemplateId(), x, y += 3, PlanterItem.treeStone.getMaterial(), plant, 1, false, damage);
+        spawnTestPlanter(PlanterItem.treeSandstone.getTemplateId(), x, y += 3, PlanterItem.treeSandstone.getMaterial(), plant, 2, false, damage);
+        spawnTestPlanter(PlanterItem.treeRendered.getTemplateId(), x, y += 3, PlanterItem.treeRendered.getMaterial(), plant, 3, false, damage);
+        spawnTestPlanter(PlanterItem.treeMarble.getTemplateId(), x, y += 3, PlanterItem.treeMarble.getMaterial(), plant, 4, false, damage);
+        spawnTestPlanter(PlanterItem.treeBrick.getTemplateId(), x, y += 3, PlanterItem.treeBrick.getMaterial(), plant, 4, false, damage);
+        spawnTestPlanter(PlanterItem.treePottery.getTemplateId(), x, y += 3, PlanterItem.treePottery.getMaterial(), plant, 5, false, damage);
+        spawnTestPlanter(PlanterItem.treeSlate.getTemplateId(), x, y += 3, PlanterItem.treeSlate.getMaterial(), plant, 5, false, damage);
+        return y;
+    }
+
+    private static int spawnPlantersRowBushes(int x, int y, Plantable plant, float damage) {
+        spawnTestPlanter(PlanterItem.bushWood.getTemplateId(), x, y, Materials.MATERIAL_WOOD_CEDAR, plant, 0, false, damage);
+        spawnTestPlanter(PlanterItem.bushWood.getTemplateId(), x, y += 3, Materials.MATERIAL_WOOD_CEDAR, plant, 1, false, damage);
+        spawnTestPlanter(PlanterItem.bushWood.getTemplateId(), x, y += 3, Materials.MATERIAL_WOOD_CEDAR, plant, 2, false, damage);
+        spawnTestPlanter(PlanterItem.bushMetal.getTemplateId(), x, y += 3, Materials.MATERIAL_IRON, plant, 3, false, damage);
+        spawnTestPlanter(PlanterItem.bushMetal.getTemplateId(), x, y += 3, Materials.MATERIAL_GOLD, plant, 4, false, damage);
+        spawnTestPlanter(PlanterItem.bushMetal.getTemplateId(), x, y += 3, Materials.MATERIAL_SERYLL, plant, 5, false, damage);
         return y;
     }
 
@@ -104,23 +112,23 @@ public class GmCommands {
     private static void spawnPlantersTrees(Communicator communicator) {
         int py = communicator.player.getTileY();
         int x = communicator.player.getTileX();
-        int y = py;
+        int y;
 
-        spawnPlantersRowTrees(x++, y, null, 0);
-        spawnPlantersRowTrees(x++, y, null, 75);
-        x++;
+        y = spawnPlantersRowTrees(x, py, null, 0);
+        spawnPlantersRowBushes(x++, y, null, 0);
+        y = spawnPlantersRowTrees(x, py, null, 75);
+        spawnPlantersRowBushes(x++, y, null, 75);
+        y = spawnPlantersRowTrees(x, py, null, -1);
+        spawnPlantersRowBushes(x++, y, null, -1);
 
         for (Plantable plant : Plantable.values()) {
             y = py;
             if (plant.planterType == PlanterType.TREE) {
                 x++;
                 spawnPlantersRowTrees(x, y, plant, 0);
-                x += 2;
-                spawnPlantersRowTrees(x, y, plant, 75f);
             } else if (plant.planterType == PlanterType.BUSH) {
                 x++;
-                y = spawnPlantersRow(x, y, PlanterItem.bushWood.getTemplateId(), ItemMaterials.MATERIAL_WOOD_CEDAR, plant) + 1;
-                y = spawnPlantersRow(x, y, PlanterItem.bushStone.getTemplateId(), ItemMaterials.MATERIAL_STONE, plant);
+                spawnPlantersRowBushes(x, y, plant, 0);
             } else continue;
             x++;
         }
@@ -140,24 +148,32 @@ public class GmCommands {
         if (arg.equalsIgnoreCase("random")) {
             colorPlantersRandom();
         } else if (arg.equalsIgnoreCase("pink")) {
-            colorPlantersSet(WurmColor.createColor(255, 1, 127));
+            colorPlantersSet(WurmColor.createColor(255, 1, 127), WurmColor.createColor(1, 255, 1));
         } else if (arg.equalsIgnoreCase("remove")) {
-            colorPlantersSet(-1);
+            colorPlantersSet(-1, -1);
         } else {
             communicator.sendAlertServerMessage("Usage: #planters paint <pink|random|remove>");
         }
     }
 
-    private static void colorPlantersSet(int color) {
+    private static void colorPlantersSet(int color, int color2) {
         Arrays.stream(Items.getAllItems())
                 .filter(PlanterItem::isPlanter)
-                .forEach(i -> i.setColor(color));
+                .forEach(i -> {
+                    i.setColor(color);
+                    if (i.getTemplate().supportsSecondryColor())
+                        i.setColor2(color2);
+                });
     }
 
     private static void colorPlantersRandom() {
         Arrays.stream(Items.getAllItems())
                 .filter(PlanterItem::isPlanter)
-                .forEach(i -> i.setColor(WurmColor.createColor(Server.rand.nextInt(255) + 1, Server.rand.nextInt(255) + 1, Server.rand.nextInt(255) + 1)));
+                .forEach(i -> {
+                    i.setColor(WurmColor.createColor(Server.rand.nextInt(255) + 1, Server.rand.nextInt(255) + 1, Server.rand.nextInt(255) + 1));
+                    if (i.getTemplate().supportsSecondryColor())
+                        i.setColor2(WurmColor.createColor(Server.rand.nextInt(255) + 1, Server.rand.nextInt(255) + 1, Server.rand.nextInt(255) + 1));
+                });
     }
 
     private static void setWinter(Communicator communicator, String arg) {

@@ -45,6 +45,10 @@ public class GenMappings {
             return override(matName + ".texture", texName);
         }
 
+        public ResURL val(String key, String val) {
+            return override(key, val);
+        }
+
         public String build() {
             if (overrides.isEmpty()) return file;
             return file + "?" +
@@ -162,17 +166,32 @@ public class GenMappings {
             generateVariants(PlanterItem.BASEMODEL + "magic.dirt", ".stone", model("magic-stone.wom"), "stone", "SmallStoneDmg.jpg", "moss", "moss_winter.png", "moss.jpg", "treeMat", "oaktex Old.png");
             emitSection("Magic");
 
-            generateVariants(PlanterItem.BASEMODEL + "tree", "", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_wood.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
-            generateVariants(PlanterItem.BASEMODEL + "tree", ".pottery", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_brick.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
-            generateVariants(PlanterItem.BASEMODEL + "tree", ".marble", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_marble.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
-            generateVariants(PlanterItem.BASEMODEL + "tree", ".clay", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_rendered.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
-            generateVariants(PlanterItem.BASEMODEL + "tree", ".stone", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_rounded.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
-            generateVariants(PlanterItem.BASEMODEL + "tree", ".sandstone", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_sandstone.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
-            generateVariants(PlanterItem.BASEMODEL + "tree", ".slate", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_slate.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
-            generateVariants(PlanterItem.BASEMODEL + "tree", ".brick", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_stonehouse.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
-            generateVariants(PlanterItem.BASEMODEL + "tree", ".brick", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_stonehouse.dds"), "wood", "woodbridge_decay.png", "dirt", "dirt_winter.jpg", null, null, null);
-
+            generateVariants(PlanterItem.BASEMODEL + "tree.wood", "", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_wood.dds"), "wood", "plank-oak decay.dds", "dirt", "dirt_winter.jpg", null, "tree_planter", "~graphics.jar/structures/Houses/floorWood_decay.dds");
+            generateVariants(PlanterItem.BASEMODEL + "tree.pottery", "", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_brick.dds"), "wood", "plank-oak decay.dds", "dirt", "dirt_winter.jpg", null, "tree_planter", "~graphics.jar/structures/Houses/brick_decay.dds");
+            generateVariants(PlanterItem.BASEMODEL + "tree.marble", "", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_marble.dds"), "wood", "plank-oak decay.dds", "dirt", "dirt_winter.jpg", null, "tree_planter", "~graphics.jar/structures/Houses/marble_decay.dds");
+            generateVariants(PlanterItem.BASEMODEL + "tree.clay", "", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_rendered.dds"), "wood", "plank-oak decay.dds", "dirt", "dirt_winter.jpg", null, "tree_planter", "~graphics.jar/structures/Houses/plaster_decay.dds");
+            generateVariants(PlanterItem.BASEMODEL + "tree.stone", "", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_rounded.dds"), "wood", "plank-oak decay.dds", "dirt", "dirt_winter.jpg", null, "tree_planter", "~graphics.jar/structures/Houses/rounded_decay.dds");
+            generateVariants(PlanterItem.BASEMODEL + "tree.sand", "", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_sandstone.dds"), "wood", "plank-oak decay.dds", "dirt", "dirt_winter.jpg", null, "tree_planter", "~graphics.jar/structures/Houses/sandstone_decay.dds");
+            generateVariants(PlanterItem.BASEMODEL + "tree.slate", "", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_slate.dds"), "wood", "plank-oak decay.dds", "dirt", "dirt_winter.jpg", null, "tree_planter", "~graphics.jar/structures/Houses/slate_decay.dds");
+            generateVariants(PlanterItem.BASEMODEL + "tree.brick", "", model("planter-tree.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_stonehouse.dds"), "wood", "plank-oak decay.dds", "dirt", "dirt_winter.jpg", null, "tree_planter", "~graphics.jar/structures/Houses/StoneWallDmg.dds");
             emitSection("Trees");
+
+            addMapping(PlanterItem.BASEMODEL + "tree.wood.unfinished", model("planter-tree-unfinished.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_wood.dds"));
+            addMapping(PlanterItem.BASEMODEL + "tree.pottery.unfinished", model("planter-tree-unfinished.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_brick.dds"));
+            addMapping(PlanterItem.BASEMODEL + "tree.marble.unfinished", model("planter-tree-unfinished.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_marble.dds"));
+            addMapping(PlanterItem.BASEMODEL + "tree.clay.unfinished", model("planter-tree-unfinished.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_rendered.dds"));
+            addMapping(PlanterItem.BASEMODEL + "tree.stone.unfinished", model("planter-tree-unfinished.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_rounded.dds"));
+            addMapping(PlanterItem.BASEMODEL + "tree.sand.unfinished", model("planter-tree-unfinished.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_sandstone.dds"));
+            addMapping(PlanterItem.BASEMODEL + "tree.slate.unfinished", model("planter-tree-unfinished.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_slate.dds"));
+            addMapping(PlanterItem.BASEMODEL + "tree.brick.unfinished", model("planter-tree-unfinished.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_stonehouse.dds"));
+            emitSection("Trees Unfinished");
+
+            generateVariants(PlanterItem.BASEMODEL + "bush.wood", "", model("planter-bush.wom").tex("frame", "wood planks iron frame.dds"), "frame", "wood and iron plaque decayed.dds", "dirt", "dirt_winter.jpg", null, null, null);
+            generateVariants(PlanterItem.BASEMODEL + "bush.metal", "", model("planter-bush.wom").tex("frame", "iron plaque iron frame.dds"), "frame", "iron plaque iron frame decayed.dds", "dirt", "dirt_winter.jpg", null, null, null);
+            addMapping(PlanterItem.BASEMODEL + "bush.wood.unfinished", model("planter-bush-unfinished.wom"));
+            addMapping(PlanterItem.BASEMODEL + "bush.metal.unfinished", model("planter-bush-unfinished.wom"));
+            emitSection("Bushes");
+
 
             addMapping("model.food.mushroom.magic", model("shroom-item.wom"));
             addMapping("model.pile.magicmushroom", model("basket-magic.wom"));
@@ -199,7 +218,7 @@ public class GenMappings {
                     } else {
                         generateStagesSprite(plant, "sprite");
                     }
-                }
+                } else continue;
                 emitSection(plant.displayName);
             }
         } finally {

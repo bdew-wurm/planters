@@ -51,12 +51,7 @@ public class PlanterModelProvider implements ModelNameProvider {
             }
         }
 
-        if (item.getTemplate() == PlanterItem.treeBrick)
-            sb.append("brick");
-        else if (item.getTemplate() == PlanterItem.treePottery)
-            sb.append("pottery");
-        else
-            sb.append(MaterialUtilities.getMaterialString(item.getMaterial()));
+        sb.append(MaterialUtilities.getMaterialString(item.getMaterial()));
 
         return sb.toString();
 
