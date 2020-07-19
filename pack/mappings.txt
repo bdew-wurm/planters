@@ -98,20 +98,20 @@ model.structure.farmbox.tree.brick.unfinished   = planter-tree-unfinished.wom?tr
 
 ########## Bushes #########
 
-model.structure.farmbox.bush.wood                  = planter-bush.wom?frame.texture=wood planks iron frame.dds
-model.structure.farmbox.bush.wood.decayed          = planter-bush.wom?frame.texture=wood and iron plaque decayed.dds
-model.structure.farmbox.bush.wood.winter           = planter-bush.wom?dirt.texture=dirt_winter.jpg&frame.texture=wood planks iron frame.dds
-model.structure.farmbox.bush.wood.decayed.winter   = planter-bush.wom?dirt.texture=dirt_winter.jpg&frame.texture=wood and iron plaque decayed.dds
-model.structure.farmbox.bush.wood.infected         = planter-bush.wom?dirt.texture=mycelium.dds&frame.texture=wood and iron plaque decayed.dds
-model.structure.farmbox.bush.wood.infected.winter  = planter-bush.wom?dirt.texture=mycelium-winter.dds&frame.texture=wood and iron plaque decayed.dds
-model.structure.farmbox.bush.metal                 = planter-bush.wom?frame.texture=iron plaque iron frame.dds
-model.structure.farmbox.bush.metal.decayed         = planter-bush.wom?frame.texture=iron plaque iron frame decayed.dds
-model.structure.farmbox.bush.metal.winter          = planter-bush.wom?dirt.texture=dirt_winter.jpg&frame.texture=iron plaque iron frame.dds
-model.structure.farmbox.bush.metal.decayed.winter  = planter-bush.wom?dirt.texture=dirt_winter.jpg&frame.texture=iron plaque iron frame decayed.dds
-model.structure.farmbox.bush.metal.infected        = planter-bush.wom?dirt.texture=mycelium.dds&frame.texture=iron plaque iron frame decayed.dds
-model.structure.farmbox.bush.metal.infected.winter = planter-bush.wom?dirt.texture=mycelium-winter.dds&frame.texture=iron plaque iron frame decayed.dds
-model.structure.farmbox.bush.wood.unfinished       = planter-bush-unfinished.wom
-model.structure.farmbox.bush.metal.unfinished      = planter-bush-unfinished.wom
+model.structure.farmbox.bush.wood                  = planter-bush.wom?planter.texture=bush-wood.dds
+model.structure.farmbox.bush.wood.decayed          = planter-bush.wom?planter.texture=bush-wood-decay.dds
+model.structure.farmbox.bush.wood.winter           = planter-bush.wom?dirt.texture=dirt_winter.jpg&planter.texture=bush-wood.dds
+model.structure.farmbox.bush.wood.decayed.winter   = planter-bush.wom?dirt.texture=dirt_winter.jpg&planter.texture=bush-wood-decay.dds
+model.structure.farmbox.bush.wood.infected         = planter-bush.wom?dirt.texture=mycelium.dds&planter.texture=bush-wood-decay.dds
+model.structure.farmbox.bush.wood.infected.winter  = planter-bush.wom?dirt.texture=mycelium-winter.dds&planter.texture=bush-wood-decay.dds
+model.structure.farmbox.bush.metal                 = planter-bush.wom?planter.texture=bush-metal.dds
+model.structure.farmbox.bush.metal.decayed         = planter-bush.wom?planter.texture=bush-metal-decay.dds
+model.structure.farmbox.bush.metal.winter          = planter-bush.wom?dirt.texture=dirt_winter.jpg&planter.texture=bush-metal.dds
+model.structure.farmbox.bush.metal.decayed.winter  = planter-bush.wom?dirt.texture=dirt_winter.jpg&planter.texture=bush-metal-decay.dds
+model.structure.farmbox.bush.metal.infected        = planter-bush.wom?dirt.texture=mycelium.dds&planter.texture=bush-metal-decay.dds
+model.structure.farmbox.bush.metal.infected.winter = planter-bush.wom?dirt.texture=mycelium-winter.dds&planter.texture=bush-metal-decay.dds
+model.structure.farmbox.bush.wood.unfinished       = planter-bush-unfinished.wom?frame.texture=bush-metal.dds
+model.structure.farmbox.bush.metal.unfinished      = planter-bush-unfinished.wom?frame.texture=bush-metal.dds
 
 ########## Items #########
 

@@ -67,7 +67,8 @@ public class GenProps {
                         int mats = in.readInt();
                         boolean hadPlank = false;
                         boolean hadCloth = false;
-                        boolean hadFrame = false;
+                        boolean hadPlanter = false;
+                        boolean hadLegs = false;
                         boolean hadStone = false;
 
                         totalFaces += faces;
@@ -83,7 +84,8 @@ public class GenProps {
                             if (tex.contains("SmallStone")) hadPlank = true;
                             if (tex.contains("wicker")) hadPlank = true;
                             if (tex.contains("cloth")) hadCloth = true;
-                            if (tex.contains("frame")) hadFrame = true;
+                            if (tex.contains("frame") || tex.contains("bush-wood")) hadPlanter = true;
+                            if (tex.contains("bush-metal")) hadLegs = true;
                             if (tex.contains("cave_slate")) hadStone = true;
 
                             in.readByte(); // enabled
@@ -111,13 +113,16 @@ public class GenProps {
 
 //                            System.out.println(String.format("    - %s -> %s", matName, tex));
                         }
-                        if (file.getName().contains("planter-tree") || file.getName().contains("planter-bush")) {
+                        if (file.getName().contains("planter-tree")) {
                             if (hadPlank)
                                 modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>secondary_pm.png</mask></meshMask>", name));
                             else if (hadStone)
                                 modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>planter_pm.png</mask></meshMask>", name));
-                            else if (hadFrame)
+                        } else if (file.getName().contains("planter-bush")) {
+                            if (hadPlanter)
                                 modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>bush_pm.png</mask></meshMask>", name));
+                            else if (hadLegs)
+                                modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>secondary_pm.png</mask></meshMask>", name));
                         } else {
                             if (hadPlank) {
                                 modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>planter_pm.png</mask></meshMask>", name));

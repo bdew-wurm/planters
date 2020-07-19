@@ -186,10 +186,10 @@ public class GenMappings {
             addMapping(PlanterItem.BASEMODEL + "tree.brick.unfinished", model("planter-tree-unfinished.wom").tex("tree_planter", "~graphics.jar/texture/terrain/cave_stonehouse.dds"));
             emitSection("Trees Unfinished");
 
-            generateVariants(PlanterItem.BASEMODEL + "bush.wood", "", model("planter-bush.wom").tex("frame", "wood planks iron frame.dds"), "frame", "wood and iron plaque decayed.dds", "dirt", "dirt_winter.jpg", null, null, null);
-            generateVariants(PlanterItem.BASEMODEL + "bush.metal", "", model("planter-bush.wom").tex("frame", "iron plaque iron frame.dds"), "frame", "iron plaque iron frame decayed.dds", "dirt", "dirt_winter.jpg", null, null, null);
-            addMapping(PlanterItem.BASEMODEL + "bush.wood.unfinished", model("planter-bush-unfinished.wom"));
-            addMapping(PlanterItem.BASEMODEL + "bush.metal.unfinished", model("planter-bush-unfinished.wom"));
+            generateVariants(PlanterItem.BASEMODEL + "bush.wood", "", model("planter-bush.wom").tex("planter", "bush-wood.dds"), "planter", "bush-wood-decay.dds", "dirt", "dirt_winter.jpg", null, null, null);
+            generateVariants(PlanterItem.BASEMODEL + "bush.metal", "", model("planter-bush.wom").tex("planter", "bush-metal.dds"), "planter", "bush-metal-decay.dds", "dirt", "dirt_winter.jpg", null, null, null);
+            addMapping(PlanterItem.BASEMODEL + "bush.wood.unfinished", model("planter-bush-unfinished.wom").tex("frame", "bush-metal.dds"));
+            addMapping(PlanterItem.BASEMODEL + "bush.metal.unfinished", model("planter-bush-unfinished.wom").tex("frame", "bush-metal.dds"));
             emitSection("Bushes");
 
 

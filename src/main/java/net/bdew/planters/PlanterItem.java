@@ -57,8 +57,6 @@ public class PlanterItem {
         int p = types.length;
         for (Short t : baseTypes) allTypes[p++] = t;
 
-        PlantersMod.logInfo(String.format("Adding planter %s with types %s", id, Arrays.toString(allTypes)));
-
         ItemTemplate tpl = new ItemTemplateBuilder(id)
                 .name(name, plural, desc)
                 .modelName(BASEMODEL + modelSuffix)
@@ -136,7 +134,7 @@ public class PlanterItem {
 
         bushMetal = registerPlanter(PlanterType.BUSH, "bdew.planters.metal.bush", "bush.metal.",
                 "bush planter", "metal bush planters", "A large metal planter suitable for growing bushs.",
-                SkillList.MASONRY, Materials.MATERIAL_IRON, new short[]{ItemTypes.ITEM_TYPE_METAL, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
+                SkillList.SMITHING_BLACKSMITHING, Materials.MATERIAL_IRON, new short[]{ItemTypes.ITEM_TYPE_METAL, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
 
         // ==== MAGIC ====
 
@@ -162,25 +160,65 @@ public class PlanterItem {
                 .addRequirement(new CreationRequirement(2, ItemList.mortar, 2, true))
                 .addRequirement(new CreationRequirement(3, ItemList.dirtPile, 1, true));
 
-        CreationEntryCreator.createAdvancedEntry(SkillList.CARPENTRY, ItemList.woodBeam, ItemList.woodBeam, treeWood.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
-                .addRequirement(new CreationRequirement(1, ItemList.woodBeam, 9, true))
+        CreationEntryCreator.createAdvancedEntry(SkillList.CARPENTRY, ItemList.plank, ItemList.nailsIronLarge, treeWood.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.plank, 20, true))
                 .addRequirement(new CreationRequirement(2, ItemList.nailsIronLarge, 4, true))
-                .addRequirement(new CreationRequirement(3, ItemList.dirtPile, 1, true));
+                .addRequirement(new CreationRequirement(3, ItemList.dirtPile, 5, true));
 
-        CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.rock, ItemList.rock, treeStone.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
-                .addRequirement(new CreationRequirement(1, ItemList.rock, 4, true))
-                .addRequirement(new CreationRequirement(2, ItemList.mortar, 2, true))
-                .addRequirement(new CreationRequirement(3, ItemList.dirtPile, 1, true));
+        CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.stoneBrick, ItemList.mortar, treeBrick.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.plank, 10, true))
+                .addRequirement(new CreationRequirement(2, ItemList.stoneBrick, 10, true))
+                .addRequirement(new CreationRequirement(3, ItemList.mortar, 10, true))
+                .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 5, true));
 
-        CreationEntryCreator.createAdvancedEntry(SkillList.CARPENTRY, ItemList.woodBeam, ItemList.woodBeam, bushWood.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
-                .addRequirement(new CreationRequirement(1, ItemList.woodBeam, 9, true))
-                .addRequirement(new CreationRequirement(2, ItemList.nailsIronLarge, 4, true))
-                .addRequirement(new CreationRequirement(3, ItemList.dirtPile, 1, true));
+        CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.brickPottery, ItemList.mortar, treePottery.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.plank, 10, true))
+                .addRequirement(new CreationRequirement(2, ItemList.brickPottery, 10, true))
+                .addRequirement(new CreationRequirement(3, ItemList.mortar, 10, true))
+                .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 5, true));
 
-        CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.rock, ItemList.rock, bushMetal.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
-                .addRequirement(new CreationRequirement(1, ItemList.rock, 4, true))
-                .addRequirement(new CreationRequirement(2, ItemList.mortar, 2, true))
-                .addRequirement(new CreationRequirement(3, ItemList.dirtPile, 1, true));
+        CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.rock, ItemList.mortar, treeStone.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.rock, 10, true))
+                .addRequirement(new CreationRequirement(2, ItemList.brickPottery, 10, true))
+                .addRequirement(new CreationRequirement(3, ItemList.mortar, 10, true))
+                .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 5, true));
+
+        CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.slateBrick, ItemList.mortar, treeSlate.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.rock, 10, true))
+                .addRequirement(new CreationRequirement(2, ItemList.slateBrick, 10, true))
+                .addRequirement(new CreationRequirement(3, ItemList.mortar, 10, true))
+                .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 5, true));
+
+        CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.rock, ItemList.mortar, treeRendered.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.rock, 5, true))
+                .addRequirement(new CreationRequirement(2, ItemList.rock, 5, true))
+                .addRequirement(new CreationRequirement(3, ItemList.clay, 10, true))
+                .addRequirement(new CreationRequirement(4, ItemList.mortar, 10, true))
+                .addRequirement(new CreationRequirement(5, ItemList.dirtPile, 5, true));
+
+        CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.sandstoneBrick, ItemList.mortar, treeSandstone.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.rock, 10, true))
+                .addRequirement(new CreationRequirement(2, ItemList.sandstoneBrick, 10, true))
+                .addRequirement(new CreationRequirement(3, ItemList.mortar, 10, true))
+                .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 5, true));
+
+        CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.marbleBrick, ItemList.mortar, treeMarble.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.rock, 10, true))
+                .addRequirement(new CreationRequirement(2, ItemList.marbleBrick, 10, true))
+                .addRequirement(new CreationRequirement(3, ItemList.mortar, 10, true))
+                .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 5, true));
+
+        CreationEntryCreator.createAdvancedEntry(SkillList.CARPENTRY, ItemList.plank, ItemList.ironBand, bushWood.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.plank, 10, true))
+                .addRequirement(new CreationRequirement(2, ItemList.metalRivet, 10, true))
+                .addRequirement(new CreationRequirement(3, ItemList.ironBand, 4, true))
+                .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 1, true));
+
+        CreationEntryCreator.createAdvancedEntry(SkillList.SMITHING_BLACKSMITHING, ItemList.ironBar, ItemList.ironBand, bushMetal.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
+                .addRequirement(new CreationRequirement(1, ItemList.plank, 10, true))
+                .addRequirement(new CreationRequirement(2, ItemList.ironBar, 10, true))
+                .addRequirement(new CreationRequirement(3, ItemList.ironBand, 4, true))
+                .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 1, true));
 
         if (PlantersMod.magicMushrooms) {
             CreationEntryCreator.createAdvancedEntry(SkillList.CARPENTRY, ItemList.woodBeam, ItemList.woodBeam, magicWood.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)

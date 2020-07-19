@@ -163,11 +163,15 @@
     <planter-bush-unfinished.wom>
         <modelProperties>
             <meshMask>
-                <mesh>feet_Cube.053</mesh>
+                <mesh>feet_Cube.008</mesh>
                 <mask>bush_pm.png</mask>
             </meshMask>
             <meshMask>
                 <mesh>tub_iron_plaque_iron_frame.dds</mesh>
+                <mask>bush_pm.png</mask>
+            </meshMask>
+            <meshMask>
+                <mesh>tub.002</mesh>
                 <mask>bush_pm.png</mask>
             </meshMask>
             <meshMask>
@@ -184,18 +188,10 @@
         <modelProperties>
             <meshMask>
                 <mesh>feet_Cube.018</mesh>
-                <mask>bush_pm.png</mask>
+                <mask>secondary_pm.png</mask>
             </meshMask>
             <meshMask>
-                <mesh>tub_iron_plaque_iron_frame.dds</mesh>
-                <mask>bush_pm.png</mask>
-            </meshMask>
-            <meshMask>
-                <mesh>dirt_iron_plaque_iron_frame.dds</mesh>
-                <mask>bush_pm.png</mask>
-            </meshMask>
-            <meshMask>
-                <mesh>tub_iron_plaque_iron_frame.dds</mesh>
+                <mesh>bush_wood</mesh>
                 <mask>bush_pm.png</mask>
             </meshMask>
         </modelProperties>
