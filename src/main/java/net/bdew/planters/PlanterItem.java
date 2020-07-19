@@ -11,7 +11,10 @@ import org.gotti.wurmunlimited.modsupport.items.ModItems;
 import org.gotti.wurmunlimited.modsupport.items.ModelNameProvider;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class PlanterItem {
     public static ItemTemplate normalWood, normalStone;
@@ -36,32 +39,13 @@ public class PlanterItem {
 
     private static final Map<Integer, PlanterType> typeMap = new HashMap<>();
 
-    private static final Collection<Short> baseTypes = Arrays.asList(
-            ItemTypes.ITEM_TYPE_REPAIRABLE,
-            ItemTypes.ITEM_TYPE_PLANTABLE,
-            ItemTypes.ITEM_TYPE_TRANSPORTABLE,
-            ItemTypes.ITEM_TYPE_NOTAKE,
-            ItemTypes.ITEM_TYPE_TURNABLE,
-            ItemTypes.ITEM_TYPE_NOMOVE,
-            ItemTypes.ITEM_TYPE_ONE_PER_TILE,
-            ItemTypes.ITEM_TYPE_TILE_ALIGNED,
-            ItemTypes.ITEM_TYPE_HASDATA,
-            ItemTypes.ITEM_TYPE_NORENAME,
-            ItemTypes.ITEM_TYPE_COLORABLE,
-            ItemTypes.ITEM_TYPE_DECORATION
-    );
-
-    private static ItemTemplate registerPlanter(PlanterType type, String id, String modelSuffix, String name, String desc, String plural, int skill, byte material, short[] types) throws IOException {
-        short[] allTypes = new short[types.length + baseTypes.size()];
-        System.arraycopy(types, 0, allTypes, 0, types.length);
-        int p = types.length;
-        for (Short t : baseTypes) allTypes[p++] = t;
+    private static ItemTemplate registerPlanter(PlanterType type, String id, String modelSuffix, String name, String desc, String plural, int skill, byte material, Utils.ItemTypeSet types) throws IOException {
 
         ItemTemplate tpl = new ItemTemplateBuilder(id)
                 .name(name, plural, desc)
                 .modelName(BASEMODEL + modelSuffix)
                 .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
-                .itemTypes(allTypes)
+                .itemTypes(types.array())
                 .decayTime(9072000L)
                 .dimensions(200, 200, 30)
                 .weightGrams(10000)
@@ -84,68 +68,90 @@ public class PlanterItem {
     }
 
     private static void registerPlanters() throws IOException {
+        Utils.ItemTypeSet baseTypes = Utils.ItemTypeSet.from(
+                ItemTypes.ITEM_TYPE_REPAIRABLE,
+                ItemTypes.ITEM_TYPE_PLANTABLE,
+                ItemTypes.ITEM_TYPE_TRANSPORTABLE,
+                ItemTypes.ITEM_TYPE_NOTAKE,
+                ItemTypes.ITEM_TYPE_TURNABLE,
+                ItemTypes.ITEM_TYPE_HASDATA,
+                ItemTypes.ITEM_TYPE_NORENAME,
+                ItemTypes.ITEM_TYPE_COLORABLE,
+                ItemTypes.ITEM_TYPE_DECORATION
+        );
+
+        Utils.ItemTypeSet onePerTile = baseTypes.with(
+                ItemTypes.ITEM_TYPE_NOMOVE,
+                ItemTypes.ITEM_TYPE_ONE_PER_TILE,
+                ItemTypes.ITEM_TYPE_TILE_ALIGNED
+        );
+
+        Utils.ItemTypeSet fourPerTile = baseTypes.with(
+                ItemTypes.ITEM_TYPE_FOUR_PER_TILE
+        );
+
         normalWood = registerPlanter(PlanterType.NORMAL, "bdew.planters.wood", "",
                 "large planter", "wooden large planters", "A large wooden planter suitable for growing crops.",
-                SkillList.CARPENTRY, Materials.MATERIAL_WOOD_BIRCH, new short[]{ItemTypes.ITEM_TYPE_WOOD});
+                SkillList.CARPENTRY, Materials.MATERIAL_WOOD_BIRCH, onePerTile.with(ItemTypes.ITEM_TYPE_WOOD));
 
         normalStone = registerPlanter(PlanterType.NORMAL, "bdew.planters.stone", "",
                 "large stone planter", "stone large planters", "A large stone planter suitable for growing crops.",
-                SkillList.MASONRY, Materials.MATERIAL_STONE, new short[]{ItemTypes.ITEM_TYPE_STONE});
+                SkillList.MASONRY, Materials.MATERIAL_STONE, onePerTile.with(ItemTypes.ITEM_TYPE_STONE));
 
         // ==== TREES ====
 
         treeWood = registerPlanter(PlanterType.TREE, "bdew.planters.wood.tree", "tree.wood.",
                 "tree planter", "wooden tree planters", "A large wooden planter suitable for growing trees.",
-                SkillList.CARPENTRY, Materials.MATERIAL_WOOD_BIRCH, new short[]{ItemTypes.ITEM_TYPE_WOOD, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
+                SkillList.CARPENTRY, Materials.MATERIAL_WOOD_BIRCH, onePerTile.with(ItemTypes.ITEM_TYPE_WOOD, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR));
 
         treeStone = registerPlanter(PlanterType.TREE, "bdew.planters.stone.tree", "tree.stone.",
                 "stone tree planter", "stone tree planters", "A large stone planter suitable for growing trees.",
-                SkillList.MASONRY, Materials.MATERIAL_STONE, new short[]{ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
+                SkillList.MASONRY, Materials.MATERIAL_STONE, onePerTile.with(ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR));
 
         treePottery = registerPlanter(PlanterType.TREE, "bdew.planters.pottery.tree", "tree.pottery.",
                 "pottery tree planter", "pottery tree planters", "A large pottery planter suitable for growing trees.",
-                SkillList.MASONRY, Materials.MATERIAL_STONE, new short[]{ItemTypes.ITEM_TYPE_POTTERY, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
+                SkillList.MASONRY, Materials.MATERIAL_STONE, onePerTile.with(ItemTypes.ITEM_TYPE_POTTERY, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR));
 
         treeMarble = registerPlanter(PlanterType.TREE, "bdew.planters.marble.tree", "tree.marble.",
                 "marble tree planter", "marble tree planters", "A large marble planter suitable for growing trees.",
-                SkillList.MASONRY, Materials.MATERIAL_MARBLE, new short[]{ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
+                SkillList.MASONRY, Materials.MATERIAL_MARBLE, onePerTile.with(ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR));
 
         treeRendered = registerPlanter(PlanterType.TREE, "bdew.planters.clay.tree", "tree.clay.",
                 "clay tree planter", "clay tree planters", "A large clay planter suitable for growing trees.",
-                SkillList.MASONRY, Materials.MATERIAL_CLAY, new short[]{ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
+                SkillList.MASONRY, Materials.MATERIAL_CLAY, onePerTile.with(ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR));
 
         treeBrick = registerPlanter(PlanterType.TREE, "bdew.planters.brick.tree", "tree.brick.",
                 "brick tree planter", "brick tree planters", "A large brick planter suitable for growing trees.",
-                SkillList.MASONRY, Materials.MATERIAL_STONE, new short[]{ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
+                SkillList.MASONRY, Materials.MATERIAL_STONE, onePerTile.with(ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR));
 
         treeSandstone = registerPlanter(PlanterType.TREE, "bdew.planters.sandstone.tree", "tree.sand.",
                 "sandstone tree planter", "sandstone tree planters", "A large sandstone planter suitable for growing trees.",
-                SkillList.MASONRY, Materials.MATERIAL_SANDSTONE, new short[]{ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
+                SkillList.MASONRY, Materials.MATERIAL_SANDSTONE, onePerTile.with(ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR));
 
         treeSlate = registerPlanter(PlanterType.TREE, "bdew.planters.slate.tree", "tree.slate.",
                 "slate tree planter", "slate tree planters", "A large slate planter suitable for growing trees.",
-                SkillList.MASONRY, Materials.MATERIAL_SLATE, new short[]{ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
+                SkillList.MASONRY, Materials.MATERIAL_SLATE, onePerTile.with(ItemTypes.ITEM_TYPE_STONE, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR));
 
         // ==== BUSH ====
 
         bushWood = registerPlanter(PlanterType.BUSH, "bdew.planters.wood.bush", "bush.wood.",
                 "bush planter", "wooden bush planters", "A large wooden planter suitable for growing bushs.",
-                SkillList.CARPENTRY, Materials.MATERIAL_WOOD_BIRCH, new short[]{ItemTypes.ITEM_TYPE_WOOD, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
+                SkillList.CARPENTRY, Materials.MATERIAL_WOOD_BIRCH, fourPerTile.with(ItemTypes.ITEM_TYPE_WOOD, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR));
 
         bushMetal = registerPlanter(PlanterType.BUSH, "bdew.planters.metal.bush", "bush.metal.",
                 "bush planter", "metal bush planters", "A large metal planter suitable for growing bushs.",
-                SkillList.SMITHING_BLACKSMITHING, Materials.MATERIAL_IRON, new short[]{ItemTypes.ITEM_TYPE_METAL, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR});
+                SkillList.SMITHING_BLACKSMITHING, Materials.MATERIAL_IRON, fourPerTile.with(ItemTypes.ITEM_TYPE_METAL, ItemTypes.ITEM_TYPE_SUPPORTS_SECONDARY_COLOR));
 
         // ==== MAGIC ====
 
         if (PlantersMod.magicMushrooms) {
             magicWood = registerPlanter(PlanterType.MAGIC, "bdew.planters.wood.magic", "magic.",
                     "magic planter", "wooden magic planters", "A large wooden planter suitable for growing magical mushrooms.",
-                    SkillList.CARPENTRY, Materials.MATERIAL_WOOD_BIRCH, new short[]{ItemTypes.ITEM_TYPE_WOOD});
+                    SkillList.CARPENTRY, Materials.MATERIAL_WOOD_BIRCH, onePerTile.with(ItemTypes.ITEM_TYPE_WOOD));
 
             magicStone = registerPlanter(PlanterType.MAGIC, "bdew.planters.stone.magic", "magic.",
                     "stone magic planter", "stone magic planters", "A large wooden planter suitable for growing magical mushrooms.",
-                    SkillList.MASONRY, Materials.MATERIAL_WOOD_BIRCH, new short[]{ItemTypes.ITEM_TYPE_STONE});
+                    SkillList.MASONRY, Materials.MATERIAL_WOOD_BIRCH, onePerTile.with(ItemTypes.ITEM_TYPE_STONE));
         }
     }
 
@@ -214,11 +220,13 @@ public class PlanterItem {
                 .addRequirement(new CreationRequirement(3, ItemList.ironBand, 4, true))
                 .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 1, true));
 
-        CreationEntryCreator.createAdvancedEntry(SkillList.SMITHING_BLACKSMITHING, ItemList.ironBar, ItemList.ironBand, bushMetal.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
-                .addRequirement(new CreationRequirement(1, ItemList.plank, 10, true))
-                .addRequirement(new CreationRequirement(2, ItemList.ironBar, 10, true))
-                .addRequirement(new CreationRequirement(3, ItemList.ironBand, 4, true))
-                .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 1, true));
+        for (final int lumpId : ItemFactory.metalLumpList) {
+            CreationEntryCreator.createAdvancedEntry(SkillList.SMITHING_BLACKSMITHING, ItemList.ironBand, lumpId, bushMetal.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
+                    .addRequirement(new CreationRequirement(1, lumpId, 10, true))
+                    .addRequirement(new CreationRequirement(2, ItemList.metalRivet, 10, true))
+                    .addRequirement(new CreationRequirement(3, ItemList.ironBand, 4, true))
+                    .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 1, true));
+        }
 
         if (PlantersMod.magicMushrooms) {
             CreationEntryCreator.createAdvancedEntry(SkillList.CARPENTRY, ItemList.woodBeam, ItemList.woodBeam, magicWood.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)

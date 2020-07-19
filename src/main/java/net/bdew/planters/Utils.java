@@ -12,7 +12,11 @@ import com.wurmonline.server.villages.Villages;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Utils {
     public static boolean checkRoleAllows(Creature performer, Item target, Predicate<VillageRole> check) {
@@ -133,6 +137,36 @@ public class Utils {
                 player.setLink(false);
             }
         }
+    }
 
+    public static class ItemTypeSet {
+        private Set<Short> values;
+
+        public ItemTypeSet(Set<Short> values) {
+            this.values = values;
+        }
+
+        public ItemTypeSet with(Short... vals) {
+            HashSet<Short> copy = new HashSet<>(values);
+            copy.addAll(Arrays.asList(vals));
+            return new ItemTypeSet(copy);
+        }
+
+        public short[] array() {
+            short[] res = new short[values.size()];
+            int p = 0;
+            for (Short v : values)
+                res[p++] = v;
+            return res;
+        }
+
+        public static ItemTypeSet from(Short... vals) {
+            HashSet<Short> copy = new HashSet<>(Arrays.asList(vals));
+            return new ItemTypeSet(copy);
+        }
+
+        public static ItemTypeSet merge(ItemTypeSet... sets) {
+            return new ItemTypeSet(Arrays.stream(sets).flatMap(s -> s.values.stream()).collect(Collectors.toSet()));
+        }
     }
 }
