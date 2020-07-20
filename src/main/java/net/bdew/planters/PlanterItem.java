@@ -39,12 +39,12 @@ public class PlanterItem {
 
     private static final Map<Integer, PlanterType> typeMap = new HashMap<>();
 
-    private static ItemTemplate registerPlanter(PlanterType type, String id, String modelSuffix, String name, String desc, String plural, int skill, byte material, Utils.ItemTypeSet types) throws IOException {
+    private static ItemTemplate registerPlanter(PlanterType type, String id, String modelSuffix, String name, String plural, String desc, int skill, byte material, Utils.ItemTypeSet types) throws IOException {
 
         ItemTemplate tpl = new ItemTemplateBuilder(id)
                 .name(name, plural, desc)
                 .modelName(BASEMODEL + modelSuffix)
-                .imageNumber((short) IconConstants.ICON_MARBLE_PLANTER)
+                .imageNumber((short) IconConstants.ICON_TOOL_CAULDRON)
                 .itemTypes(types.array())
                 .decayTime(9072000L)
                 .dimensions(200, 200, 30)
@@ -221,8 +221,8 @@ public class PlanterItem {
                 .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 1, true));
 
         for (final int lumpId : ItemFactory.metalLumpList) {
-            CreationEntryCreator.createAdvancedEntry(SkillList.SMITHING_BLACKSMITHING, ItemList.ironBand, lumpId, bushMetal.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
-                    .addRequirement(new CreationRequirement(1, lumpId, 10, true))
+            CreationEntryCreator.createAdvancedEntry(SkillList.SMITHING_BLACKSMITHING, lumpId, ItemList.hammerWood, bushMetal.getTemplateId(), true, false, 0f, false, true, CreationCategories.DECORATION)
+                    .addRequirement(new CreationRequirement(1, ItemList.sheetIron, 4, true))
                     .addRequirement(new CreationRequirement(2, ItemList.metalRivet, 10, true))
                     .addRequirement(new CreationRequirement(3, ItemList.ironBand, 4, true))
                     .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 1, true));
@@ -235,7 +235,6 @@ public class PlanterItem {
                     .addRequirement(new CreationRequirement(3, ItemList.moss, 5, true))
                     .addRequirement(new CreationRequirement(4, MiscItems.stumpId, 1, true))
                     .addRequirement(new CreationRequirement(5, ItemList.sourceCrystal, 4, true));
-
 
             CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.rock, ItemList.rock, magicStone.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
                     .addRequirement(new CreationRequirement(1, ItemList.rock, 4, true))
