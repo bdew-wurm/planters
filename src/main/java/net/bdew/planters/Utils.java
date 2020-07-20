@@ -62,13 +62,13 @@ public class Utils {
     }
 
     public static void sendPlanterTree(Player player, Item item, Plantable plant) {
-        if (player.hasLink() && item.getTemplateId() != 520) {
+        if (player.hasLink()) {
             try {
                 final ByteBuffer bb = player.getCommunicator().getConnection().getBuffer();
 
                 bb.put((byte) (-9));
 
-                bb.putLong(item.getWurmId() + 1);
+                bb.putLong(item.getWurmId() + 8);
                 bb.putFloat(0); //x
                 bb.putFloat(0); //y
                 bb.putFloat(0); //r
@@ -82,7 +82,7 @@ public class Utils {
                 if (plant == Plantable.ThornBush) size *= 0.5f;
                 if (plant == Plantable.OakTree) size *= 0.7f;
 
-                byte[] tempStringArr = String.format("%s %s [%d - %.1f]", plant.displayName, plant.planterType == PlanterType.BUSH ? "bush" : "tree", growthStage, size)
+                byte[] tempStringArr = String.format("planted %s %s [%d - %.1f]", plant.displayName, plant.planterType == PlanterType.BUSH ? "bush" : "tree", growthStage, size)
                         .getBytes(StandardCharsets.UTF_8);
                 bb.put((byte) tempStringArr.length);
                 bb.put(tempStringArr);
@@ -98,7 +98,7 @@ public class Utils {
 
                 bb.put((byte) (item.isOnSurface() ? 0 : -1));
 
-                bb.put(plant.material);
+                bb.put((byte) 0);
 
                 tempStringArr = "".getBytes(StandardCharsets.UTF_8);
                 bb.put((byte) tempStringArr.length);

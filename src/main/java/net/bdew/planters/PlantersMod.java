@@ -2,8 +2,11 @@ package net.bdew.planters;
 
 import com.wurmonline.server.behaviours.Actions;
 import com.wurmonline.server.creatures.Communicator;
+import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
+import javassist.expr.ExprEditor;
+import javassist.expr.MethodCall;
 import net.bdew.planters.actions.*;
 import net.bdew.planters.area.BetterFarmHandler;
 import org.gotti.wurmunlimited.modloader.classhooks.HookManager;
@@ -82,6 +85,31 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
 
             ctCommunicator.getMethod("sendRemoveItem", "(Lcom/wurmonline/server/items/Item;)V")
                     .insertAfter("net.bdew.planters.Hooks.removeItemHook(this, $1);");
+
+            CtClass ctBehaviourDispatcher = classPool.getCtClass("com.wurmonline.server.behaviours.BehaviourDispatcher");
+
+            ExprEditor topItemRedirect = new ExprEditor() {
+                @Override
+                public void edit(MethodCall m) throws CannotCompileException {
+                    if (m.getMethodName().equals("getBehaviour")) {
+                        m.replace("   if (targetType == 10 && net.bdew.planters.Hooks.isPlanterTopItem($1)) {" +
+                                "                   target = target - 8;" +
+                                "                   targetType = 2;" +
+                                "                   $_ = $proceed(target, $2);" +
+                                "               } else {" +
+                                "                   $_ = $proceed($$);" +
+                                "               };");
+                    }
+                }
+            };
+
+            ctBehaviourDispatcher.getMethod("requestActions", "(Lcom/wurmonline/server/creatures/Creature;Lcom/wurmonline/server/creatures/Communicator;BJJ)V")
+                    .instrument(topItemRedirect);
+            ctBehaviourDispatcher.getMethod("requestSelectionActions", "(Lcom/wurmonline/server/creatures/Creature;Lcom/wurmonline/server/creatures/Communicator;BJJ)V")
+                    .instrument(topItemRedirect);
+            ctBehaviourDispatcher.getMethod("action", "(Lcom/wurmonline/server/creatures/Creature;Lcom/wurmonline/server/creatures/Communicator;JJS)V")
+                    .insertBefore(" if (($4 & 0xFFL) == 10 && net.bdew.planters.Hooks.isPlanterTopItem($4)) $4=$4-8;");
+
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }

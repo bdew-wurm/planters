@@ -135,4 +135,13 @@ public class Hooks {
     public static void addTickingEffect(long wurmId, int delay, TickingPlayerEffect eff) {
         effects.add(new DelayedEffect(wurmId, delay, eff));
     }
+
+    public static boolean isPlanterTopItem(long id) {
+        try {
+            Item actual = Items.getItem(id - 8);
+            return PlanterItem.isPlanter(actual);
+        } catch (NoSuchItemException e) {
+            return false;
+        }
+    }
 }
