@@ -48,7 +48,7 @@ public class InfectAction implements ModAction, BehaviourProvider, ActionPerform
         return performer.isPlayer() && target != null
                 && target.getParentOrNull() == null
                 && PlanterItem.isPlanter(target)
-                && Utils.checkRoleAllows(performer, target, VillageRole::mayFarm)
+                && Utils.checkRoleAllows(performer, target, VillageRole::mayTendFields)
                 && performer.getDeity() != null
                 && performer.getDeity().isHateGod() != PlanterItem.isInfected(target);
     }

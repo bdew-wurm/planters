@@ -31,7 +31,7 @@ public class TendPerformer implements ActionPerformer {
                 && source.getTemplateId() == ItemList.rake
                 && PlanterItem.getGrowthStage(target) < 5
                 && !PlanterItem.isTended(target)
-                && Utils.checkRoleAllows(performer, target, VillageRole::mayFarm);
+                && Utils.checkRoleAllows(performer, target, VillageRole::mayTendFields);
     }
 
 

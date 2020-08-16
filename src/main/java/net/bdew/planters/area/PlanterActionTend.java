@@ -12,7 +12,7 @@ import net.bdew.planters.actions.TendPerformer;
 public class PlanterActionTend extends BasePlanterAction {
     @Override
     boolean checkRole(VillageRole role) {
-        return role.mayFarm();
+        return role.mayTendFields();
     }
 
     @Override
