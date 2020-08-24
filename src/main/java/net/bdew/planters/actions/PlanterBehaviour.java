@@ -32,9 +32,14 @@ public class PlanterBehaviour implements BehaviourProvider {
         if (performer.isPlayer() && target != null && PlanterItem.isPlanter(target)) {
             List<ActionEntry> list = new ArrayList<>();
             if (SowPerformer.canUse(performer, source, target)) list.add(Actions.actionEntrys[Actions.SOW]);
+            if (PlantPerformer.canUse(performer, source, target))
+                list.add(new ActionEntry(Actions.PLANT, "Plant", "planting"));
             if (CultivatePerformer.canUse(performer, source, target)) list.add(Actions.actionEntrys[Actions.CULTIVATE]);
             if (TendPerformer.canUse(performer, source, target)) list.add(Actions.actionEntrys[Actions.FARM]);
             if (HarvestPerformer.canUse(performer, source, target)) list.add(Actions.actionEntrys[Actions.HARVEST]);
+            if (ChopPerformer.canUse(performer, source, target)) list.add(Actions.actionEntrys[Actions.CHOP]);
+            if (PickSproutPerformer.canUse(performer, source, target))
+                list.add(Actions.actionEntrys[Actions.PICKSPROUT]);
             return list;
         } else if (performer.isPlayer() && target != null && DigStumpPerformer.canUse(performer, source, target)) {
             return digStumpAction;

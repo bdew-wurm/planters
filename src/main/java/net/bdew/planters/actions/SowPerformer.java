@@ -19,7 +19,7 @@ public class SowPerformer implements ActionPerformer {
     }
 
     public static boolean canUse(Creature performer, Item source, Item target) {
-        if (performer.isPlayer() && PlanterItem.isPlanter(target) && target.getAuxData() == 0 && target.getParentId() == -10L) {
+        if (performer.isPlayer() && PlanterItem.isPlanter(target) && target.getAuxData() == 0 && target.getParentId() == -10L && !PlanterItem.isTreeOrBushPlanter(target)) {
             if (Plantable.findSeed(source.getTemplateId(), PlanterItem.getPlanterType(target.getTemplateId())) == null)
                 return false;
             return Utils.checkRoleAllows(performer, target, VillageRole::maySowFields);

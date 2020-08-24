@@ -96,4 +96,11 @@ public enum Plantable {
             if (value.seedItem == id && value.planterType == planterType) return value;
         return null;
     }
+
+    public static Plantable getFromMaterial(byte material) {
+        for (Plantable value : values())
+            if (value.material == material) return value;
+        return null;
+    }
+
 }

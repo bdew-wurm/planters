@@ -10,8 +10,12 @@ import net.bdew.planters.PlanterItem;
 import net.bdew.planters.actions.TendPerformer;
 
 public class PlanterActionTend extends BasePlanterAction {
+    public PlanterActionTend() {
+        super(false);
+    }
+
     @Override
-    boolean checkRole(VillageRole role) {
+    boolean checkRole(VillageRole role, Item target) {
         return role.mayTendFields();
     }
 
@@ -28,6 +32,7 @@ public class PlanterActionTend extends BasePlanterAction {
     @Override
     public boolean canActOn(Creature performer, Item source, Item target, boolean sendMsg) {
         if (!super.canActOn(performer, source, target, sendMsg)) return false;
+        if (PlanterItem.isTreeOrBushPlanter(target)) return false;
         if (target.getAuxData() == 0) {
             if (sendMsg) {
                 performer.getCommunicator().sendNormalServerMessage(String.format("You skip the %s as nothing is growing there.", target.getName().toLowerCase()));

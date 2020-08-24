@@ -1,10 +1,13 @@
 package net.bdew.planters;
 
 import com.wurmonline.server.FailedException;
+import com.wurmonline.server.Server;
+import com.wurmonline.server.behaviours.Methods;
 import com.wurmonline.server.creatures.Creature;
 import com.wurmonline.server.items.Item;
 import com.wurmonline.server.items.ItemFactory;
 import com.wurmonline.server.items.NoSuchTemplateException;
+import com.wurmonline.server.items.RuneUtilities;
 import com.wurmonline.server.players.Player;
 import com.wurmonline.server.villages.Village;
 import com.wurmonline.server.villages.VillageRole;
@@ -130,13 +133,66 @@ public class Utils {
             try {
                 ByteBuffer bb = player.getCommunicator().getConnection().getBuffer();
                 bb.put((byte) 10);
-                bb.putLong(item.getWurmId() + 1);
+                bb.putLong(item.getWurmId() + 8);
                 player.getCommunicator().getConnection().flush();
             } catch (Exception ex) {
                 PlantersMod.logException(String.format("Failed to send remove item %s (%d) to player %s (%d)", player.getName(), player.getWurmId(), item.getName(), item.getWurmId()), ex);
                 player.setLink(false);
             }
         }
+    }
+
+    public static boolean checkFillBucket(Creature performer, Item bucket, int fillTemplate, int fillAmount, boolean sendMessage) {
+        if (fillAmount > performer.getCarryingCapacityLeft()) {
+            if (sendMessage)
+                performer.getCommunicator().sendNormalServerMessage("You stop harvesting as you wouldn't be able to carry all the liquid.");
+            return false;
+        }
+
+        if (fillAmount > bucket.getFreeVolume()) {
+            if (sendMessage)
+                performer.getCommunicator().sendNormalServerMessage("You stop harvesting as your bucket is too full.");
+            return false;
+        }
+
+        for (Item check : bucket.getItems()) {
+            if (check.getTemplateId() != fillTemplate) {
+                if (sendMessage)
+                    performer.getCommunicator().sendNormalServerMessage("You stop harvesting as your bucket contains something else.");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static void fillBucket(Creature performer, Item bucket, int fillTemplate, int fillAmount, float ql, byte rarity) throws NoSuchTemplateException, FailedException {
+        Methods.sendSound(performer, "sound.liquid.fillcontainer.bucket");
+        for (Item existing : bucket.getItems()) {
+            if (existing.getTemplateId() == fillTemplate) {
+                int sumWeight = existing.getWeightGrams() + fillAmount;
+                float sumQl = (existing.getQualityLevel() * existing.getWeightGrams() / sumWeight) + (ql * fillAmount / sumWeight);
+                existing.setWeight(sumWeight, true);
+                existing.setQualityLevel(sumQl);
+                if (existing.getRarity() > rarity)
+                    existing.setRarity(rarity);
+                return;
+            }
+        }
+        final Item harvested = ItemFactory.createItem(fillTemplate, ql, rarity, null);
+        harvested.setWeight(fillAmount, true);
+        bucket.insertItem(harvested);
+    }
+
+    public static int maxTreeBushHarvest(Item planter, double skill, Item tool) {
+        int bonus = 0;
+        if (tool.getSpellEffects() != null) {
+            final float extraChance = tool.getSpellEffects().getRuneEffect(RuneUtilities.ModifierEffect.ENCH_FARMYIELD) - 1.0f;
+            if (extraChance > 0.0f && Server.rand.nextFloat() < extraChance) {
+                ++bonus;
+            }
+        }
+        return Math.min(PlanterItem.getGrowthStage(planter) - 1, (int) (skill + 28.0) / 27 + bonus);
     }
 
     public static class ItemTypeSet {

@@ -12,7 +12,7 @@ repositories {
 
 dependencies {
     compile 'org.gotti.wurmunlimited:server-modlauncher:0.43'
-    compile 'com.github.bdew-wurm:betterfarm:2.0'
+    compile 'com.github.bdew-wurm:betterfarm:2.2'
 }
 
 jar {

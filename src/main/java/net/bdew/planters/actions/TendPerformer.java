@@ -31,6 +31,7 @@ public class TendPerformer implements ActionPerformer {
                 && source.getTemplateId() == ItemList.rake
                 && PlanterItem.getGrowthStage(target) < 5
                 && !PlanterItem.isTended(target)
+                && !PlanterItem.isTreeOrBushPlanter(target)
                 && Utils.checkRoleAllows(performer, target, VillageRole::mayTendFields);
     }
 
@@ -67,8 +68,8 @@ public class TendPerformer implements ActionPerformer {
         else
             performer.getCommunicator().sendNormalServerMessage("The planter is now nicely groomed.");
 
-        int tendPower = PlanterItem.getTendPower(target);
-        int tendCount = PlanterItem.getTendCount(target);
+        int tendPower = PlanterItem.getFarmTendPower(target);
+        int tendCount = PlanterItem.getFarmTendCount(target);
 
         tendPower += (int) (power * 2.0 + rarity * 110 + source.getRarity() * 10);
 

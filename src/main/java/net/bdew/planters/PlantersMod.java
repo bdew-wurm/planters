@@ -43,6 +43,7 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
     public static float magicUntendedDeathChance = 0.5f;
     public static float magicMushroomFavorPerQL = 1f;
     public static float magicMushroomKarmaPerQL = 0.5f;
+    public static int treeGrowthTicks = 10;
 
     @Override
     public void configure(Properties properties) {
@@ -53,6 +54,7 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
         magicUntendedDeathChance = Float.parseFloat(properties.getProperty("magicUntendedDeathChance", "0.2"));
         magicMushroomFavorPerQL = Float.parseFloat(properties.getProperty("magicMushroomFavorPerQL", "1"));
         magicMushroomKarmaPerQL = Float.parseFloat(properties.getProperty("magicMushroomKarmaPerQL", "0.5"));
+        treeGrowthTicks = Integer.parseInt(properties.getProperty("treeGrowthTicks", "10"));
     }
 
     @Override
@@ -128,6 +130,9 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
         ModActions.registerActionPerformer(new CultivatePerformer());
         ModActions.registerActionPerformer(new TendPerformer());
         ModActions.registerActionPerformer(new HarvestPerformer());
+        ModActions.registerActionPerformer(new ChopPerformer());
+        ModActions.registerActionPerformer(new PlantPerformer());
+        ModActions.registerActionPerformer(new PickSproutPerformer());
         ModActions.registerActionPerformer(new DigStumpPerformer());
         ModActions.registerBehaviourProvider(new PlanterBehaviour());
 

@@ -27,6 +27,9 @@ public class PlanterItem {
     private static final int FLAG_TENDED = 0x100;
     private static final int FLAG_INFECTED = 0x200;
 
+    private static final int TREE_FLAG_HARVESTABLE = 0x01;
+    private static final int TREE_FLAG_SPROUTING = 0x02;
+
     private static final String[] AGES = new String[]{
             "freshly sown",
             "sprouting",
@@ -36,6 +39,17 @@ public class PlanterItem {
             "ripe",
             "wilted"
     };
+
+    private static final String[] TREE_AGES = new String[]{
+            "sprout",
+            "young",
+            "growing",
+            "mature",
+            "old",
+            "very old",
+            "-unused-"
+    };
+
 
     private static final Map<Integer, PlanterType> typeMap = new HashMap<>();
 
@@ -274,13 +288,23 @@ public class PlanterItem {
         return (type == PlanterType.TREE || type == PlanterType.BUSH) && item.getAuxData() != 0;
     }
 
-    public static void updateData(Item item, Plantable crop, int growthStage, boolean tended, int tendCount, int tendPower) {
+    public static void updateData(Item item, Plantable crop, int growthStage, boolean tended, int tendCountOrHarvestability, int tendPowerOrSubstage) {
         VolaTile vt = Zones.getOrCreateTile(item.getTilePos(), item.isOnSurface());
         vt.makeInvisible(item);
         item.setAuxData((byte) crop.number);
         boolean infected = isInfected(item);
-        item.setData((growthStage & 0xFF) | (tended ? FLAG_TENDED : 0) | (infected ? FLAG_INFECTED : 0), (tendCount & 0xFF) | (tendPower << 8));
-        updateName(item, crop, growthStage, tended, infected);
+        item.setData((growthStage & 0xFF) | (tended ? FLAG_TENDED : 0) | (infected ? FLAG_INFECTED : 0), (tendCountOrHarvestability & 0xFF) | (tendPowerOrSubstage << 8));
+        updateName(item, crop, growthStage, tended, infected, false, false);
+        vt.makeVisible(item);
+    }
+
+    public static void updateTreeData(Item item, Plantable crop, int growthStage, int subStage, boolean harvestable, boolean sprouting) {
+        VolaTile vt = Zones.getOrCreateTile(item.getTilePos(), item.isOnSurface());
+        vt.makeInvisible(item);
+        item.setAuxData((byte) crop.number);
+        boolean infected = isInfected(item);
+        item.setData((growthStage & 0xFF) | (infected ? FLAG_INFECTED : 0), (harvestable ? TREE_FLAG_HARVESTABLE : 0) | (sprouting ? TREE_FLAG_SPROUTING : 0) | (subStage << 8));
+        updateName(item, crop, growthStage, false, infected, harvestable, sprouting);
         vt.makeVisible(item);
     }
 
@@ -290,11 +314,11 @@ public class PlanterItem {
         item.setAuxData((byte) 0);
         boolean infected = isInfected(item);
         item.setData((infected ? FLAG_INFECTED : 0), 0);
-        updateName(item, null, 0, false, infected);
+        updateName(item, null, 0, false, infected, false, false);
         vt.makeVisible(item);
     }
 
-    public static void updateName(Item item, Plantable crop, int growthStage, boolean tended, boolean infected) {
+    public static void updateName(Item item, Plantable crop, int growthStage, boolean tended, boolean infected, boolean harvestable, boolean sprouting) {
         StringBuilder nameBuilder = new StringBuilder();
         StringBuilder descBuilder = new StringBuilder();
 
@@ -303,10 +327,18 @@ public class PlanterItem {
 
         if (crop != null) {
             nameBuilder.append(" - ").append(crop.displayName);
-            if (growthStage >= 0 && growthStage <= 6) {
-                descBuilder.append(AGES[growthStage]);
-                if (growthStage < 5 && !tended) {
-                    descBuilder.append(", ").append("untended");
+            if (isTreeOrBushPlanter(item)) {
+                if (growthStage >= 0 && growthStage <= 5) {
+                    descBuilder.append(TREE_AGES[growthStage]);
+                    if (harvestable && crop.cropItem > 0) descBuilder.append(", harvestable");
+                    if (sprouting) descBuilder.append(", sprouting");
+                }
+            } else {
+                if (growthStage >= 0 && growthStage <= 6) {
+                    descBuilder.append(AGES[growthStage]);
+                    if (growthStage < 5 && !tended) {
+                        descBuilder.append(", ").append("untended");
+                    }
                 }
             }
         }
@@ -339,7 +371,7 @@ public class PlanterItem {
         int growthStage = getGrowthStage(item);
         boolean tended = isTended(item);
         item.setData1((growthStage & 0xFF) | (tended ? FLAG_TENDED : 0) | (infected ? FLAG_INFECTED : 0));
-        updateName(item, crop, growthStage, tended, infected);
+        updateName(item, crop, growthStage, tended, infected, isTreeHarvestable(item), isTreeSprouting(item));
         vt.makeVisible(item);
 
         Arrays.stream(vt.getWatchers())
@@ -348,16 +380,40 @@ public class PlanterItem {
                 .forEach(p -> p.getCommunicator().sendAttachEffect(item.getWurmId(), (byte) (infected ? 8 : 11), (byte) 0, (byte) 0, (byte) 0, (byte) 0));
     }
 
-    public static int getTendCount(Item item) {
+    public static int getFarmTendCount(Item item) {
         return item.getData2() & 0xFF;
     }
 
-    public static int getTendPower(Item item) {
+    public static int getFarmTendPower(Item item) {
         return item.getData2() >> 8;
     }
 
+    public static int getTreeSubstage(Item item) {
+        return item.getData2() >> 8;
+    }
+
+    public static boolean isTreeHarvestable(Item item) {
+        return (item.getData2() & TREE_FLAG_HARVESTABLE) != 0;
+    }
+
+    public static boolean isTreeSprouting(Item item) {
+        return (item.getData2() & TREE_FLAG_SPROUTING) != 0;
+    }
+
     public static boolean needsPolling(Item item) {
-        return isPlanter(item) && item.getParentId() == -10L && item.getAuxData() > 0 &&
-                getGrowthStage(item) < (PlantersMod.canWilt ? 6 : 5);
+        if (!isPlanter(item) || item.getParentId() != -10L || item.getAuxData() == 0) return false;
+        if (isTreeOrBushPlanter(item))
+            return getGrowthStage(item) < 5 || !isTreeHarvestable(item) || !isTreeSprouting(item);
+        else
+            return getGrowthStage(item) < (PlantersMod.canWilt ? 6 : 5);
+    }
+
+    public static boolean isTreeOrBushPlanter(Item item) {
+        return isTreeOrBushPlanter(item.getTemplateId());
+    }
+
+    public static boolean isTreeOrBushPlanter(int tplId) {
+        PlanterType type = getPlanterType(tplId);
+        return type == PlanterType.TREE || type == PlanterType.BUSH;
     }
 }

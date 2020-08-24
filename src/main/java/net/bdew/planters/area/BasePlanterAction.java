@@ -14,16 +14,25 @@ import net.bdew.planters.PlanterItem;
 import net.bdew.wurm.betterfarm.api.IItemAction;
 
 public abstract class BasePlanterAction implements IItemAction {
-    abstract boolean checkRole(VillageRole role);
+    protected final boolean isForTreesAndBushes;
+
+    public BasePlanterAction(boolean isForTreesAndBushes) {
+        this.isForTreesAndBushes = isForTreesAndBushes;
+    }
+
+    abstract boolean checkRole(VillageRole role, Item target);
 
     @Override
     public boolean checkSkill(Creature performer, float needed) {
-        return performer.getSkills().getSkillOrLearn(SkillList.FARMING).getRealKnowledge() >= needed;
+        if (isForTreesAndBushes)
+            return performer.getSkills().getSkillOrLearn(SkillList.FORESTRY).getRealKnowledge() >= needed;
+        else
+            return performer.getSkills().getSkillOrLearn(SkillList.FARMING).getRealKnowledge() >= needed;
     }
 
     @Override
     public boolean canStartOn(Creature performer, Item source, Item target) {
-        return performer.isPlayer() && target.getParentOrNull() == null && PlanterItem.isPlanter(target);
+        return performer.isPlayer() && target.getParentOrNull() == null && PlanterItem.isPlanter(target) && PlanterItem.isTreeOrBushPlanter(target) == isForTreesAndBushes;
     }
 
     @Override
@@ -44,7 +53,7 @@ public abstract class BasePlanterAction implements IItemAction {
             Village village = vt.getVillage();
             if (village != null) {
                 VillageRole role = village.getRoleFor(performer);
-                if (role == null || !checkRole(role)) {
+                if (role == null || !checkRole(role, target)) {
                     if (sendMsg)
                         performer.getCommunicator().sendNormalServerMessage(String.format("You decide to skip the %s as it's against local laws.", target.getName().toLowerCase()));
                     return false;
