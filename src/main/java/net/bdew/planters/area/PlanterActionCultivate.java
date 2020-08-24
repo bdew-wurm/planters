@@ -9,9 +9,16 @@ import com.wurmonline.server.villages.VillageRole;
 import net.bdew.planters.actions.CultivatePerformer;
 
 public class PlanterActionCultivate extends BasePlanterAction {
+    public PlanterActionCultivate(boolean isForTreesAndBushes) {
+        super(isForTreesAndBushes);
+    }
+
     @Override
-    boolean checkRole(VillageRole role) {
-        return role.mayCultivate();
+    boolean checkRole(VillageRole role, Item target) {
+        if (isForTreesAndBushes)
+            return role.mayChopDownAllTrees();
+        else
+            return role.mayCultivate();
     }
 
     @Override

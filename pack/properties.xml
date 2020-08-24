@@ -160,6 +160,42 @@
             </meshMask>
         </modelProperties>
     </magic-wood.wom>
+    <planter-bush-unfinished.wom>
+        <modelProperties>
+            <meshMask>
+                <mesh>feet_Cube.008</mesh>
+                <mask>bush_pm.png</mask>
+            </meshMask>
+            <meshMask>
+                <mesh>tub_iron_plaque_iron_frame.dds</mesh>
+                <mask>bush_pm.png</mask>
+            </meshMask>
+            <meshMask>
+                <mesh>tub.002</mesh>
+                <mask>bush_pm.png</mask>
+            </meshMask>
+            <meshMask>
+                <mesh>planter_Cube.005</mesh>
+                <mask>bush_pm.png</mask>
+            </meshMask>
+            <meshMask>
+                <mesh>tub_iron_plaque_iron_frame.dds</mesh>
+                <mask>bush_pm.png</mask>
+            </meshMask>
+        </modelProperties>
+    </planter-bush-unfinished.wom>
+    <planter-bush.wom>
+        <modelProperties>
+            <meshMask>
+                <mesh>feet_Cube.018</mesh>
+                <mask>secondary_pm.png</mask>
+            </meshMask>
+            <meshMask>
+                <mesh>bush_wood</mesh>
+                <mask>bush_pm.png</mask>
+            </meshMask>
+        </modelProperties>
+    </planter-bush.wom>
     <planter-stone.wom>
         <modelProperties>
             <meshMask>
@@ -168,6 +204,30 @@
             </meshMask>
         </modelProperties>
     </planter-stone.wom>
+    <planter-tree-unfinished.wom>
+        <modelProperties>
+            <meshMask>
+                <mesh>cerclage_bois_Cube.013</mesh>
+                <mask>secondary_pm.png</mask>
+            </meshMask>
+        </modelProperties>
+    </planter-tree-unfinished.wom>
+    <planter-tree.wom>
+        <modelProperties>
+            <meshMask>
+                <mesh>wood</mesh>
+                <mask>secondary_pm.png</mask>
+            </meshMask>
+            <meshMask>
+                <mesh>tree_planter</mesh>
+                <mask>planter_pm.png</mask>
+            </meshMask>
+            <meshMask>
+                <mesh>cerclage_bois_Cube.013</mesh>
+                <mask>secondary_pm.png</mask>
+            </meshMask>
+        </modelProperties>
+    </planter-tree.wom>
     <planter-wood.wom>
         <modelProperties>
             <meshMask>

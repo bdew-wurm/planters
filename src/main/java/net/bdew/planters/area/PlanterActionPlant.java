@@ -3,24 +3,35 @@ package net.bdew.planters.area;
 import com.wurmonline.server.behaviours.Actions;
 import com.wurmonline.server.creatures.Creature;
 import com.wurmonline.server.items.Item;
+import com.wurmonline.server.items.ItemList;
 import com.wurmonline.server.skills.SkillList;
 import com.wurmonline.server.villages.VillageRole;
 import net.bdew.planters.Plantable;
 import net.bdew.planters.PlanterItem;
 import net.bdew.planters.PlanterType;
-import net.bdew.planters.actions.SowPerformer;
+import net.bdew.planters.actions.PlantPerformer;
+import net.bdew.wurm.betterfarm.api.ActionEntryOverride;
 
-public class PlanterActionSow extends BasePlanterAction {
-    public PlanterActionSow() {
-        super(false);
+public class PlanterActionPlant extends BasePlanterAction {
+    public PlanterActionPlant() {
+        super(true);
     }
 
-    private Item findSeed(Item container, PlanterType type) {
+    private final ActionEntryOverride override = new ActionEntryOverride(Actions.PLANT, "Plant", "planting", null);
+
+    @Override
+    public ActionEntryOverride getOverride(Creature performer, Item source, Item target) {
+        return override;
+    }
+
+    private Item findSprout(Item container, PlanterType type) {
         for (Item item : container.getAllItems(true)) {
-            if (Plantable.findSeed(item.getTemplateId(), type) != null) {
-                return item;
+            if (item.getTemplateId() == ItemList.sprout) {
+                Plantable crop = Plantable.getFromMaterial(item.getMaterial());
+                if (crop != null && crop.planterType == type)
+                    return item;
             } else if (item.isHollow()) {
-                Item found = findSeed(item, type);
+                Item found = findSprout(item, type);
                 if (found != null) return found;
             }
         }
@@ -28,8 +39,13 @@ public class PlanterActionSow extends BasePlanterAction {
     }
 
     @Override
+    public boolean checkSkill(Creature performer, float needed) {
+        return performer.getSkills().getSkillOrLearn(SkillList.GARDENING).getRealKnowledge() >= needed;
+    }
+
+    @Override
     boolean checkRole(VillageRole role, Item target) {
-        return role.maySowFields();
+        return role.mayPlantSprouts();
     }
 
     @Override
@@ -48,7 +64,7 @@ public class PlanterActionSow extends BasePlanterAction {
             return false;
         }
 
-        if (findSeed(source, PlanterItem.getPlanterType(target.getTemplateId())) == null) {
+        if (findSprout(source, PlanterItem.getPlanterType(target.getTemplateId())) == null) {
             if (sendMsg)
                 performer.getCommunicator().sendNormalServerMessage(String.format("You decide to skip the %s as you have nothing to plant there.", target.getName().toLowerCase()));
             return false;
@@ -59,18 +75,18 @@ public class PlanterActionSow extends BasePlanterAction {
 
     @Override
     public float getActionTime(Creature performer, Item source, Item target) {
-        return Actions.getQuickActionTime(performer, performer.getSkills().getSkillOrLearn(SkillList.FARMING), null, 0.0);
+        return Actions.getQuickActionTime(performer, performer.getSkills().getSkillOrLearn(SkillList.GARDENING), null, 0.0);
     }
 
     @Override
     public boolean actionStarted(Creature performer, Item source, Item target) {
-        Item seed = findSeed(source, PlanterItem.getPlanterType(target.getTemplateId()));
-        return seed != null && SowPerformer.actionStart(performer, seed, target);
+        Item sprout = findSprout(source, PlanterItem.getPlanterType(target.getTemplateId()));
+        return sprout != null && PlantPerformer.actionStart(performer, sprout, target);
     }
 
     @Override
     public boolean actionCompleted(Creature performer, Item source, Item target, byte rarity) {
-        Item seed = findSeed(source, PlanterItem.getPlanterType(target.getTemplateId()));
-        return seed != null && SowPerformer.actionEnd(performer, seed, target, rarity);
+        Item spro = findSprout(source, PlanterItem.getPlanterType(target.getTemplateId()));
+        return spro != null && PlantPerformer.actionEnd(performer, spro, target, rarity);
     }
 }

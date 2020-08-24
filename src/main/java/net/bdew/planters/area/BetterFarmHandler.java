@@ -6,19 +6,6 @@ import net.bdew.wurm.betterfarm.api.AreaActionType;
 import net.bdew.wurm.betterfarm.api.BetterFarmAPI;
 
 public class BetterFarmHandler {
-    private static PlanterActionSow sow;
-    private static PlanterActionHarvest harvest, replant;
-    private static PlanterActionCultivate cultivate;
-    private static PlanterActionTend tend;
-
-    private static void addActions(int id) {
-        BetterFarmAPI.INSTANCE.addItemAreaHandler(id, AreaActionType.SOW, sow);
-        BetterFarmAPI.INSTANCE.addItemAreaHandler(id, AreaActionType.HARVEST, harvest);
-        BetterFarmAPI.INSTANCE.addItemAreaHandler(id, AreaActionType.HARVEST_AND_REPLANT, replant);
-        BetterFarmAPI.INSTANCE.addItemAreaHandler(id, AreaActionType.CULTIVATE, cultivate);
-        BetterFarmAPI.INSTANCE.addItemAreaHandler(id, AreaActionType.FARM, tend);
-    }
-
     public static void install() {
         if (BetterFarmAPI.INSTANCE == null) {
             PlantersMod.logWarning("Better Farming is loaded but api is not initialized?");
@@ -27,19 +14,28 @@ public class BetterFarmHandler {
         } else {
             PlantersMod.logInfo("Adding better farming support");
 
-            sow = new PlanterActionSow();
-            harvest = new PlanterActionHarvest(false);
-            replant = new PlanterActionHarvest(true);
-            tend = new PlanterActionTend();
-            cultivate = new PlanterActionCultivate();
+            PlanterActionSow sow = new PlanterActionSow();
+            PlanterActionHarvest harvest = new PlanterActionHarvest(false, false);
+            PlanterActionHarvest replant = new PlanterActionHarvest(false, true);
+            PlanterActionHarvest harvestTree = new PlanterActionHarvest(true, false);
+            PlanterActionTend tend = new PlanterActionTend();
+            PlanterActionCultivate cultivate = new PlanterActionCultivate(true);
+            PlanterActionPlant plant = new PlanterActionPlant();
+            PlanterActionPickSprout pick = new PlanterActionPickSprout();
 
-            addActions(PlanterItem.woodId);
-            addActions(PlanterItem.stoneId);
-
-            if (PlantersMod.magicMushrooms) {
-                addActions(PlanterItem.magicWoodId);
-                addActions(PlanterItem.magicStoneId);
-            }
+            PlanterItem.allTemplateIds().forEach(tpl -> {
+                if (PlanterItem.isTreeOrBushPlanter(tpl)) {
+                    BetterFarmAPI.INSTANCE.addItemAreaHandler(tpl, AreaActionType.PLANT, plant);
+                    BetterFarmAPI.INSTANCE.addItemAreaHandler(tpl, AreaActionType.HARVEST, harvestTree);
+                    BetterFarmAPI.INSTANCE.addItemAreaHandler(tpl, AreaActionType.PICK_SPROUT, pick);
+                } else {
+                    BetterFarmAPI.INSTANCE.addItemAreaHandler(tpl, AreaActionType.SOW, sow);
+                    BetterFarmAPI.INSTANCE.addItemAreaHandler(tpl, AreaActionType.HARVEST, harvest);
+                    BetterFarmAPI.INSTANCE.addItemAreaHandler(tpl, AreaActionType.HARVEST_AND_REPLANT, replant);
+                    BetterFarmAPI.INSTANCE.addItemAreaHandler(tpl, AreaActionType.CULTIVATE, cultivate);
+                    BetterFarmAPI.INSTANCE.addItemAreaHandler(tpl, AreaActionType.FARM, tend);
+                }
+            });
         }
     }
 }

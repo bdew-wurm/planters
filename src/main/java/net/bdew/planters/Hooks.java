@@ -81,20 +81,39 @@ public class Hooks {
                 PlanterTracker.removePlanter(planter);
                 continue;
             }
-            int stage = PlanterItem.getGrowthStage(planter);
-            int tendPower = PlanterItem.getTendPower(planter);
-            int tendCount = PlanterItem.getTendCount(planter);
 
-            if (stage == 5 && PlantersMod.canWilt && Server.rand.nextFloat() < 0.5f) stage = 6;
-            if (stage < 5) stage++;
+            if (crop.planterType == PlanterType.BUSH || crop.planterType == PlanterType.TREE) {
+                int stage = PlanterItem.getGrowthStage(planter);
+                int substage = PlanterItem.getTreeSubstage(planter);
+                boolean harvestable = PlanterItem.isTreeHarvestable(planter);
+                boolean sprouting = PlanterItem.isTreeSprouting(planter);
 
-            if (crop.planterType == PlanterType.MAGIC && !PlanterItem.isTended(planter)) {
-                if (Server.rand.nextFloat() < PlantersMod.magicUntendedDeathChance) {
-                    stage = 6;
+                if (substage >= PlantersMod.treeGrowthTicks) {
+                    if (stage < 5) stage++;
+                    substage = 0;
+                    harvestable = stage > 2;
+                    sprouting = stage > 3;
+                } else {
+                    substage += 1;
                 }
-            }
 
-            PlanterItem.updateData(planter, crop, stage, stage >= 5, tendCount, tendPower);
+                PlanterItem.updateTreeData(planter, crop, stage, substage, harvestable, sprouting);
+            } else {
+                int stage = PlanterItem.getGrowthStage(planter);
+                int tendPower = PlanterItem.getFarmTendPower(planter);
+                int tendCount = PlanterItem.getFarmTendCount(planter);
+
+                if (stage == 5 && PlantersMod.canWilt && Server.rand.nextFloat() < 0.5f) stage = 6;
+                if (stage < 5) stage++;
+
+                if (crop.planterType == PlanterType.MAGIC && !PlanterItem.isTended(planter)) {
+                    if (Server.rand.nextFloat() < PlantersMod.magicUntendedDeathChance) {
+                        stage = 6;
+                    }
+                }
+
+                PlanterItem.updateData(planter, crop, stage, stage >= 5, tendCount, tendPower);
+            }
 
             if (!PlanterItem.needsPolling(planter)) PlanterTracker.removePlanter(planter);
 
@@ -120,15 +139,28 @@ public class Hooks {
                     comm.sendAttachEffect(item.getWurmId(), (byte) 0, (byte) 1, (byte) 255, (byte) 255, (byte) 255);
             }
         }
+        if (PlanterItem.needsTopItem(item))
+            Utils.sendPlanterTree(comm.getPlayer(), item, PlanterItem.getPlantable(item));
     }
 
     public static void removeItemHook(Communicator comm, Item item) {
         if (item.getTemplateId() == MiscItems.magicShroomId || item.getTemplateId() == MiscItems.basketMagicId || PlanterItem.getPlanterType(item.getTemplateId()) == PlanterType.MAGIC) {
             comm.sendRemoveEffect(item.getWurmId());
         }
+        if (PlanterItem.needsTopItem(item))
+            Utils.removePlanterTree(comm.getPlayer(), item);
     }
 
     public static void addTickingEffect(long wurmId, int delay, TickingPlayerEffect eff) {
         effects.add(new DelayedEffect(wurmId, delay, eff));
+    }
+
+    public static boolean isPlanterTopItem(long id) {
+        try {
+            Item actual = Items.getItem(id - 8);
+            return PlanterItem.isPlanter(actual);
+        } catch (NoSuchItemException e) {
+            return false;
+        }
     }
 }

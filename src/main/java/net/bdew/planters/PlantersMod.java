@@ -2,8 +2,11 @@ package net.bdew.planters;
 
 import com.wurmonline.server.behaviours.Actions;
 import com.wurmonline.server.creatures.Communicator;
+import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
+import javassist.expr.ExprEditor;
+import javassist.expr.MethodCall;
 import net.bdew.planters.actions.*;
 import net.bdew.planters.area.BetterFarmHandler;
 import org.gotti.wurmunlimited.modloader.classhooks.HookManager;
@@ -40,6 +43,7 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
     public static float magicUntendedDeathChance = 0.5f;
     public static float magicMushroomFavorPerQL = 1f;
     public static float magicMushroomKarmaPerQL = 0.5f;
+    public static int treeGrowthTicks = 10;
 
     @Override
     public void configure(Properties properties) {
@@ -50,6 +54,7 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
         magicUntendedDeathChance = Float.parseFloat(properties.getProperty("magicUntendedDeathChance", "0.2"));
         magicMushroomFavorPerQL = Float.parseFloat(properties.getProperty("magicMushroomFavorPerQL", "1"));
         magicMushroomKarmaPerQL = Float.parseFloat(properties.getProperty("magicMushroomKarmaPerQL", "0.5"));
+        treeGrowthTicks = Integer.parseInt(properties.getProperty("treeGrowthTicks", "10"));
     }
 
     @Override
@@ -75,15 +80,38 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
                         .insertBefore("if (this.getTemplateId() == net.bdew.planters.MiscItems.stumpId) return net.bdew.planters.MiscItems.stumpSizeMod(this);");
             }
 
-            if (magicMushrooms) {
-                CtClass ctCommunicator = classPool.getCtClass("com.wurmonline.server.creatures.Communicator");
+            CtClass ctCommunicator = classPool.getCtClass("com.wurmonline.server.creatures.Communicator");
 
-                ctCommunicator.getMethod("sendItem", "(Lcom/wurmonline/server/items/Item;JZ)V")
-                        .insertAfter("net.bdew.planters.Hooks.sendItemHook(this, $1);");
+            ctCommunicator.getMethod("sendItem", "(Lcom/wurmonline/server/items/Item;JZ)V")
+                    .insertAfter("net.bdew.planters.Hooks.sendItemHook(this, $1);");
 
-                ctCommunicator.getMethod("sendRemoveItem", "(Lcom/wurmonline/server/items/Item;)V")
-                        .insertAfter("net.bdew.planters.Hooks.removeItemHook(this, $1);");
-            }
+            ctCommunicator.getMethod("sendRemoveItem", "(Lcom/wurmonline/server/items/Item;)V")
+                    .insertAfter("net.bdew.planters.Hooks.removeItemHook(this, $1);");
+
+            CtClass ctBehaviourDispatcher = classPool.getCtClass("com.wurmonline.server.behaviours.BehaviourDispatcher");
+
+            ExprEditor topItemRedirect = new ExprEditor() {
+                @Override
+                public void edit(MethodCall m) throws CannotCompileException {
+                    if (m.getMethodName().equals("getBehaviour")) {
+                        m.replace("   if (targetType == 10 && net.bdew.planters.Hooks.isPlanterTopItem($1)) {" +
+                                "                   target = target - 8;" +
+                                "                   targetType = 2;" +
+                                "                   $_ = $proceed(target, $2);" +
+                                "               } else {" +
+                                "                   $_ = $proceed($$);" +
+                                "               };");
+                    }
+                }
+            };
+
+            ctBehaviourDispatcher.getMethod("requestActions", "(Lcom/wurmonline/server/creatures/Creature;Lcom/wurmonline/server/creatures/Communicator;BJJ)V")
+                    .instrument(topItemRedirect);
+            ctBehaviourDispatcher.getMethod("requestSelectionActions", "(Lcom/wurmonline/server/creatures/Creature;Lcom/wurmonline/server/creatures/Communicator;BJJ)V")
+                    .instrument(topItemRedirect);
+            ctBehaviourDispatcher.getMethod("action", "(Lcom/wurmonline/server/creatures/Creature;Lcom/wurmonline/server/creatures/Communicator;JJS)V")
+                    .insertBefore(" if (($4 & 0xFFL) == 10 && net.bdew.planters.Hooks.isPlanterTopItem($4)) $4=$4-8;");
+
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
@@ -102,6 +130,9 @@ public class PlantersMod implements WurmServerMod, Initable, PreInitable, Config
         ModActions.registerActionPerformer(new CultivatePerformer());
         ModActions.registerActionPerformer(new TendPerformer());
         ModActions.registerActionPerformer(new HarvestPerformer());
+        ModActions.registerActionPerformer(new ChopPerformer());
+        ModActions.registerActionPerformer(new PlantPerformer());
+        ModActions.registerActionPerformer(new PickSproutPerformer());
         ModActions.registerActionPerformer(new DigStumpPerformer());
         ModActions.registerBehaviourProvider(new PlanterBehaviour());
 

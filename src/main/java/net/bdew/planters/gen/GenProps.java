@@ -67,6 +67,9 @@ public class GenProps {
                         int mats = in.readInt();
                         boolean hadPlank = false;
                         boolean hadCloth = false;
+                        boolean hadPlanter = false;
+                        boolean hadLegs = false;
+                        boolean hadStone = false;
 
                         totalFaces += faces;
                         totalVerts += verts;
@@ -81,6 +84,9 @@ public class GenProps {
                             if (tex.contains("SmallStone")) hadPlank = true;
                             if (tex.contains("wicker")) hadPlank = true;
                             if (tex.contains("cloth")) hadCloth = true;
+                            if (tex.contains("frame") || tex.contains("bush-wood")) hadPlanter = true;
+                            if (tex.contains("bush-metal")) hadLegs = true;
+                            if (tex.contains("cave_slate")) hadStone = true;
 
                             in.readByte(); // enabled
 
@@ -107,11 +113,23 @@ public class GenProps {
 
 //                            System.out.println(String.format("    - %s -> %s", matName, tex));
                         }
-                        if (hadPlank) {
-                            modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>planter_pm.png</mask></meshMask>", name));
-                        }
-                        if (hadCloth) {
-                            modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>cloth_pm.png</mask></meshMask>", name));
+                        if (file.getName().contains("planter-tree")) {
+                            if (hadPlank)
+                                modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>secondary_pm.png</mask></meshMask>", name));
+                            else if (hadStone)
+                                modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>planter_pm.png</mask></meshMask>", name));
+                        } else if (file.getName().contains("planter-bush")) {
+                            if (hadPlanter)
+                                modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>bush_pm.png</mask></meshMask>", name));
+                            else if (hadLegs)
+                                modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>secondary_pm.png</mask></meshMask>", name));
+                        } else {
+                            if (hadPlank) {
+                                modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>planter_pm.png</mask></meshMask>", name));
+                            }
+                            if (hadCloth) {
+                                modelPropsSB.append(String.format("<meshMask><mesh>%s</mesh><mask>cloth_pm.png</mask></meshMask>", name));
+                            }
                         }
                     }
                     System.out.println(String.format("%s: %d meshes / %d vertices / %d faces / %d materials", file.getName(), meshes, totalVerts, totalFaces / 3, totalMats));
