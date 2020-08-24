@@ -69,23 +69,92 @@ public class Utils {
             try {
                 final ByteBuffer bb = player.getCommunicator().getConnection().getBuffer();
 
+                int growthStage = PlanterItem.getGrowthStage(item);
+
+                float zOffs = 0.4f;
+                float zBase = 0.9f;
+                float scale = 1;
+
+                if (plant.planterType == PlanterType.BUSH) {
+                    zOffs = 0.6f;
+                    scale = 0.7f;
+                }
+
+                if (growthStage == 0) scale *= 0.5f;
+                if (growthStage == 1) scale *= 0.75f;
+                if (growthStage > 2) scale *= (growthStage + 3) / 4f;
+
+                if (plant == Plantable.ThornBush) {
+                    scale *= 0.15f;
+                    zOffs += 0.2f;
+                    zBase += 0.3f;
+                }
+                if (plant == Plantable.LavenderBush) {
+                    scale *= 0.4f;
+                    zOffs = 0.4f;
+                    zBase += 0.2f;
+                }
+                if (plant == Plantable.GrapeBush) {
+                    scale *= 0.5f;
+                    zBase += 0.2f;
+                }
+                if (plant == Plantable.RoseBush) scale *= 0.8f;
+                if (plant == Plantable.CamelliaBush) scale *= 0.6f;
+                if (plant == Plantable.HazelnutBush) scale *= 0.6f;
+                if (plant == Plantable.RaspberryBush) {
+                    zOffs -= 0.3f;
+                }
+                if (plant == Plantable.OleanderBush) {
+                    scale *= 0.7f;
+                    zOffs -= 0.2f;
+                }
+                if (plant == Plantable.BlueberryBush) {
+                    scale *= 0.7f;
+                    zOffs -= 0.1f;
+                }
+                if (plant == Plantable.LingonberryBush) {
+                    scale *= 0.4f;
+                    zBase += 0.28f;
+                    zOffs -= 0.6f;
+                }
+                if (plant == Plantable.OakTree && growthStage > 2) {
+                    scale *= 0.6f;
+                    zOffs -= 0.5f;
+                }
+                if (plant == Plantable.WillowTree && growthStage > 2) {
+                    scale *= 1.3f;
+                    zBase += 0.5f;
+                }
+                if (plant == Plantable.FirTree && growthStage > 2) scale *= 1.5f;
+                if (plant == Plantable.OliveTree && growthStage > 2) scale *= 1.5f;
+                if (plant == Plantable.LemonTree && growthStage > 2) scale *= 2f;
+                if (plant == Plantable.CedarTree && growthStage > 2) {
+                    scale *= 0.9f;
+                }
+                if (plant == Plantable.AppleTree && growthStage > 2) {
+                    scale *= 1.5f;
+                    zBase += 0.75f;
+                }
+                if (plant == Plantable.OrangeTree && growthStage > 2) scale *= 2f;
+                if (plant == Plantable.OliveTree && growthStage > 2) {
+                    zBase += 0.5f;
+                    scale *= 0.8f;
+                }
+                if (plant == Plantable.PineTree && growthStage > 2) {
+                    zBase += 0.7f;
+                    scale *= 0.8f;
+                }
+                if (plant == Plantable.BirchTree && growthStage > 2) zBase -= 0.4f;
+
                 bb.put((byte) (-9));
 
                 bb.putLong(item.getWurmId() + 8);
                 bb.putFloat(0); //x
                 bb.putFloat(0); //y
                 bb.putFloat(0); //r
-                bb.putFloat(0.5f); //z
+                bb.putFloat(zBase + zOffs * scale); //z
 
-                int growthStage = PlanterItem.getGrowthStage(item);
-                float size = 5;
-                if (growthStage == 0) size *= 0.5f;
-                if (growthStage > 1) size *= (growthStage + 5) / 8f;
-
-                if (plant == Plantable.ThornBush) size *= 0.5f;
-                if (plant == Plantable.OakTree) size *= 0.7f;
-
-                byte[] tempStringArr = String.format("planted %s %s [%d - %.1f]", plant.displayName, plant.planterType == PlanterType.BUSH ? "bush" : "tree", growthStage, size)
+                byte[] tempStringArr = String.format("planted %s %s [%d - %.1f]", plant.displayName, plant.planterType == PlanterType.BUSH ? "bush" : "tree", growthStage, scale)
                         .getBytes(StandardCharsets.UTF_8);
                 bb.put((byte) tempStringArr.length);
                 bb.put(tempStringArr);
@@ -95,7 +164,7 @@ public class Utils {
                 bb.put(tempStringArr);
 
 
-                tempStringArr = String.format("%s%s", plant.modelName, growthStage < 2 ? "young." : "").getBytes(StandardCharsets.UTF_8);
+                tempStringArr = String.format("%s%s", plant.modelName, growthStage < 3 ? "young." : "").getBytes(StandardCharsets.UTF_8);
                 bb.put((byte) tempStringArr.length);
                 bb.put(tempStringArr);
 
@@ -111,7 +180,7 @@ public class Utils {
 
                 bb.put((byte) 0);
 
-                bb.putFloat(size);
+                bb.putFloat(scale * 5);
                 bb.putLong(item.onBridge());
                 bb.put(item.getRarity());
 
