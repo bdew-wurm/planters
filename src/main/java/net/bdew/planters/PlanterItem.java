@@ -165,7 +165,7 @@ public class PlanterItem {
 
             magicStone = registerPlanter(PlanterType.MAGIC, "bdew.planters.stone.magic", "magic.",
                     "stone magic planter", "stone magic planters", "A large wooden planter suitable for growing magical mushrooms.",
-                    SkillList.MASONRY, Materials.MATERIAL_WOOD_BIRCH, onePerTile.with(ItemTypes.ITEM_TYPE_STONE));
+                    SkillList.MASONRY, Materials.MATERIAL_STONE, onePerTile.with(ItemTypes.ITEM_TYPE_STONE));
         }
     }
 
@@ -323,10 +323,9 @@ public class PlanterItem {
         StringBuilder descBuilder = new StringBuilder();
 
         if (infected) nameBuilder.append("infected ");
-        nameBuilder.append(item.getTemplate().getName());
 
         if (crop != null) {
-            nameBuilder.append(" - ").append(crop.displayName);
+            nameBuilder.append(crop.displayName).append(" planter");
             if (isTreeOrBushPlanter(item)) {
                 if (growthStage >= 0 && growthStage <= 5) {
                     descBuilder.append(TREE_AGES[growthStage]);
@@ -341,6 +340,8 @@ public class PlanterItem {
                     }
                 }
             }
+        } else {
+            nameBuilder.append(item.getTemplate().getName());
         }
 
         item.setName(nameBuilder.toString());

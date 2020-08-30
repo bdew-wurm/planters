@@ -5,12 +5,16 @@ import com.wurmonline.server.Items;
 import com.wurmonline.server.Server;
 import com.wurmonline.server.creatures.Communicator;
 import com.wurmonline.server.items.*;
+import com.wurmonline.server.zones.VolaTile;
+import com.wurmonline.server.zones.Zones;
 import com.wurmonline.shared.constants.ItemMaterials;
 import org.gotti.wurmunlimited.modloader.interfaces.MessagePolicy;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 public class GmCommands {
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
@@ -144,6 +148,29 @@ public class GmCommands {
         communicator.sendNormalServerMessage("Deleted all planters.");
     }
 
+    private static void fixPlanters(Communicator communicator) {
+        List<Item> wrongMats = Arrays.stream(Items.getAllItems())
+                .filter(item -> item.getTemplate() == PlanterItem.magicStone && item.getMaterial() != Materials.MATERIAL_STONE)
+                .collect(Collectors.toList());
+
+        if (!wrongMats.isEmpty()) {
+            communicator.sendNormalServerMessage(String.format("Fixing %d planters with incorrect material", wrongMats.size()));
+            for (Item planter : wrongMats) {
+                planter.setMaterial(Materials.MATERIAL_STONE);
+                if (planter.getParentId() == -10) {
+                    VolaTile tile = Zones.getTileOrNull(planter.getTilePos(), planter.isOnSurface());
+                    if (tile != null) {
+                        tile.makeInvisible(planter);
+                        tile.makeVisible(planter);
+                    }
+                } else {
+                    planter.sendUpdate();
+                }
+            }
+            communicator.sendNormalServerMessage("... done!");
+        } else communicator.sendNormalServerMessage("Didn't find anything to fix");
+    }
+
     private static void colorPlanters(Communicator communicator, String arg) {
         if (arg.equalsIgnoreCase("random")) {
             colorPlantersRandom();
@@ -249,6 +276,9 @@ public class GmCommands {
                             return MessagePolicy.DISCARD;
                         }
                         break;
+                    case "fix":
+                        fixPlanters(communicator);
+                        return MessagePolicy.DISCARD;
                 }
             }
             communicator.sendAlertServerMessage("Usage:");
@@ -257,6 +287,7 @@ public class GmCommands {
             communicator.sendAlertServerMessage(" #planters winter <on|off|disable>");
             communicator.sendAlertServerMessage(" #planters paint <pink|random|remove>");
             communicator.sendAlertServerMessage(" #planters infected <on|off>");
+            communicator.sendAlertServerMessage(" #planters fix");
             return MessagePolicy.DISCARD;
         }
         return MessagePolicy.PASS;
