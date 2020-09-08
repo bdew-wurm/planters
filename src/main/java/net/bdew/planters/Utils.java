@@ -17,6 +17,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -67,6 +68,7 @@ public class Utils {
     public static void sendPlanterTree(Player player, Item item, Plantable plant) {
         if (player.hasLink()) {
             try {
+
                 final ByteBuffer bb = player.getCommunicator().getConnection().getBuffer();
 
                 int growthStage = PlanterItem.getGrowthStage(item);
@@ -148,21 +150,31 @@ public class Utils {
 
                 bb.put((byte) (-9));
 
+                Random rand = new Random();
+                rand.setSeed(item.getWurmId());
+
                 bb.putLong(item.getWurmId() + 8);
                 bb.putFloat(0); //x
                 bb.putFloat(0); //y
-                bb.putFloat(0); //r
+                bb.putFloat(rand.nextFloat() * 360f); //r
                 bb.putFloat(zBase + zOffs * scale); //z
 
-                byte[] tempStringArr = String.format("planted %s %s [%d - %.1f]", plant.displayName, plant.planterType == PlanterType.BUSH ? "bush" : "tree", growthStage, scale)
+                StringBuilder desc = new StringBuilder()
+                        .append("(")
+                        .append(PlanterItem.TREE_AGES[PlanterItem.getGrowthStage(item)]);
+
+                if (PlanterItem.isTreeHarvestable(item)) desc.append(", harvestable");
+                if (PlanterItem.isTreeSprouting(item)) desc.append(", sprouting");
+                desc.append(")");
+
+                byte[] tempStringArr = String.format("planted %s %s", plant.displayName, plant.planterType == PlanterType.BUSH ? "bush" : "tree")
                         .getBytes(StandardCharsets.UTF_8);
                 bb.put((byte) tempStringArr.length);
                 bb.put(tempStringArr);
 
-                tempStringArr = "".getBytes(StandardCharsets.UTF_8);
+                tempStringArr = desc.toString().getBytes(StandardCharsets.UTF_8);
                 bb.put((byte) tempStringArr.length);
                 bb.put(tempStringArr);
-
 
                 tempStringArr = String.format("%s%s", plant.modelName, growthStage < 3 ? "young." : "").getBytes(StandardCharsets.UTF_8);
                 bb.put((byte) tempStringArr.length);

@@ -30,7 +30,7 @@ public class PlanterItem {
     private static final int TREE_FLAG_HARVESTABLE = 0x01;
     private static final int TREE_FLAG_SPROUTING = 0x02;
 
-    private static final String[] AGES = new String[]{
+    public static final String[] AGES = new String[]{
             "freshly sown",
             "sprouting",
             "growing",
@@ -40,7 +40,7 @@ public class PlanterItem {
             "wilted"
     };
 
-    private static final String[] TREE_AGES = new String[]{
+    public static final String[] TREE_AGES = new String[]{
             "sprout",
             "young",
             "growing",
@@ -61,7 +61,7 @@ public class PlanterItem {
                 .imageNumber((short) IconConstants.ICON_TOOL_CAULDRON)
                 .itemTypes(types.array())
                 .decayTime(9072000L)
-                .dimensions(200, 200, 30)
+                .dimensions(120, 120, 50)
                 .weightGrams(10000)
                 .material(material)
                 .behaviourType((short) 1)
@@ -210,11 +210,10 @@ public class PlanterItem {
                 .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 5, true));
 
         CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.rock, ItemList.mortar, treeRendered.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
-                .addRequirement(new CreationRequirement(1, ItemList.rock, 5, true))
-                .addRequirement(new CreationRequirement(2, ItemList.rock, 5, true))
-                .addRequirement(new CreationRequirement(3, ItemList.clay, 10, true))
-                .addRequirement(new CreationRequirement(4, ItemList.mortar, 10, true))
-                .addRequirement(new CreationRequirement(5, ItemList.dirtPile, 5, true));
+                .addRequirement(new CreationRequirement(1, ItemList.rock, 10, true))
+                .addRequirement(new CreationRequirement(2, ItemList.clay, 10, true))
+                .addRequirement(new CreationRequirement(3, ItemList.mortar, 10, true))
+                .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 5, true));
 
         CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.sandstoneBrick, ItemList.mortar, treeSandstone.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
                 .addRequirement(new CreationRequirement(1, ItemList.rock, 10, true))
