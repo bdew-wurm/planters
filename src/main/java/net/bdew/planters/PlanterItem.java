@@ -199,7 +199,7 @@ public class PlanterItem {
 
         CreationEntryCreator.createAdvancedEntry(SkillList.MASONRY, ItemList.rock, ItemList.mortar, treeStone.getTemplateId(), false, false, 0f, true, true, CreationCategories.DECORATION)
                 .addRequirement(new CreationRequirement(1, ItemList.rock, 10, true))
-                .addRequirement(new CreationRequirement(2, ItemList.brickPottery, 10, true))
+                .addRequirement(new CreationRequirement(2, ItemList.roundedBrick, 10, true))
                 .addRequirement(new CreationRequirement(3, ItemList.mortar, 10, true))
                 .addRequirement(new CreationRequirement(4, ItemList.dirtPile, 5, true));
 
