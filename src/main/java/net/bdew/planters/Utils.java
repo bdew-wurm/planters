@@ -96,7 +96,7 @@ public class Utils {
                     zOffs = 0.4f;
                     zBase += 0.2f;
                 }
-                if (plant == Plantable.GrapeBush) {
+                if (plant == Plantable.GrapeBushGreen || plant == Plantable.GrapeBushBlue) {
                     scale *= 0.5f;
                     zBase += 0.2f;
                 }

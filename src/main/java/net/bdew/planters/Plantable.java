@@ -49,13 +49,15 @@ public enum Plantable {
     LavenderBush(44, "lavender", PlanterType.BUSH, ItemList.sprout, ItemList.flowerLavender, "model.bush.lavendel", 4, (byte) 46, false, false),
     RoseBush(45, "rose", PlanterType.BUSH, ItemList.sprout, ItemList.flowerRose, "model.bush.rose", 5, (byte) 47, false, false),
     ThornBush(46, "thorn", PlanterType.BUSH, ItemList.sprout, -1, "model.bush.thorn", 15, (byte) 48, false, false),
-    GrapeBush(47, "grape", PlanterType.BUSH, ItemList.sprout, ItemList.grapesGreen, "model.bush.grape", 5, (byte) 49, false, false),
+    GrapeBushGreen(47, "green grape", PlanterType.BUSH, ItemList.sprout, ItemList.grapesGreen, "model.bush.grape", 5, (byte) 49, false, false, 54),
     CamelliaBush(48, "camellia", PlanterType.BUSH, ItemList.sprout, ItemList.leavesCamellia, "model.bush.camellia", 3, (byte) 50, false, false),
     OleanderBush(49, "oleander", PlanterType.BUSH, ItemList.sprout, ItemList.leavesOleander, "model.bush.oleander", 2, (byte) 51, false, false),
     HazelnutBush(50, "hazelnut", PlanterType.BUSH, ItemList.sprout, ItemList.nutHazel, "model.bush.hazelnut", 2, (byte) 71, false, false),
     RaspberryBush(51, "raspberry", PlanterType.BUSH, ItemList.sprout, ItemList.raspberries, "model.bush.raspberry", 2, (byte) 90, false, false),
     BlueberryBush(52, "blueberry", PlanterType.BUSH, ItemList.sprout, ItemList.blueberry, "model.bush.blueberry", 2, (byte) 91, false, false),
-    LingonberryBush(53, "lingonberry", PlanterType.BUSH, ItemList.sprout, ItemList.lingonberry, "model.bush.lingonberry", 2, (byte) 92, false, false);
+    LingonberryBush(53, "lingonberry", PlanterType.BUSH, ItemList.sprout, ItemList.lingonberry, "model.bush.lingonberry", 2, (byte) 92, false, false),
+    GrapeBushBlue(54, "blue grape", PlanterType.BUSH, ItemList.sprout, ItemList.grapesBlue, "model.bush.grape", 5, (byte) 49, false, false, 47);
+
 
     static {
         PlantersMod.logInfo("Plantable enum init, magic shroom id = " + MagicMushroom.cropItem);
@@ -71,8 +73,9 @@ public enum Plantable {
     public final byte material;
     public final boolean needsScythe;
     public final boolean water;
+    public final int altVersion;
 
-    Plantable(int number, String displayName, PlanterType planterType, int seedItem, int cropItem, String modelName, float difficulty, byte material, boolean needsScythe, boolean water) {
+    Plantable(int number, String displayName, PlanterType planterType, int seedItem, int cropItem, String modelName, float difficulty, byte material, boolean needsScythe, boolean water, int altVersion) {
         this.number = number;
         this.displayName = displayName;
         this.planterType = planterType;
@@ -83,6 +86,11 @@ public enum Plantable {
         this.material = material;
         this.needsScythe = needsScythe;
         this.water = water;
+        this.altVersion = altVersion;
+    }
+
+    Plantable(int number, String displayName, PlanterType planterType, int seedItem, int cropItem, String modelName, float difficulty, byte material, boolean needsScythe, boolean water) {
+        this(number, displayName, planterType, seedItem, cropItem, modelName, difficulty, material, needsScythe, water, -1);
     }
 
     public static Plantable getFromId(int id) {

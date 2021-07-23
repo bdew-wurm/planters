@@ -8,14 +8,14 @@ import net.bdew.planters.PlanterItem;
 import org.gotti.wurmunlimited.modsupport.actions.BehaviourProvider;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class PlanterBehaviour implements BehaviourProvider {
     private final List<ActionEntry> digStumpAction;
 
     public PlanterBehaviour() {
-        digStumpAction = Collections.singletonList(new ActionEntry(Actions.DIG, "Dig up", "digging"));
+        digStumpAction = Arrays.asList(new ActionEntry(Actions.DIG, "Dig up", "digging"));
     }
 
     @Override

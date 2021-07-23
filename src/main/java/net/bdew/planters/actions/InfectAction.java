@@ -10,7 +10,7 @@ import net.bdew.planters.PlanterItem;
 import net.bdew.planters.Utils;
 import org.gotti.wurmunlimited.modsupport.actions.*;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class InfectAction implements ModAction, BehaviourProvider, ActionPerformer {
@@ -25,8 +25,8 @@ public class InfectAction implements ModAction, BehaviourProvider, ActionPerform
         }).range(4).build();
         ModActions.registerAction(actionEntry);
 
-        infectMenu = Collections.singletonList(actionEntry);
-        cleanseMenu = Collections.singletonList(new ActionEntry(actionEntry.getNumber(), "Cleanse", "cleansing"));
+        infectMenu = Arrays.asList(actionEntry);
+        cleanseMenu = Arrays.asList(new ActionEntry(actionEntry.getNumber(), "Cleanse", "cleansing"));
     }
 
     @Override
