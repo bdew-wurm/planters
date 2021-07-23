@@ -91,7 +91,8 @@ public class PlanterItem {
                 ItemTypes.ITEM_TYPE_HASDATA,
                 ItemTypes.ITEM_TYPE_NORENAME,
                 ItemTypes.ITEM_TYPE_COLORABLE,
-                ItemTypes.ITEM_TYPE_DECORATION
+                ItemTypes.ITEM_TYPE_DECORATION,
+                ItemTypes.ITEM_TYPE_DESTROYABLE
         );
 
         Utils.ItemTypeSet onePerTile = baseTypes.with(
